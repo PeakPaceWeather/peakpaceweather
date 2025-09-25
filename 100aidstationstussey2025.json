@@ -18,7 +18,7 @@
   { "name": "Loop 4 AS 1", "lat": 40.7397, "lon": -77.7525, "miles": 41.92 },
   { "name": "Loop 4 AS 2", "lat": 40.7236, "lon": -77.7911, "miles": 45.02 },
   { "name": "Loop 4 AS 3", "lat": 40.7485, "lon": -77.7763, "miles": 47.75 },
-  { "name": "Loop 4 AS 4", "lat": 40.7682, "lon": -77.7559, "miles": 51.04 },
+  { "name": "50 Mile Loop Start", "lat": 40.7682, "lon": -77.7559, "miles": 51.04 },
 
   { "name": "Three Bridges, One Leg Breaker", "lat": 40.7485, "lon": -77.7763, "miles": 54.24 },
   { "name": "Down To The Swamp", "lat": 40.7214, "lon": -77.8243, "miles": 58.24 },
