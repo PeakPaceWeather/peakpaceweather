@@ -1,12 +1,86 @@
 [
-  { "year": 2015, "max": "55.0", "min": "35.1", "precip": "0.00", "conditions": "" },
-  { "year": 2016, "max": "50.0", "min": "30.9", "precip": "0.00", "conditions": "" },
-  { "year": 2017, "max": "48.0", "min": "42.1", "precip": "0.00", "conditions": "" },
-  { "year": 2018, "max": "46.0", "min": "34.0", "precip": "0.00", "conditions": "" },
-  { "year": 2019, "max": "60.1", "min": "42.1", "precip": "0.00", "conditions": "" },
-  { "year": 2020, "max": "48.0", "min": "37.9", "precip": "0.06", "conditions": "" },
-  { "year": 2021, "max": "73.0", "min": "48.9", "precip": "0.01", "conditions": "" },
-  { "year": 2022, "max": "70.0", "min": "55.0", "precip": "0.00", "conditions": "" },
-  { "year": 2023, "max": "75.0", "min": "48.0", "precip": "0.00", "conditions": "" },
-  { "year": 2024, "max": "61.0", "min": "34.0", "precip": "0.00", "conditions": "" }
+  {
+    "year": 2013,
+    "max": "51.8",
+    "min": "30.2",
+    "precip": "0.00",
+    "conditions": "Clear"
+  },
+  {
+    "year": 2014,
+    "max": "61.7",
+    "min": "46.4",
+    "precip": "0.00",
+    "conditions": "Clear"
+  },
+  {
+    "year": 2015,
+    "max": "53.6",
+    "min": "33.8",
+    "precip": "0.00",
+    "conditions": "Clear"
+  },
+  {
+    "year": 2016,
+    "max": "46.4",
+    "min": "28.4",
+    "precip": "0.00",
+    "conditions": "Clear"
+  },
+  {
+    "year": 2017,
+    "max": "51.8",
+    "min": "42.0",
+    "precip": "0.00",
+    "conditions": "Clear"
+  },
+  {
+    "year": 2018,
+    "max": "44.6",
+    "min": "32.0",
+    "precip": "0.00",
+    "conditions": "Clear"
+  },
+  {
+    "year": 2019,
+    "max": "57.2",
+    "min": "42.8",
+    "precip": "0.00",
+    "conditions": "Rain"
+  },
+  {
+    "year": 2020,
+    "max": "53.6",
+    "min": "42.0",
+    "precip": "0.17",
+    "conditions": "Rain"
+  },
+  {
+    "year": 2021,
+    "max": "59.0",
+    "min": "44.6",
+    "precip": "0.00",
+    "conditions": "Rain"
+  },
+  {
+    "year": 2022,
+    "max": "60.8",
+    "min": "52.7",
+    "precip": "0.00",
+    "conditions": "Rain"
+  },
+  {
+    "year": 2023,
+    "max": "75.2",
+    "min": "50.0",
+    "precip": "0.00",
+    "conditions": "Clear"
+  },
+  {
+    "year": 2024,
+    "max": "59.0",
+    "min": "46.4",
+    "precip": "0.00",
+    "conditions": "Clear"
+  }
 ]
