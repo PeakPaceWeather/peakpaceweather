@@ -1,0 +1,12 @@
+[
+  { "year": 2015, "max": "55.9", "min": "46.0", "precip": "0.26", "conditions": "" },
+  { "year": 2016, "max": "55.0", "min": "41.0", "precip": "0.00", "conditions": "" },
+  { "year": 2017, "max": "66.0", "min": "42.1", "precip": "0.00", "conditions": "" },
+  { "year": 2018, "max": "46.9", "min": "35.1", "precip": "0.00", "conditions": "" },
+  { "year": 2019, "max": "66.9", "min": "37.9", "precip": "0.00", "conditions": "" },
+  { "year": 2020, "max": "57.9", "min": "39.0", "precip": "0.00", "conditions": "" },
+  { "year": 2021, "max": "55.9", "min": "43.0", "precip": "0.26", "conditions": "" },
+  { "year": 2022, "max": "69.1", "min": "53.1", "precip": "0.00", "conditions": "" },
+  { "year": 2023, "max": "71.1", "min": "37.9", "precip": "0.00", "conditions": "" },
+  { "year": 2024, "max": "62.1", "min": "34.0", "precip": "0.00", "conditions": "" }
+]
