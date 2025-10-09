@@ -1,7 +1,7 @@
 <head>
   <meta charset="UTF-8" />
-  <!-- Force desktop layout, allow pinch-zoom/pan -->
-  <meta name="viewport" content="width=1000, user-scalable=yes, initial-scale=1.0, maximum-scale=5.0" />
+  <!-- Fit screen width, still allow pinch-zoom -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0" />
 
   <title id="pageTitle">Tussey mOUnTaiNBACK 100 Mile Ultramarathon | Peak Pace</title>
 
@@ -12,15 +12,11 @@
 
   <!-- ==== Styles ==== -->
   <style>
-    /* === Force desktop layout on all devices === */
+    /* === Base layout === */
     html, body {
-      min-width: 1000px !important;
-      overflow-x: auto !important;
-      touch-action: pan-x pan-y !important;
-      zoom: 1 !important;
-    }
-
-    body {
+      overflow-x: hidden;
+      touch-action: pan-x pan-y;
+      zoom: 1;
       margin: 0;
       padding: 0;
       font-family: "Source Sans Pro", Arial, sans-serif;
@@ -43,6 +39,7 @@
       max-width: 1000px;
       margin: 0 auto;
       padding: 0 10px;
+      box-sizing: border-box;
     }
 
     /* ==== Header ==== */
@@ -77,6 +74,7 @@
       background: #fff;
       padding: 16px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      box-sizing: border-box;
     }
     section:last-of-type { margin-bottom: 24px; }
     section h3 {
@@ -265,9 +263,13 @@
     }
     .climoPanel { display: none; }
     .climoPanel.active { display: block; }
+/* ==== Fix map scroll hijack ==== */
+.leaflet-container {
+  touch-action: pan-x pan-y !important; /* allow normal page scroll */
+  overscroll-behavior: contain;
+}
   </style>
 </head>
-
 
 
 
@@ -911,15 +913,26 @@ pointBackgroundColor: (ctx) => {
 }
 
 /* ========= MAP ========= */
+// Disable scroll and touch zoom so the page scrolls normally.
+// Users can still zoom via +/– controls or double-click.
+
 const map = L.map('map', {
-  scrollWheelZoom: true,
-  touchZoom: true,
+  scrollWheelZoom: false,
+  touchZoom: false,
   zoomControl: true,
   dragging: true
 }).setView([40.7682, -77.7559], 12);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{ attribution:'&copy; OpenStreetMap contributors'}).addTo(map);
-let markers=[];
+// Optional: allow zoom only after focusing on the map (desktop UX)
+map.on('focus', () => map.scrollWheelZoom.enable());
+map.on('blur', () => map.scrollWheelZoom.disable());
+
+// Add the tile layer
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+let markers = [];
 
 /* ========= HIGHLIGHT HELPERS ========= */
 function applyMarkerHighlights(activeGroupIdx){
