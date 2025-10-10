@@ -35,13 +35,14 @@ html, body {
 
 .main-header {
   text-align: center;
-  font-family: "Montserrat", "Source Sans Pro", Arial, sans-serif;
-  font-size: clamp(24px, 5vw, 40px);
+  font-family: "Montserrat", sans-serif;
   font-weight: 800;
-  letter-spacing: 2px;
+  font-size: clamp(36px, 6vw, 52px);
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--pp-dark);
-  margin: 24px 0 10px;
+  color: #000; /* deep black text as in screenshot */
+  margin: 28px 0 18px;
+  line-height: 1;
 }
     header { text-align:center; margin:8px auto 14px; }
     header h2 { margin:0; font-size:32px; font-weight:700; }
@@ -78,7 +79,12 @@ html, body {
     .blaze-dot { width:20px; height:20px; background:var(--blaze); border:2px solid #222; border-radius:50%; transition:transform 0.2s ease; transform-origin:center; }
     .blaze-dot:hover { transform: scale(1.4); cursor:pointer; }
     .blaze-dot.highlighted { transform: scale(1.6); background: var(--highlight); }
-    .highlight-row { background: var(--hoverRow) !important; }
+/* Mobile tap highlight for table rows */
+.highlight-row {
+  background: var(--hoverRow) !important;
+  box-shadow: inset 0 0 0 2px var(--highlight);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
 
     .leaflet-tooltip, .pp-tooltip { background:#fff; border:2px solid var(--highlight); border-radius:8px; color:var(--ink); font-size:13px; font-weight:500; line-height:1.4; box-shadow:0 2px 8px rgba(0,0,0,0.15); padding:6px 10px; }
 
@@ -747,13 +753,15 @@ async function updateForecasts(){
 }
 </script>
 <script>
-// === Tap-to-highlight table rows (mobile-friendly) ===
+// === Tap-to-highlight rows (mobile & desktop) ===
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("table tr").forEach(tr => {
+  document.querySelectorAll("#forecastBody tr, #climoBody25 tr, #climoBody26 tr").forEach(tr => {
     tr.addEventListener("click", () => {
+      // remove highlight from all rows in that table
       const table = tr.closest("table");
       table.querySelectorAll("tr").forEach(r => r.classList.remove("highlight-row"));
-      tr.classList.toggle("highlight-row");
+      // toggle this one
+      tr.classList.add("highlight-row");
     });
   });
 });
