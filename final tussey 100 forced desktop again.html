@@ -94,9 +94,41 @@ html, body {
     .climoTab.active { background: var(--pp-dark); color:#fff; }
     .climoPanel { display:none; } .climoPanel.active { display:block; }
 
+
     /* Avoid “snap-to” from focus scroll (we’ll also disable keyboard focus in JS) */
     .leaflet-container { scroll-margin-top:0; scroll-behavior:auto; }
     .leaflet-container:focus { outline:none; scroll-margin-top:0; }
+/* === Uniform Panel Width Fix === */
+.page-wrapper {
+  width: 1000px;
+  margin: 0 auto;
+  padding: 0;               /* remove side padding so panels line up exactly */
+  box-sizing: border-box;
+}
+
+/* All primary panels share the same exact width */
+section, 
+#map, 
+#paceBox {
+  width: 960px;             /* uniform internal width */
+  max-width: 960px;
+  margin: 18px auto;        /* center them inside the wrapper */
+  box-sizing: border-box;
+}
+
+/* Adjust spacing for the map specifically */
+#map {
+  height: 600px;
+  margin-top: 10px;
+}
+
+/* Ensure elevation chart matches others */
+#elevSection, #elevWrap {
+  width: 960px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
   </style>
 </head>
 
