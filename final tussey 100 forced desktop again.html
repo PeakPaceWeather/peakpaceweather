@@ -1,473 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- Fit screen width, still allow pinch-zoom -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0" />
-
+  <meta name="viewport" content="width=1000, user-scalable=yes, initial-scale=1.0, maximum-scale=5.0" />
   <title id="pageTitle">Tussey mOUnTaiNBACK 100 Mile Ultramarathon | Peak Pace</title>
 
-  <!-- ==== Libraries ==== -->
+  <!-- Libraries -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 
-  <!-- ==== Styles ==== -->
   <style>
-    /* === Base layout === */
-    html, body {
-      overflow-x: hidden;
-      touch-action: pan-x pan-y;
-      zoom: 1;
-      margin: 0;
-      padding: 0;
-      font-family: "Source Sans Pro", Arial, sans-serif;
-      color: #111;
-      background: #fff;
-      line-height: 1.5;
-    }
+    /* Force desktop layout */
+    html, body { min-width: 1000px !important; overflow-x: auto !important; touch-action: pan-x pan-y !important; zoom: 1 !important; }
+    body { margin: 0; padding: 0; font-family: "Source Sans Pro", Arial, sans-serif; color: #111; background: #fff; line-height: 1.5; }
 
     :root {
-      --ink: #111;
-      --muted: #555;
-      --line: #ddd;
-      --pp-dark: #003546;
-      --blaze: #37BC7D;
-      --highlight: #FF6700;
-      --hoverRow: #fff3e6;
+      --ink:#111; --muted:#555; --line:#ddd;
+      --pp-dark:#003546; --blaze:#37BC7D; --highlight:#FF6700; --hoverRow:#fff3e6;
     }
 
-    .page-wrapper {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 10px;
-      box-sizing: border-box;
-    }
+    .page-wrapper { max-width: 1000px; margin: 0 auto; padding: 0 10px; }
 
-    /* ==== Header ==== */
-    header {
-      text-align: center;
-      margin: 28px auto 14px;
-    }
-    header h2 {
-      margin: 0;
-      font-size: 32px;
-      font-weight: 700;
-    }
-    #countdown {
-      font-size: 20px;
-      font-weight: 600;
-      margin-top: 6px;
-      color: #333;
-    }
-    #forecastStatus {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
+    .main-header { text-align:center; font-size:36px; font-weight:800; letter-spacing:1px; color:var(--pp-dark); margin:24px 0 10px; }
+    header { text-align:center; margin:8px auto 14px; }
+    header h2 { margin:0; font-size:32px; font-weight:700; }
+    #countdown { font-size:20px; font-weight:600; margin-top:6px; color:#333; }
 
-    /* ==== Card-style sections ==== */
-    section,
-    #elevSection {
-      width: 100%;
-      margin: 18px 0 0 0;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      background: #fff;
-      padding: 16px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      box-sizing: border-box;
-    }
-    section:last-of-type { margin-bottom: 24px; }
-    section h3 {
-      text-align: center;
-      margin: 0 0 12px;
-      font-size: 20px;
-      font-weight: 700;
-    }
+    section, #elevSection { width:100%; margin:18px 0 0 0; border:1px solid #ccc; border-radius:8px; background:#fff; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+    section:last-of-type { margin-bottom:24px; }
+    section h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700; }
 
-    /* ==== Tables ==== */
-    table { width: 100%; border-collapse: collapse; }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: center;
-      font-size: 14px;
-    }
-    th { background: #f0f0f0; font-weight: 700; }
+    table { width:100%; border-collapse:collapse; }
+    th, td { border:1px solid #ccc; padding:8px; text-align:center; font-size:14px; }
+    th { background:#f0f0f0; font-weight:700; }
+    #climoAvg25, #climoAvg26 { font-weight:700; background:#f5f5f5; }
+    #forecastBody tr:hover, #climoBody25 tr:hover, #climoBody26 tr:hover { background: var(--hoverRow); }
+    .note { font-size:12px; text-align:center; margin-top:8px; color:var(--muted); }
 
-    #climoAvg25, #climoAvg26 {
-      font-weight: 700;
-      background: #f5f5f5;
-    }
+    #paceBox { text-align:center; padding:8px; margin:6px 0; background:#fff; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,0.08); }
+    #paceControls { display:flex; gap:4px; align-items:center; justify-content:center; flex-wrap:wrap; }
+    #paceBox select, #paceBox button { font-size:13px; padding:4px 6px; }
+    #paceGo, #toggleUnits { border:1px solid var(--pp-dark); border-radius:6px; color:#fff; background:var(--pp-dark); cursor:pointer; }
 
-    #forecastBody tr:hover,
-    #climoBody25 tr:hover,
-    #climoBody26 tr:hover {
-      background: var(--hoverRow);
-    }
-
-    .note {
-      font-size: 12px;
-      text-align: center;
-      margin-top: 8px;
-      color: var(--muted);
-    }
-
-    /* ==== Target Pace Box ==== */
-    #paceBox { 
-      text-align: center; 
-      padding: 8px; 
-      margin: 6px 0; 
-      background: #fff; 
-      border: 1px solid #ccc; 
-      border-radius: 8px; 
-      box-shadow: 0 2px 4px rgba(0,0,0,0.08); 
-    }
-    #paceControls {
-      display: flex;
-      gap: 4px;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    #paceBox select, #paceBox button { font-size: 13px; padding: 4px 6px; }
-    #paceGo, #toggleUnits {
-      border: 1px solid var(--pp-dark);
-      border-radius: 6px;
-      color: #fff;
-      background: var(--pp-dark);
-      cursor: pointer;
-    }
-
-    /* ==== Map ==== */
-    #map { 
-      width: 100%; 
-      height: 600px; 
-      margin: 10px 0 0 0; 
-      border: 1px solid #ccc; 
-      border-radius: 8px; 
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08); 
-    }
-    .leaflet-marker-icon {
-      cursor: pointer;
-      transition: transform 150ms ease;
-    }
+    #map { width:100%; height:600px; margin:10px 0 0 0; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+    .leaflet-marker-icon { cursor:pointer; transition: transform 150ms ease; }
     .leaflet-marker-icon:hover { transform: scale(1.2); }
 
-    /* ==== Elevation Chart ==== */
-    #elevWrap { 
-      width: 100%; 
-      position: relative; 
-      height: 225px;
-      margin-top: 10px; 
-    }
-    #elevationChart { 
-      position: absolute; 
-      inset: 0; 
-      cursor: pointer; 
-    }
+    #elevWrap { width:100%; position:relative; height:225px; margin-top:10px; }
+    #elevationChart { position:absolute; inset:0; cursor:pointer; }
 
-    /* ==== WBGT ==== */
-    .wbgt-low { color: #2e7d32; }
-    .wbgt-mod { color: #f9a825; }
-    .wbgt-high { color: #f57c00; }
-    .wbgt-very { color: #c62828; }
-    .wbgt-extreme { background: #ffb3b3; color: #000; font-weight: 700; }
-    .wbgt-na { color: var(--muted); }
+    .wbgt-low { color:#2e7d32; } .wbgt-mod { color:#f9a825; }
+    .wbgt-high { color:#f57c00; } .wbgt-very { color:#c62828; }
+    .wbgt-extreme { background:#ffb3b3; color:#000; font-weight:700; }
+    .wbgt-na { color:var(--muted); }
 
-    /* ==== Blaze markers ==== */
-    .blaze-dot {
-      width: 20px;
-      height: 20px;
-      background: var(--blaze);
-      border: 2px solid #222;
-      border-radius: 50%;
-      transition: transform 0.2s ease;
-      transform-origin: center center;
-    }
-    .blaze-dot:hover { transform: scale(1.4); cursor: pointer; }
-    .blaze-dot.highlighted {
-      transform: scale(1.6);
-      background: var(--highlight);
-    }
+    .blaze-dot { width:20px; height:20px; background:var(--blaze); border:2px solid #222; border-radius:50%; transition:transform 0.2s ease; transform-origin:center; }
+    .blaze-dot:hover { transform: scale(1.4); cursor:pointer; }
+    .blaze-dot.highlighted { transform: scale(1.6); background: var(--highlight); }
     .highlight-row { background: var(--hoverRow) !important; }
 
-    /* ==== Tooltips ==== */
-    .leaflet-tooltip,
-    .pp-tooltip {
-      background: #fff;
-      border: 2px solid var(--highlight);
-      border-radius: 8px;
-      color: var(--ink);
-      font-size: 13px;
-      font-weight: 500;
-      line-height: 1.4;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      padding: 6px 10px;
-    }
+    .leaflet-tooltip, .pp-tooltip { background:#fff; border:2px solid var(--highlight); border-radius:8px; color:var(--ink); font-size:13px; font-weight:500; line-height:1.4; box-shadow:0 2px 8px rgba(0,0,0,0.15); padding:6px 10px; }
 
-    /* ==== Layout ==== */
-    #map, #elevWrap, section { box-sizing: border-box; width: 100%; }
-    .scroll-table { width: 100%; box-sizing: border-box; overflow-x: auto; }
-    .scroll-table table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    .leaflet-control a { background-color:var(--pp-dark) !important; color:#fff !important; border:1px solid var(--pp-dark) !important; width:30px !important; height:30px !important; line-height:30px !important; text-align:center; font-size:16px; }
+    .leaflet-control a:hover { background-color: var(--blaze) !important; border-color: var(--blaze) !important; }
 
-    /* ==== Leaflet controls ==== */
-    .leaflet-control { border: none !important; background: none !important; }
-    .leaflet-control a,
-    .leaflet-bar a,
-    .leaflet-bar a:hover {
-      background-color: var(--pp-dark) !important;
-      color: #fff !important;
-      border: 1px solid var(--pp-dark) !important;
-      width: 30px !important;
-      height: 30px !important;
-      line-height: 30px !important;
-      text-align: center;
-      font-size: 16px;
-    }
-    .leaflet-control a:hover {
-      background-color: var(--blaze) !important;
-      border-color: var(--blaze) !important;
-    }
-
-    /* ==== Pace button flash ==== */
-    @keyframes flashBlaze {
-      0%   { background-color: var(--pp-dark); }
-      20%  { background-color: var(--blaze); }
-      80%  { background-color: var(--blaze); }
-      100% { background-color: var(--pp-dark); }
-    }
+    @keyframes flashBlaze { 0%{background-color:var(--pp-dark);} 20%,80%{background-color:var(--blaze);} 100%{background-color:var(--pp-dark);} }
     #paceGo.flash { animation: flashBlaze 0.8s ease; }
 
-    /* ==== Climatology Tabs ==== */
-    #climoTabs {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 12px;
-      gap: 8px;
-    }
-    .climoTab {
-      padding: 6px 14px;
-      border: 1px solid var(--pp-dark);
-      border-radius: 6px 6px 0 0;
-      background: #f9f9f9;
-      color: var(--pp-dark);
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
+    #climoTabs { display:flex; justify-content:center; margin-bottom:12px; gap:8px; }
+    .climoTab { padding:6px 14px; border:1px solid var(--pp-dark); border-radius:6px 6px 0 0; background:#f9f9f9; color:var(--pp-dark); font-size:14px; font-weight:600; cursor:pointer; transition: background 0.2s ease, color 0.2s ease; }
     .climoTab:hover { background: var(--hoverRow); }
-    .climoTab.active {
-      background: var(--pp-dark);
-      color: #fff;
-    }
-    .climoPanel { display: none; }
-    .climoPanel.active { display: block; }
-/* ==== Fix map scroll hijack ==== */
-.leaflet-container {
-  touch-action: pan-x pan-y !important; /* allow normal page scroll */
-  overscroll-behavior: contain;
-}
+    .climoTab.active { background: var(--pp-dark); color:#fff; }
+    .climoPanel { display:none; } .climoPanel.active { display:block; }
+
+    /* Avoid “snap-to” from focus scroll (we’ll also disable keyboard focus in JS) */
+    .leaflet-container { scroll-margin-top:0; scroll-behavior:auto; }
+    .leaflet-container:focus { outline:none; scroll-margin-top:0; }
   </style>
 </head>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <body>
 <div class="page-wrapper">
+  <div class="main-header">PEAK PACE WEATHER</div>
 
-<header>
-  <h2 id="raceName"></h2>
-  <div id="countdown">Loading countdown…</div>
-</header>
+  <header>
+    <h2 id="raceName"></h2>
+    <div id="countdown">Loading countdown…</div>
+  </header>
 
-<section id="climatology">
-  <h3>Climatology – Boalsburg, PA</h3>
-
-  <!-- Tab buttons -->
-  <div id="climoTabs">
-    <button class="climoTab active" data-day="25">Oct 25</button>
-    <button class="climoTab" data-day="26">Oct 26</button>
-  </div>
-
-  <!-- Panels -->
-  <div id="climoPanels">
-    <!-- Oct 25 Panel -->
-    <div class="climoPanel active" id="climo25">
-      <table>
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Max Temp (°F)</th>
-            <th>Min Temp (°F)</th>
-            <th>Precipitation (")</th>
-            <th>Conditions</th>
-          </tr>
-        </thead>
-        <tbody id="climoBody25"></tbody>
-        <tfoot>
-          <tr id="climoAvg25">
-            <td>Averages</td><td>—</td><td>—</td><td>—</td><td>—</td>
-          </tr>
-        </tfoot>
-      </table>
-      <div class="note">
-  Historical climatology values are based on ASOS data from KUNV (University Park Airport), 
-  located approximately 7 miles from Boalsburg, PA. Local variations in elevation, topography, 
-  and vegetation may cause actual race-day conditions to differ from those observed at KUNV. 
-  Data are provided for general planning purposes only and do not represent an official forecast.
-</div>
-
+  <!-- Climatology -->
+  <section id="climatology">
+    <h3>Climatology – Boalsburg, PA</h3>
+    <div id="climoTabs">
+      <button class="climoTab active" data-day="25">Oct 25</button>
+      <button class="climoTab" data-day="26">Oct 26</button>
     </div>
 
-    <!-- Oct 26 Panel -->
-    <div class="climoPanel" id="climo26">
-      <table>
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Max Temp (°F)</th>
-            <th>Min Temp (°F)</th>
-            <th>Precipitation (")</th>
-            <th>Conditions</th>
-          </tr>
-        </thead>
-        <tbody id="climoBody26"></tbody>
-        <tfoot>
-          <tr id="climoAvg26">
-            <td>Averages</td><td>—</td><td>—</td><td>—</td><td>—</td>
-          </tr>
-        </tfoot>
-      </table>
-      <div class="note">
-  Historical climatology values are based on ASOS data from KUNV (University Park Airport), 
-  located approximately 7 miles from Boalsburg, PA. Local variations in elevation, topography, 
-  and vegetation may cause actual race-day conditions to differ from those observed at KUNV. 
-  Data are provided for general planning purposes only and do not represent an official forecast.
-</div>
+    <div id="climoPanels">
+      <div class="climoPanel active" id="climo25">
+        <table>
+          <thead><tr><th>Year</th><th>Max Temp (°F)</th><th>Min Temp (°F)</th><th>Precipitation (")</th><th>Conditions</th></tr></thead>
+          <tbody id="climoBody25"></tbody>
+          <tfoot><tr id="climoAvg25"><td>Averages</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></tfoot>
+        </table>
+        <div class="note">Historical climatology values are based on ASOS data from KUNV (University Park Airport), ~7 miles from Boalsburg, PA. Local variation may differ from KUNV. For planning only.</div>
+      </div>
+
+      <div class="climoPanel" id="climo26">
+        <table>
+          <thead><tr><th>Year</th><th>Max Temp (°F)</th><th>Min Temp (°F)</th><th>Precipitation (")</th><th>Conditions</th></tr></thead>
+          <tbody id="climoBody26"></tbody>
+          <tfoot><tr id="climoAvg26"><td>Averages</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></tfoot>
+        </table>
+        <div class="note">Historical climatology values are based on ASOS data from KUNV (University Park Airport), ~7 miles from Boalsburg, PA. Local variation may differ from KUNV. For planning only.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pace -->
+  <div id="paceBox">
+    <div id="paceControls">
+      <label for="paceMin" id="paceLabel">Target Pace (min/mi):</label>
+      <select id="paceMin"></select> : <select id="paceSec"></select>
+      <button id="paceGo">Submit</button>
+      <span id="paceConfirm" style="margin-left:8px; font-size:13px; color:var(--muted);"></span>
     </div>
   </div>
-</section>
 
+  <!-- Map -->
+  <div id="map"></div>
 
+  <!-- Elevation -->
+  <section id="elevSection">
+    <div id="elevWrap"><canvas id="elevationChart"></canvas></div>
+  </section>
 
-<div id="paceBox">
-  <div id="paceControls">
-    <label for="paceMin" id="paceLabel">Target Pace (min/mi):</label>
-    <select id="paceMin"></select> : <select id="paceSec"></select>
-    <button id="paceGo">Submit</button>
-    <span id="paceConfirm" style="margin-left:8px; font-size:13px; color:var(--muted);"></span>
-  </div>
-</div>
+  <!-- Summary -->
+  <section id="summary">
+    <h3 id="tableHeader" style="margin-bottom:0;">Peak Pace Forecast</h3>
+    <div id="forecastValidLabel" style="font-size:12px; color:#555; margin:4px 0 6px; text-align:center;">Checking forecast window…</div>
+    <table>
+      <thead>
+        <tr><th>Station</th><th>Distance (mi)</th><th>ETA</th><th>Temp (°F)</th><th>Wind</th><th>Conditions</th><th>WBGT</th></tr>
+      </thead>
+      <tbody id="forecastBody"></tbody>
+    </table>
+    <div class="note" id="forecastNote">Forecasts available within 7 days of race.</div>
+  </section>
 
-
-<div id="map"></div>
-
-<section id="elevSection">
-  <div id="elevWrap"><canvas id="elevationChart"></canvas></div>
-</section>
-
-<section id="summary">
-  <h3 id="tableHeader" style="margin-bottom:0;">Peak Pace Forecast</h3>
-  <div id="forecastValidLabel" 
-       style="font-size:12px; color:#555; margin:4px 0 6px; text-align:center;">
-    Checking forecast window…
-  </div>
-  <table>
-    <thead>
-      <tr>
-        <th>Station</th>
-        <th>Distance (mi)</th>
-        <th>ETA</th>
-        <th>Temp (°F)</th>
-        <th>Wind</th>
-        <th>Conditions</th>
-        <th>WBGT</th>
-      </tr>
-    </thead>
-    <tbody id="forecastBody"></tbody>
-  </table>
-  <div class="note" id="forecastNote">Forecasts available within 7 days of race.</div>
-</section>
-
-
-<section id="sources">
-  <h3>Data Sources</h3>
-  <ul style="font-size:13px; color:#555; line-height:1.5;">
-    <li>Climatology: Iowa State University 
-      <a href="https://mesonet.agron.iastate.edu/request/download.phtml" target="_blank" rel="noopener">IEM ASOS Archive</a>
-    </li>
-    <li>Elevation: Mapbox Terrain-RGB</li>
-    <li>Weather Forecasts: NOAA/NWS API</li>
-    <li>WBGT categories & regional thresholds: NOAA/NWS 
-      <a href="https://digital.weather.gov/staticpages/definitions.php" target="_blank" rel="noopener">WBGT Definitions</a>
-    </li>
-  </ul>
-  <div class="note" style="font-size:12px; color:#555; margin-top:6px;">
-    WBGT values shown here are <b>approximations</b>, derived from NOAA temperature and relative humidity using the Stull (2011) wet-bulb formula. 
-    They represent shaded WBGT and do not fully account for direct sunlight, wind, or radiant heat. 
-    On-field measurements may differ.
-  </div>
-</section>
-
-
+  <!-- Sources -->
+  <section id="sources">
+    <h3>Data Sources</h3>
+    <ul style="font-size:13px; color:#555; line-height:1.5;">
+      <li>Climatology: Iowa State University <a href="https://mesonet.agron.iastate.edu/request/download.phtml" target="_blank" rel="noopener">IEM ASOS Archive</a></li>
+      <li>Elevation: Mapbox Terrain-RGB</li>
+      <li>Weather Forecasts: NOAA/NWS API</li>
+      <li>WBGT categories & regional thresholds: NOAA/NWS <a href="https://digital.weather.gov/staticpages/definitions.php" target="_blank" rel="noopener">WBGT Definitions</a></li>
+    </ul>
+    <div class="note" style="font-size:12px; color:#555; margin-top:6px;">
+      WBGT values shown here are <b>approximations</b>, derived from NOAA temperature and relative humidity using the Stull (2011) wet-bulb formula. They represent shaded WBGT and do not fully account for direct sunlight, wind, or radiant heat. On-field measurements may differ.
+    </div>
+  </section>
 </div>
 </body>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<!-- ====== Core JS: Config / Pace / Climo ====== -->
 <script>
-/* ========= CONFIG ========= */
 const MAPBOX_TOKEN = "pk.eyJ1IjoiZGlsbG9uZHVyaW5pY2siLCJhIjoiY21memtlbm83MDNycTJtb3JtdGxucWpkMiJ9.W7Ge6XYCd0Gfl9f7YQ2dNw";
 
 const raceConfig = {
   name: "Tussey mOUnTaiNBACK 100 Mile Ultramarathon",
-  date: new Date("2025-10-05T18:30-04:00"),
+  date: new Date("2025-10-12T18:30-04:00"),
   routeUrl: "https://raw.githubusercontent.com/dillondurinick/peakpaceweather/refs/heads/main/100routetussey2025.json",
   stationsUrl: "https://raw.githubusercontent.com/dillondurinick/peakpaceweather/refs/heads/main/100aidstationstussey2025.json",
   elevationZoom: 12,
@@ -479,108 +183,105 @@ document.getElementById("raceName").textContent = raceConfig.name;
 document.getElementById("pageTitle").textContent = `${raceConfig.name} | Peak Pace`;
 const raceDate = raceConfig.date;
 
-/* ========= COUNTDOWN ========= */
+/* Countdown */
 function updateCountdown() {
   const diff = raceConfig.date - new Date();
   const el = document.getElementById("countdown");
   const raceStartStr = raceConfig.date.toLocaleString([], { month:"short", day:"numeric", hour:"numeric", minute:"2-digit" });
   if (diff <= 0) { el.textContent = "RACE DAY IS HERE!"; return; }
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  el.textContent = days === 1
-    ? `1 DAY UNTIL RACE DAY (${raceStartStr})`
-    : `${days} DAYS UNTIL RACE DAY (${raceStartStr})`;
+  el.textContent = days === 1 ? `1 DAY UNTIL RACE DAY (${raceStartStr})` : `${days} DAYS UNTIL RACE DAY (${raceStartStr})`;
 }
 setInterval(updateCountdown, 60000); updateCountdown();
 
-/* ========= UNITS / PACE ========= */
-// Imperial only (mi, ft, min/mi)
-function formatDist(mi){ return `${mi.toFixed(1)} mi`; }
-function formatElev(ft){ return `${Math.round(ft)} ft`; }
-
+/* Pace helpers */
 function paceMinPerMiFromUI(){
   const m = Number(document.getElementById('paceMin').value) || 0;
   const s = Number(document.getElementById('paceSec').value) || 0;
-  return m + s/60; // always minutes per mile
+  return m + s/60;
 }
-
 (function initPace(){
   const mins=document.getElementById('paceMin'), secs=document.getElementById('paceSec');
-  for(let m=4;m<=30;m++){ 
-    let o=document.createElement('option'); 
-    o.value=m; o.textContent=m; 
-    mins.appendChild(o); 
-  }
-  for(let s=0;s<60;s++){ 
-    let o=document.createElement('option'); 
-    o.value=s; o.textContent=String(s).padStart(2,'0'); 
-    secs.appendChild(o); 
-  }
+  for(let m=4;m<=30;m++){ let o=document.createElement('option'); o.value=m; o.textContent=m; mins.appendChild(o); }
+  for(let s=0;s<60;s++){ let o=document.createElement('option'); o.value=s; o.textContent=String(s).padStart(2,'0'); secs.appendChild(o); }
   mins.value=10; secs.value=0;
-
   function showPaceConfirm(){
     const paceM = String(mins.value).padStart(2,"0");
     const paceS = String(secs.value).padStart(2,"0");
-    const el = document.getElementById("paceConfirm");
-    el.textContent = `Pace set to ${paceM}:${paceS} min/mi`;
+    document.getElementById("paceConfirm").textContent = `Pace set to ${paceM}:${paceS} min/mi`;
   }
-
-// Submit button
-const paceBtn = document.getElementById('paceGo');
-
-paceBtn.addEventListener("mousedown", () => {
-  paceBtn.style.backgroundColor =
-    getComputedStyle(document.documentElement).getPropertyValue('--highlight').trim() || '#FF6700';
-});
-
-paceBtn.addEventListener("mouseup", () => {
-  paceBtn.style.backgroundColor = "var(--pp-dark)";
-  updateForecasts();
-  showPaceConfirm();
-});
-
-paceBtn.addEventListener("mouseleave", () => {
-  paceBtn.style.backgroundColor = "var(--pp-dark)";
-});
-
-  // Show default pace confirmation immediately on page load
+  const paceBtn = document.getElementById('paceGo');
+  paceBtn.addEventListener("mousedown", () => {
+    paceBtn.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue('--highlight').trim() || '#FF6700';
+  });
+  paceBtn.addEventListener("mouseup", () => {
+    paceBtn.style.backgroundColor = "var(--pp-dark)";
+    updateForecasts();
+    showPaceConfirm();
+  });
+  paceBtn.addEventListener("mouseleave", () => { paceBtn.style.backgroundColor = "var(--pp-dark)"; });
   showPaceConfirm();
 })();
 
-/* ========= NOAA FORECAST ========= */
-async function getNOAAForecast(lat, lon, targetDate) {
+/* Climatology */
+function populateClimoTable(data, bodyId, avgId) {
+  const body = document.getElementById(bodyId);
+  body.innerHTML = "";
+  let sumMax = 0, sumMin = 0, sumPrecip = 0, count = 0;
+  data.forEach(row => {
+    const max = Number(row.max);
+    const min = Number(row.min);
+    const precip = Number(row.precip);
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${row.year}</td>
+      <td>${isNaN(max) ? "—" : max.toFixed(1)}</td>
+      <td>${isNaN(min) ? "—" : min.toFixed(1)}</td>
+      <td>${isNaN(precip) ? "—" : precip.toFixed(2)}</td>
+      <td>${row.conditions || "—"}</td>`;
+    body.appendChild(tr);
+    if (!isNaN(max)) sumMax += max;
+    if (!isNaN(min)) sumMin += min;
+    if (!isNaN(precip)) sumPrecip += precip;
+    count++;
+  });
+  const avgRow = document.getElementById(avgId);
+  if(count > 0){
+    avgRow.innerHTML = `<td>Averages</td><td>${(sumMax/count).toFixed(1)}</td><td>${(sumMin/count).toFixed(1)}</td><td>${(sumPrecip/count).toFixed(2)}</td><td>—</td>`;
+  }
+}
+async function loadClimatology() {
   try {
-    const pointRes = await fetch(`https://api.weather.gov/points/${lat},${lon}`);
-    const pointData = await pointRes.json();
-    const fRes = await fetch(pointData.properties.forecastHourly);
-    const fData = await fRes.json();
-    const periods=fData?.properties?.periods||[];
-    if (!periods.length) return null;
-    return periods.reduce((p,c)=>
-      Math.abs(new Date(c.startTime)-targetDate) < Math.abs(new Date(p.startTime)-targetDate) ? c : p
-    );
-  } catch { return null; }
+    const [res25, res26] = await Promise.all([
+      fetch("https://raw.githubusercontent.com/dillondurinick/peakpaceweather/refs/heads/main/October_25_Climate.json"),
+      fetch("https://raw.githubusercontent.com/dillondurinick/peakpaceweather/refs/heads/main/October_26_Climate.json")
+    ]);
+    if (!res25.ok || !res26.ok) throw new Error("Bad response");
+    const data25 = await res25.json();
+    const data26 = await res26.json();
+    populateClimoTable(data25, "climoBody25", "climoAvg25");
+    populateClimoTable(data26, "climoBody26", "climoAvg26");
+  } catch (err) {
+    console.error("Failed to load climatology:", err);
+    document.getElementById("climoBody25").innerHTML = `<tr><td colspan="5">Climatology data unavailable</td></tr>`;
+    document.getElementById("climoBody26").innerHTML = `<tr><td colspan="5">Climatology data unavailable</td></tr>`;
+  }
 }
+document.querySelectorAll(".climoTab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".climoTab").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const day = btn.dataset.day;
+    document.querySelectorAll(".climoPanel").forEach(p => p.classList.remove("active"));
+    document.getElementById("climo" + day).classList.add("active");
+  });
+});
+loadClimatology();
+</script>
 
-/* ========= WBGT HELPERS ========= */
-function wbgtClass(valF, category=1){
-  if (valF==null) return {label:"—",cls:"wbgt-na",desc:"No data"};
-  if (valF<82) return {label:`${valF.toFixed(0)}° Low`,cls:"wbgt-low",desc:"Safe"};
-  if (valF<85) return {label:`${valF.toFixed(0)}° Mod`,cls:"wbgt-mod",desc:"Caution"};
-  if (valF<88) return {label:`${valF.toFixed(0)}° High`,cls:"wbgt-high",desc:"High risk"};
-  if (valF<90) return {label:`${valF.toFixed(0)}° Very High`,cls:"wbgt-very",desc:"Very high risk"};
-  return {label:`${valF.toFixed(0)}° Extreme`,cls:"wbgt-extreme",desc:"Extreme risk"};
-}
-function toC(f){return(f-32)*5/9;} 
-function toF(c){return c*9/5+32;}
-function wetBulbC(Tc,RH){ 
-  if(isNaN(Tc)||isNaN(RH)) return null;
-  const Tw=Tc*Math.atan(0.151977*Math.sqrt(RH+8.313659))+Math.atan(Tc+RH)-Math.atan(RH-1.676331)+0.00391838*Math.pow(RH,1.5)*Math.atan(0.023101*RH)-4.686035;
-  return Tw;
-}
-function wbgtShadeF(Tf,RH){const Tw=wetBulbC(toC(Tf),RH); return Tw?toF(Tw):null;}
-function daysUntilRace(){return Math.floor((raceConfig.date-new Date())/(1000*60*60*24));}
-
-/* ========= TERRAIN-RGB ========= */
+<!-- ====== Elevation + Terrain helpers ====== -->
+<script>
+/* Terrain-RGB helpers */
 function latLonToTileXY(lat, lon, z){
   const x = Math.floor((lon + 180) / 360 * Math.pow(2, z));
   const y = Math.floor((1 - Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180)) / Math.PI) / 2 * Math.pow(2, z));
@@ -627,166 +328,8 @@ function haversineMi(a,b){
   return 2*R*Math.asin(Math.sqrt(h));
 }
 
-/* ========= CLIMATOLOGY TABLE ========= */
-function populateClimoTable(data, bodyId, avgId) {
-  const body = document.getElementById(bodyId);
-  body.innerHTML = "";
-
-  let sumMax = 0, sumMin = 0, sumPrecip = 0, count = 0;
-
-  data.forEach(row => {
-    const max = Number(row.max);
-    const min = Number(row.min);
-    const precip = Number(row.precip);
-
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${row.year}</td>
-      <td>${isNaN(max) ? "—" : max.toFixed(1)}</td>
-      <td>${isNaN(min) ? "—" : min.toFixed(1)}</td>
-      <td>${isNaN(precip) ? "—" : precip.toFixed(2)}</td>
-      <td>${row.conditions || "—"}</td>
-    `;
-    body.appendChild(tr);
-
-    if (!isNaN(max)) sumMax += max;
-    if (!isNaN(min)) sumMin += min;
-    if (!isNaN(precip)) sumPrecip += precip;
-    count++;
-  });
-
-  // Fill averages row
-  const avgRow = document.getElementById(avgId);
-  if(count > 0){
-    avgRow.innerHTML = `
-      <td>Averages</td>
-      <td>${(sumMax/count).toFixed(1)}</td>
-      <td>${(sumMin/count).toFixed(1)}</td>
-      <td>${(sumPrecip/count).toFixed(2)}</td>
-      <td>—</td>
-    `;
-  }
-}
-
-async function loadClimatology() {
-  try {
-    const [res25, res26] = await Promise.all([
-      fetch("https://raw.githubusercontent.com/dillondurinick/peakpaceweather/refs/heads/main/October_25_Climate.json"),
-      fetch("https://raw.githubusercontent.com/dillondurinick/peakpaceweather/refs/heads/main/October_26_Climate.json")
-    ]);
-
-    if (!res25.ok || !res26.ok) throw new Error("Bad response");
-
-    const data25 = await res25.json();
-    const data26 = await res26.json();
-
-    populateClimoTable(data25, "climoBody25", "climoAvg25");
-    populateClimoTable(data26, "climoBody26", "climoAvg26");
-  } catch (err) {
-    console.error("Failed to load climatology:", err);
-    document.getElementById("climoBody25").innerHTML =
-      `<tr><td colspan="5">Climatology data unavailable</td></tr>`;
-    document.getElementById("climoBody26").innerHTML =
-      `<tr><td colspan="5">Climatology data unavailable</td></tr>`;
-  }
-}
-
-/* ========= TAB SWITCHING ========= */
-document.querySelectorAll(".climoTab").forEach(btn => {
-  btn.addEventListener("click", () => {
-    // Tabs
-    document.querySelectorAll(".climoTab").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    // Panels
-    const day = btn.dataset.day;
-    document.querySelectorAll(".climoPanel").forEach(p => p.classList.remove("active"));
-    document.getElementById("climo" + day).classList.add("active");
-  });
-});
-
-// Auto-run on page load
-loadClimatology();
-
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-/* ========= MAP TOOLTIP BINDER ========= */
-function bindMarkerTooltip(marker) {
-  marker.bindTooltip("", { 
-    direction: "auto",
-    offset: [0, -10],
-    opacity: 0.95,
-    className: "pp-tooltip",
-    sticky: false,
-    autoPan: true   // 👈 keeps tooltips inside the viewport
-  });
-}
-
-async function buildElevationProfile(routeCoords, z){
-  const fullDistances = [0];
-  for(let i=1;i<routeCoords.length;i++) {
-    fullDistances[i] = fullDistances[i-1] + haversineMi(routeCoords[i-1], routeCoords[i]);
-  }
-
-  // Sample every 10th point (for speed) but keep aligned distances
-  const sampled = [];
-  const sampledDistances = [];
-  for (let i=0;i<routeCoords.length;i+=10){
-    sampled.push(routeCoords[i]);
-    sampledDistances.push(fullDistances[i]);
-  }
-  // Always include the last point
-  if (sampled[sampled.length-1] !== routeCoords[routeCoords.length-1]) {
-    sampled.push(routeCoords[routeCoords.length-1]);
-    sampledDistances.push(fullDistances[fullDistances.length-1]);
-  }
-
-  const meters=[];
-  for (const [lat,lon] of sampled){ 
-    meters.push(await getElevationMetersAt(lat,lon,z)); 
-  }
-  const feet = meters.map(m => (m!=null ? m*3.28084 : null));
-
-  return { distances: sampledDistances, elevations: feet, sampled };
-}
-
-
-/* ========= GLOBALS ========= */
-let elevChart = null,
-    profileDistances = [],
-    profileElevations = [],
-    currentHighlightIndices = new Set();
-let groupList = [];
-let stationIndexToGroup = [];
-
-/* ========= INTERPOLATION ========= */
+/* Elevation profile sampling + chart */
+let elevChart = null, profileDistances = [], profileElevations = [], currentHighlightIndices = new Set();
 function elevationAtMile(mile) {
   if (!profileDistances.length) return null;
   for (let i=1;i<profileDistances.length;i++) {
@@ -800,89 +343,70 @@ function elevationAtMile(mile) {
   }
   return profileElevations[profileElevations.length-1];
 }
-
-/* ========= CHART BUILDER ========= */
+async function buildElevationProfile(routeCoords, z){
+  const fullDistances = [0];
+  for(let i=1;i<routeCoords.length;i++) { fullDistances[i] = fullDistances[i-1] + haversineMi(routeCoords[i-1], routeCoords[i]); }
+  const sampled = [], sampledDistances = [];
+  for (let i=0;i<routeCoords.length;i+=10){ sampled.push(routeCoords[i]); sampledDistances.push(fullDistances[i]); }
+  if (sampled[sampled.length-1] !== routeCoords[routeCoords.length-1]) {
+    sampled.push(routeCoords[routeCoords.length-1]);
+    sampledDistances.push(fullDistances[fullDistances.length-1]);
+  }
+  const meters=[];
+  for (const [lat,lon] of sampled){ meters.push(await getElevationMetersAt(lat,lon,z)); }
+  const feet = meters.map(m => (m!=null ? m*3.28084 : null));
+  return { distances: sampledDistances, elevations: feet, sampled };
+}
 function buildElevationChart(distances, elevations, stations){
   const ctx = document.getElementById('elevationChart').getContext('2d');
   if(elevChart) elevChart.destroy();
-
-  profileDistances = distances;
-  profileElevations = elevations;
-
-  const stationPoints = stations.map(s => ({
-    x: s.miles,
-    y: elevationAtMile(s.miles)
-  }));
-
+  profileDistances = distances; profileElevations = elevations;
+  const stationPoints = stations.map(s => ({ x: s.miles, y: elevationAtMile(s.miles) }));
   elevChart = new Chart(ctx, {
     type: 'line',
     data: {
       datasets: [
+        { label:'Elevation', data: profileDistances.map((d,i)=>({x:d,y:elevations[i]})), parsing:false, borderColor:'#000', pointRadius:0, borderWidth:1.5, fill:false, tension:0.1 },
         {
-          label: 'Elevation',
-          data: profileDistances.map((d,i)=>({x:d, y:elevations[i]})),
-          parsing: false,
-          borderColor: '#000',
-          pointRadius: 0,
-          borderWidth: 1.5,
-          fill: false,
-          tension: 0.1
-        },
-        {
-          label: 'Aid Stations',
-          type: 'scatter',
-          data: stationPoints,
-          parsing: false,
-          pointRadius: 6,
-          hoverRadius: 10,
-          hitRadius: 12,
-pointBackgroundColor: (ctx) => {
-  const idx = ctx.dataIndex;
-  return (elevChart && currentHighlightIndices.has(idx))
-    ? getComputedStyle(document.documentElement).getPropertyValue('--highlight').trim() || '#FF6700'
-    : getComputedStyle(document.documentElement).getPropertyValue('--blaze').trim() || '#37BC7D';
-},
-          pointBorderColor: '#222',
-          pointBorderWidth: 1
+          label:'Aid Stations', type:'scatter', data: stationPoints, parsing:false, pointRadius:6, hoverRadius:10, hitRadius:12,
+          pointBackgroundColor: (c) => {
+            const idx = c.dataIndex;
+            return (elevChart && currentHighlightIndices.has(idx))
+              ? getComputedStyle(document.documentElement).getPropertyValue('--highlight').trim() || '#FF6700'
+              : getComputedStyle(document.documentElement).getPropertyValue('--blaze').trim() || '#37BC7D';
+          },
+          pointBorderColor:'#222', pointBorderWidth:1
         }
       ]
     },
     options: {
-      responsive: true,
-      maintainAspectRatio: false,
+      responsive:true, maintainAspectRatio:false,
       plugins: {
-        legend: { display: false },
-       tooltip: {
-  enabled: true,
-  filter: ctx => ctx.datasetIndex === 1,
-  callbacks: {
-    title: (ctx) => {
-      const station = stations[ctx[0].dataIndex];
-      return `${station.name} – Mile ${station.miles.toFixed(1)}`;
-    },
-    label: (ctx) => {
-      const station = stations[ctx.dataIndex];
-      if (station.forecasts && station.forecasts.length) {
-        return station.forecasts.map(f => [
-          `ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}`,
-          `Temp: ${f.temp}`,
-          `Wind: ${f.wind}`,
-          `Conditions: ${f.cond}`
-        ]).flat();
-      }
-      return ["Forecast: —"];
-    }
-  },
-  backgroundColor: '#fff',
-  borderColor: getComputedStyle(document.documentElement).getPropertyValue('--highlight').trim() || '#FF6700',
-  borderWidth: 2,
-  titleColor: '#111',
-  bodyColor: '#111',
-  padding: 8,
-  displayColors: false
-}
+        legend: { display:false },
+        tooltip: {
+          enabled:true, filter: ctx => ctx.datasetIndex === 1,
+          callbacks: {
+            title: (ctx) => {
+              const station = stations[ctx[0].dataIndex];
+              return `${station.name} – Mile ${station.miles.toFixed(1)}`;
+            },
+            label: (ctx) => {
+              const station = stations[ctx.dataIndex];
+              if (station.forecasts && station.forecasts.length) {
+                return station.forecasts.map(f => [
+                  `ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}`,
+                  `Temp: ${f.temp}`, `Wind: ${f.wind}`, `Conditions: ${f.cond}`
+                ]).flat();
+              }
+              return ["Forecast: —"];
+            }
+          },
+          backgroundColor:'#fff',
+          borderColor: getComputedStyle(document.documentElement).getPropertyValue('--highlight').trim() || '#FF6700',
+          borderWidth:2, titleColor:'#111', bodyColor:'#111', padding:8, displayColors:false
+        }
       },
-      interaction: { mode: 'point', intersect: true },
+      interaction: { mode:'point', intersect:true },
       onHover: (event, elements) => {
         const canvas = event.chart.canvas;
         if (elements.length > 0 && elements[0].datasetIndex === 1) {
@@ -897,12 +421,11 @@ pointBackgroundColor: (ctx) => {
         }
       },
       scales: {
-        x: { type: 'linear', title: { display: true, text: 'Distance (mi)' }, min: 0, max: 100.9 },
-        y: { title: { display: true, text: 'Elevation (ft)' }, ticks: { autoSkip: true, maxTicksLimit: 6 } }
+        x: { type:'linear', title:{ display:true, text:'Distance (mi)' }, min:0, max:100.9 },
+        y: { title:{ display:true, text:'Elevation (ft)' }, ticks:{ autoSkip:true, maxTicksLimit:6 } }
       }
     }
   });
-
   ctx.canvas.addEventListener("mouseleave", () => {
     if (elevChart) {
       elevChart.tooltip.setActiveElements([], {x:0,y:0});
@@ -911,33 +434,77 @@ pointBackgroundColor: (ctx) => {
     }
   });
 }
+</script>
 
-/* ========= MAP ========= */
-// Disable scroll and touch zoom so the page scrolls normally.
-// Users can still zoom via +/– controls or double-click.
+<!-- ====== Map + Markers + Forecasts ====== -->
+<script>
+/* WBGT helpers */
+function wbgtClass(valF, category=1){
+  if (valF==null) return {label:"—",cls:"wbgt-na",desc:"No data"};
+  if (valF<82) return {label:`${valF.toFixed(0)}° Low`,cls:"wbgt-low",desc:"Safe"};
+  if (valF<85) return {label:`${valF.toFixed(0)}° Mod`,cls:"wbgt-mod",desc:"Caution"};
+  if (valF<88) return {label:`${valF.toFixed(0)}° High`,cls:"wbgt-high",desc:"High risk"};
+  if (valF<90) return {label:`${valF.toFixed(0)}° Very High`,cls:"wbgt-very",desc:"Very high risk"};
+  return {label:`${valF.toFixed(0)}° Extreme`,cls:"wbgt-extreme",desc:"Extreme risk"};
+}
+function toC(f){return(f-32)*5/9;} 
+function toF(c){return c*9/5+32;}
+function wetBulbC(Tc,RH){ 
+  if(isNaN(Tc)||isNaN(RH)) return null;
+  const Tw=Tc*Math.atan(0.151977*Math.sqrt(RH+8.313659))+Math.atan(Tc+RH)-Math.atan(RH-1.676331)+0.00391838*Math.pow(RH,1.5)*Math.atan(0.023101*RH)-4.686035;
+  return Tw;
+}
+function wbgtShadeF(Tf,RH){const Tw=wetBulbC(toC(Tf),RH); return Tw?toF(Tw):null;}
+function daysUntilRace(){return Math.floor((raceConfig.date-new Date())/(1000*60*60*24));}
 
+/* NOAA */
+async function getNOAAForecast(lat, lon, targetDate) {
+  try {
+    const pointRes = await fetch(`https://api.weather.gov/points/${lat},${lon}`);
+    const pointData = await pointRes.json();
+    const fRes = await fetch(pointData.properties.forecastHourly);
+    const fData = await fRes.json();
+    const periods=fData?.properties?.periods||[];
+    if (!periods.length) return null;
+    return periods.reduce((p,c)=>
+      Math.abs(new Date(c.startTime)-targetDate) < Math.abs(new Date(p.startTime)-targetDate) ? c : p
+    );
+  } catch { return null; }
+}
+
+/* Marker tooltips */
+function bindMarkerTooltip(marker) {
+  marker.bindTooltip("", { 
+    direction: "auto",
+    offset: [0, -10],
+    opacity: 0.95,
+    className: "pp-tooltip",
+    sticky: false,
+    autoPan: true
+  });
+}
+
+/* Map (keyboard disabled = no focus snap; everything else works) */
 const map = L.map('map', {
+  keyboard: false,          // <<< key fix: prevents focus + scroll jump
   scrollWheelZoom: false,
-  touchZoom: false,
+  touchZoom: true,
   zoomControl: true,
   dragging: true
 }).setView([40.7682, -77.7559], 12);
 
-// Optional: allow zoom only after focusing on the map (desktop UX)
-map.on('focus', () => map.scrollWheelZoom.enable());
-map.on('blur', () => map.scrollWheelZoom.disable());
+/* Tiles */
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
 
-// Add the tile layer
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
-
+/* Globals for markers / groups */
 let markers = [];
+let groupList = [];
+let stationIndexToGroup = [];
 
-/* ========= HIGHLIGHT HELPERS ========= */
+/* Highlight helpers (chart + markers) */
 function applyMarkerHighlights(activeGroupIdx){
   markers.forEach((m,i)=>{
-    const dot = m.getElement().querySelector('.blaze-dot');
+    const dot = m.getElement()?.querySelector('.blaze-dot');
     if (dot) dot.classList.toggle("highlighted", i === activeGroupIdx);
   });
 }
@@ -960,18 +527,36 @@ function highlightByGroupIndex(groupIdx){
 }
 function clearHighlights(){
   currentHighlightIndices.clear();
-  markers.forEach(m=>m.getElement().querySelector('.blaze-dot')?.classList.remove("highlighted"));
+  markers.forEach(m=>m.getElement()?.querySelector('.blaze-dot')?.classList.remove("highlighted"));
   if(elevChart){ elevChart.setActiveElements([]); elevChart.update(); }
 }
 
-const blazeIcon = L.divIcon({
-  className: "",
-  html: '<div class="blaze-dot"></div>',
-  iconSize: [20, 20],
-  iconAnchor: [10, 10]
-});
+const blazeIcon = L.divIcon({ className:"", html:'<div class="blaze-dot"></div>', iconSize:[20,20], iconAnchor:[10,10] });
 
-/* ========= BUILD EVERYTHING ========= */
+/* Tooltip text (HTML per group) */
+function tooltipLinesMapGroup(g, stations) {
+  let html = "";
+  g.indices.forEach((i, idx) => {
+    const s = stations[i];
+    if (idx > 0) html += `<hr style="margin:6px 0;">`;
+    html += `<div style="margin-bottom:6px;">
+      <strong>${s.name} – Mile ${s.miles.toFixed(1)}</strong><br>`;
+    if (s.forecasts && s.forecasts.length) {
+      s.forecasts.forEach(f => {
+        html += `ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}<br>
+                 Temp: ${f.temp}<br>
+                 Wind: ${f.wind}<br>
+                 Conditions: ${f.cond}<br>`;
+      });
+    } else {
+      html += `Forecast: —<br>`;
+    }
+    html += `</div>`;
+  });
+  return html;
+}
+
+/* Build everything */
 Promise.all([
   fetch(raceConfig.routeUrl).then(r=>r.json()),
   fetch(raceConfig.stationsUrl).then(r=>r.json())
@@ -981,6 +566,7 @@ Promise.all([
   const line=L.polyline(route,{color:"#000",weight:3}).addTo(map);
   map.fitBounds(line.getBounds());
 
+  /* Elevation */
   try{
     const {distances,elevations}=await buildElevationProfile(route,raceConfig.elevationZoom);
     buildElevationChart(distances,elevations,stations);
@@ -992,6 +578,7 @@ Promise.all([
     buildElevationChart(distances,elevations,stations);
   }
 
+  /* Group stations that share a lat/lon (multiple passes) */
   const groupsByKey = {};
   stations.forEach((s, idx) => {
     const key = `${s.lat},${s.lon}`;
@@ -1000,123 +587,25 @@ Promise.all([
   });
   groupList = Object.values(groupsByKey);
 
+  /* Place markers */
   groupList.forEach((g, gIdx) => {
     g.indices.forEach(stIdx => { stationIndexToGroup[stIdx] = gIdx; });
     const marker = L.marker([g.lat, g.lon], { icon: blazeIcon }).addTo(map);
     g.marker = marker;
     markers.push(marker);
-
-    // ✅ Now safe to call
-bindMarkerTooltip(marker);
-marker.setTooltipContent(tooltipLinesMapGroup(g, stations));
-
-marker.on("mouseover", () => highlightByGroupIndex(gIdx));
-marker.on("mouseout", clearHighlights);
-
+    bindMarkerTooltip(marker);
+    marker.setTooltipContent(tooltipLinesMapGroup(g, stations));
+    marker.on("mouseover", () => highlightByGroupIndex(gIdx));
+    marker.on("mouseout", clearHighlights);
   });
 
-updateForecasts();
-groupList.forEach(g => {
-  if (g.marker) g.marker.setTooltipContent(tooltipLinesMapGroup(g, raceConfig.stations));
+  /* Initial forecasts fill */
+  updateForecasts();
+  groupList.forEach(g => { if (g.marker) g.marker.setTooltipContent(tooltipLinesMapGroup(g, raceConfig.stations)); });
 });
-});
-</script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-/* ========= FORECASTS ========= */
-function daysForecastAvailable(){ 
-  return daysUntilRace() <= 7; 
-}
-
-/* Format one forecast */
-function formatForecastLine(f, plain=false) {
-  if (!f) return plain ? "Forecast: —" : "Forecast: —";
-  if (plain) {
-    return [
-      `ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}`,
-      `Temp: ${f.temp}`,
-      `Wind: ${f.wind}`,
-      `Conditions: ${f.cond}`
-    ];
-  }
-  return `
-    ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}<br>
-    Temp: ${f.temp}<br>
-    Wind: ${f.wind}<br>
-    Conditions: ${f.cond}
-  `;
-}
-
-/* Map tooltips (HTML, handles groups) */
-function tooltipLinesMapGroup(g, stations) {
-  let html = "";
-  g.indices.forEach((i, idx) => {
-    const s = stations[i];
-    if (idx > 0) html += `<hr style="margin:6px 0;">`; // divider between passes
-    html += `<div style="margin-bottom:6px;">
-      <strong>${s.name} – Mile ${s.miles.toFixed(1)}</strong><br>
-    `;
-    if (s.forecasts && s.forecasts.length) {
-      s.forecasts.forEach(f => {
-        html += `
-          ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}<br>
-          Temp: ${f.temp}<br>
-          Wind: ${f.wind}<br>
-          Conditions: ${f.cond}<br>
-        `;
-      });
-    } else {
-      html += `Forecast: —<br>`;
-    }
-    html += `</div>`;
-  });
-  return html;
-}
-
-/* Chart tooltips (array of strings) */
-function tooltipLinesChart(station) {
-  if (station.forecasts && station.forecasts.length) {
-    let lines = [`${station.name} – Mile ${station.miles.toFixed(1)}`];
-    station.forecasts.forEach((f, idx) => {
-      if (idx > 0) lines.push("----------------");
-      lines.push(...formatForecastLine(f, true));
-    });
-    return lines;
-  } else {
-    return ["Forecast: —"];
-  }
-}
-
+/* Forecast table + updates */
+function daysForecastAvailable(){ return daysUntilRace() <= 7; }
 async function updateForecasts(){
   const tbody = document.getElementById("forecastBody"); 
   tbody.innerHTML = "";
@@ -1133,7 +622,7 @@ async function updateForecasts(){
 
   const pace = paceMinPerMiFromUI();
 
-  for (const s of raceConfig.stations){
+  for (const s of (raceConfig.stations || [])){
     const eta = new Date(raceConfig.date.getTime() + s.miles * pace * 60000);
     const timeStr = eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
 
@@ -1143,22 +632,15 @@ async function updateForecasts(){
     if (forecastsAvailable){
       const f = await getNOAAForecast(s.lat, s.lon, eta);
       if (f){
-        // Temp
-        let tVal = f.temperature;
+        const tVal = f.temperature;
         temp = (tVal!=null) ? `${tVal}°F` : "—";
-
-        // Wind: NWS API gives windSpeed ("5 mph") and windDirection ("NW")
         const speed = f.windSpeed || "";
         const dir = f.windDirection || "";
         wind = (speed || dir) ? `${speed} ${dir}`.trim() : "—";
-
         cond = f.shortForecast || "—";
-
-        // WBGT (table only)
         const rh = f.relativeHumidity?.value;
         const wbgtVal = (f.temperature && rh!=null) ? wbgtShadeF(f.temperature, rh) : null;
         wbgtCell = wbgtClass(wbgtVal, raceConfig.regionCategory);
-
         forecastObj=f;
       }
     }
@@ -1172,8 +654,7 @@ async function updateForecasts(){
       <td>${temp}</td>
       <td>${wind}</td>
       <td>${cond}</td>
-      <td class="${wbgtCell.cls}" title="${wbgtCell.desc}">${wbgtCell.label}</td>
-    `;
+      <td class="${wbgtCell.cls}" title="${wbgtCell.desc}">${wbgtCell.label}</td>`;
     tbody.appendChild(row);
     s._row=row;
 
@@ -1186,7 +667,7 @@ async function updateForecasts(){
       `Forecast valid as of ${new Date().toLocaleString()}`;
   }
 
-  // Refresh all map tooltips with grouped content
+  /* refresh tooltips after forecast load */
   if(groupList && groupList.length){
     groupList.forEach(g=>{
       if(g.marker) g.marker.setTooltipContent(tooltipLinesMapGroup(g, raceConfig.stations));
@@ -1194,17 +675,4 @@ async function updateForecasts(){
   }
 }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</html>
