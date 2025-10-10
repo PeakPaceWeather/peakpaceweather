@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=1000, user-scalable=yes, initial-scale=1.0, maximum-scale=5.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0" />
   <title id="pageTitle">Tussey mOUnTaiNBACK 100 Mile Ultramarathon | Peak Pace</title>
 
   <!-- Libraries -->
@@ -11,8 +12,12 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 
   <style>
-    /* Force desktop layout */
-    html, body { min-width: 1000px !important; overflow-x: auto !important; touch-action: pan-x pan-y !important; zoom: 1 !important; }
+/* Responsive layout with pinch-zoom enabled */
+html, body {
+  overflow-x: hidden;
+  touch-action: pan-x pan-y;
+  zoom: 1;
+}
     body { margin: 0; padding: 0; font-family: "Source Sans Pro", Arial, sans-serif; color: #111; background: #fff; line-height: 1.5; }
 
     :root {
@@ -22,7 +27,16 @@
 
     .page-wrapper { max-width: 1000px; margin: 0 auto; padding: 0 10px; }
 
-    .main-header { text-align:center; font-size:36px; font-weight:800; letter-spacing:1px; color:var(--pp-dark); margin:24px 0 10px; }
+.main-header {
+  text-align: center;
+  font-family: "Montserrat", "Source Sans Pro", Arial, sans-serif;
+  font-size: clamp(24px, 5vw, 40px);
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--pp-dark);
+  margin: 24px 0 10px;
+}
     header { text-align:center; margin:8px auto 14px; }
     header h2 { margin:0; font-size:32px; font-weight:700; }
     #countdown { font-size:20px; font-weight:600; margin-top:6px; color:#333; }
@@ -493,6 +507,25 @@ const map = L.map('map', {
   dragging: true
 }).setView([40.7682, -77.7559], 12);
 
+// === Allow pinch-zoom on page; restrict map to two-finger zoom ===
+const mapContainer = document.getElementById('map');
+
+// Disable single-finger drag-scroll inside map (only two-finger gestures)
+mapContainer.addEventListener('touchstart', (e) => {
+  if (e.touches.length === 1) {
+    map.dragging.disable();
+  } else {
+    map.dragging.enable();
+  }
+});
+
+// Re-enable map drag once touch ends
+mapContainer.addEventListener('touchend', () => map.dragging.enable());
+
+// Make sure page can pinch-zoom anywhere
+document.documentElement.style.touchAction = "pan-x pan-y pinch-zoom";
+document.body.style.touchAction = "pan-x pan-y pinch-zoom";
+
 /* Tiles */
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
 
@@ -674,5 +707,25 @@ async function updateForecasts(){
     });
   }
 }
+</script>
+<script>
+// === Tap-to-highlight table rows (mobile-friendly) ===
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("table tr").forEach(tr => {
+    tr.addEventListener("click", () => {
+      const table = tr.closest("table");
+      table.querySelectorAll("tr").forEach(r => r.classList.remove("highlight-row"));
+      tr.classList.toggle("highlight-row");
+    });
+  });
+});
+</script>
+<script>
+// === Fix Chart.js not resizing correctly on mobile orientation change ===
+window.addEventListener("orientationchange", () => {
+  if (window.elevChart) {
+    setTimeout(() => elevChart.resize(), 500);
+  }
+});
 </script>
 </html>
