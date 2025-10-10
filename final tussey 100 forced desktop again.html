@@ -80,6 +80,11 @@ html, body {
     .blaze-dot:hover { transform: scale(1.4); cursor:pointer; }
     .blaze-dot.highlighted { transform: scale(1.6); background: var(--highlight); }
 /* Mobile tap highlight for table rows */
+/* Make table rows obviously tappable on mobile */
+#forecastBody tr, #climoBody25 tr, #climoBody26 tr {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
 .highlight-row {
   background: var(--hoverRow) !important;
   box-shadow: inset 0 0 0 2px var(--highlight);
@@ -752,20 +757,33 @@ async function updateForecasts(){
   }
 }
 </script>
+<!-- === Tap-to-highlight rows (mobile & desktop, delegated) === -->
 <script>
-// === Tap-to-highlight rows (mobile & desktop) ===
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("#forecastBody tr, #climoBody25 tr, #climoBody26 tr").forEach(tr => {
-    tr.addEventListener("click", () => {
-      // remove highlight from all rows in that table
+function installRowHighlighting() {
+  const ids = ["forecastBody", "climoBody25", "climoBody26"];
+
+  ids.forEach(id => {
+    const tbody = document.getElementById(id);
+    if (!tbody) return;
+
+    const activate = (tr) => {
       const table = tr.closest("table");
-      table.querySelectorAll("tr").forEach(r => r.classList.remove("highlight-row"));
-      // toggle this one
-      tr.classList.add("highlight-row");
-    });
+      const wasActive = tr.classList.contains("highlight-row");
+      table.querySelectorAll("tbody tr").forEach(r => r.classList.remove("highlight-row"));
+      if (!wasActive) tr.classList.add("highlight-row"); // toggle behavior
+    };
+
+    // Use pointerup so it fires properly on touch and click
+    tbody.addEventListener("pointerup", (e) => {
+      const tr = e.target.closest("tr");
+      if (tr && tbody.contains(tr)) activate(tr);
+    }, { passive: true });
   });
-});
+}
+
+document.addEventListener("DOMContentLoaded", installRowHighlighting);
 </script>
+
 <script>
 // === Fix Chart.js not resizing correctly on mobile orientation change ===
 window.addEventListener("orientationchange", () => {
@@ -774,4 +792,5 @@ window.addEventListener("orientationchange", () => {
   }
 });
 </script>
+
 </html>
