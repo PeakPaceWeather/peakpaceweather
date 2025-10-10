@@ -3,7 +3,7 @@
 <head>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
   <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0" />
+<meta name="viewport" content="width=1000, user-scalable=yes, initial-scale=1.0, maximum-scale=5.0" />
   <title id="pageTitle">Tussey mOUnTaiNBACK 100 Mile Ultramarathon | Peak Pace</title>
 
   <!-- Libraries -->
@@ -25,7 +25,13 @@ html, body {
       --pp-dark:#003546; --blaze:#37BC7D; --highlight:#FF6700; --hoverRow:#fff3e6;
     }
 
-    .page-wrapper { max-width: 1000px; margin: 0 auto; padding: 0 10px; }
+.page-wrapper {
+  width: 1000px;           /* fixed desktop width */
+  margin: 0 auto;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
 
 .main-header {
   text-align: center;
