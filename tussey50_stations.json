@@ -1,0 +1,80 @@
+[
+  {
+    "name": "50-Mile Start",
+    "lat": 40.7682,
+    "lon": -77.7559,
+    "miles": 0.0
+  },
+  {
+    "name": "Three Bridges, One Leg Breaker",
+    "lat": 40.7485,
+    "lon": -77.7763,
+    "miles": 3.2
+  },
+  {
+    "name": "Down To The Swamp",
+    "lat": 40.7214,
+    "lon": -77.8243,
+    "miles": 7.2
+  },
+  {
+    "name": "Race To The Beach",
+    "lat": 40.6841,
+    "lon": -77.8638,
+    "miles": 11.1
+  },
+  {
+    "name": "Three Up, Three Down",
+    "lat": 40.6955,
+    "lon": -77.7964,
+    "miles": 16.5
+  },
+  {
+    "name": "The Breeze",
+    "lat": 40.6953,
+    "lon": -77.7673,
+    "miles": 19.9
+  },
+  {
+    "name": "Stairway to the Stars",
+    "lat": 40.6767,
+    "lon": -77.7362,
+    "miles": 24.0
+  },
+  {
+    "name": "Merrily We Roll Along",
+    "lat": 40.696,
+    "lon": -77.6803,
+    "miles": 27.7
+  },
+  {
+    "name": "Rock On Down",
+    "lat": 40.7045,
+    "lon": -77.7253,
+    "miles": 32.0
+  },
+  {
+    "name": "Made In The Shade",
+    "lat": 40.7272,
+    "lon": -77.7029,
+    "miles": 34.9
+  },
+  {
+    "name": "Stream Of Consciousness",
+    "lat": 40.7725,
+    "lon": -77.6803,
+    "miles": 40.4
+  },
+  {
+    "name": "Are We There Yet?",
+    "lat": 40.7397,
+    "lon": -77.7525,
+    "miles": 45.7
+  },
+  {
+    "name": "Finish",
+    "lat": 40.7695,
+    "lon": -77.7576,
+    "miles": 49.9
+  }
+]
