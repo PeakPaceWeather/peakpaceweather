@@ -1,0 +1,56 @@
+[
+  {
+    "name": "50 Kilometer Start",
+    "lat": 40.769583,
+    "lon": -77.75525,
+    "miles": 0.0
+  },
+  {
+    "name": "Aid Station 1",
+    "lat": 40.74849,
+    "lon": -77.776236,
+    "miles": 3.2
+  },
+  {
+    "name": "Aid Station 2",
+    "lat": 40.721361,
+    "lon": -77.824583,
+    "miles": 7.2
+  },
+  {
+    "name": "Aid Station 3",
+    "lat": 40.682583,
+    "lon": -77.864167,
+    "miles": 11.1
+  },
+  {
+    "name": "Aid Station 4",
+    "lat": 40.695528,
+    "lon": -77.796389,
+    "miles": 16.5
+  },
+  {
+    "name": "Aid Station 5",
+    "lat": 40.739778,
+    "lon": -77.752417,
+    "miles": 24.5
+  },
+  {
+    "name": "Aid Station 6",
+    "lat": 40.723611,
+    "lon": -77.791111,
+    "miles": 28.0
+  },
+  {
+    "name": "Aid Station 7",
+    "lat": 40.7485,
+    "lon": -77.776222,
+    "miles": 30.5
+  },
+  {
+    "name": "50 Kilometer Finish",
+    "lat": 40.769528,
+    "lon": -77.757583,
+    "miles": 31.0
+  }
+]
