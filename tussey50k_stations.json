@@ -21,36 +21,36 @@
     "name": "Aid Station 3",
     "lat": 40.682583,
     "lon": -77.864167,
-    "miles": 11.1
+    "miles": 10.7
   },
   {
     "name": "Aid Station 4",
     "lat": 40.695528,
     "lon": -77.796389,
-    "miles": 16.5
+    "miles": 16.3
   },
   {
     "name": "Aid Station 5",
     "lat": 40.739778,
     "lon": -77.752417,
-    "miles": 24.5
+    "miles": 22.2
   },
   {
     "name": "Aid Station 6",
     "lat": 40.723611,
     "lon": -77.791111,
-    "miles": 28.0
+    "miles": 25.2
   },
   {
     "name": "Aid Station 7",
     "lat": 40.7485,
     "lon": -77.776222,
-    "miles": 30.5
+    "miles": 27.9
   },
   {
     "name": "50 Kilometer Finish",
     "lat": 40.769528,
     "lon": -77.757583,
-    "miles": 31.0
+    "miles": 31.1
   }
 ]
