@@ -306,15 +306,13 @@ async function loadClimatology() {
 
   const tabs = document.getElementById('climoTabs');
   const panels = document.getElementById('climoPanels');
-  tabs.innerHTML = ""; panels.innerHTML = "";
-
-  const start = new Date(raceConfig.date);
-  const span = Math.max(1, Number(raceConfig.multiDaySpan) || 1);
+  tabs.innerHTML = "";
+  panels.innerHTML = "";
 
   // Build tabs/panels
   const tabButtons = [];
-  for (let i=0; i<span; i++){
-    const d = new Date(start.getTime() + i*24*60*60*1000);
+  for (let i = 0; i < span; i++) {
+    const d = new Date(start.getTime() + i * 24 * 60 * 60 * 1000);
     const tab = document.createElement('button');
     tab.className = 'climoTab';
     tab.dataset.dayIndex = String(i);
@@ -330,22 +328,22 @@ async function loadClimatology() {
   if (span === 1) { tabs.style.display = 'none'; }
 
   // Activate day 0 by default
-  function activate(idx){
+  function activate(idx) {
     panels.querySelectorAll('.climoPanel').forEach(p => p.classList.remove('active'));
     tabButtons.forEach(b => b.classList.remove('active'));
     const p = document.getElementById(`climoPanel_${idx}`);
     if (p) p.classList.add('active');
-    if (span>1 && tabButtons[idx]) tabButtons[idx].classList.add('active');
+    if (span > 1 && tabButtons[idx]) tabButtons[idx].classList.add('active');
   }
-  if (span>1) {
-    tabButtons.forEach((btn,i)=>btn.addEventListener('click',()=>activate(i)));
+  if (span > 1) {
+    tabButtons.forEach((btn, i) => btn.addEventListener('click', () => activate(i)));
   }
   activate(0);
 
   // Fetch/build per day
-  for (let i=0; i<span; i++){
-    const d = new Date(start.getTime() + i*24*60*60*1000);
-    const file = climoFilenameFor(d); // e.g., October_12_Climate.json
+  for (let i = 0; i < span; i++) {
+    const d = new Date(start.getTime() + i * 24 * 60 * 60 * 1000);
+    const file = climoFilenameFor(d);
     const url = raceConfig.climoBaseUrl + file;
 
     const panel = document.getElementById(`climoPanel_${i}`);
@@ -354,20 +352,22 @@ async function loadClimatology() {
     const noteEl = panel.querySelector('.climoNote');
 
     // Dynamic note (station + city)
-    noteEl.textContent = `Historical climatology values are based on ASOS data from ${raceConfig.climoStationId} (${raceConfig.climoStationName}), near ${raceConfig.city}. Local variation may differ from ${raceConfig.climoStationId}. For planning only.`;
+    noteEl.textContent = `Historical climatology for ${shortMonthDay(d)} based on ASOS data from ${raceConfig.climoStationId} (${raceConfig.climoStationName}), near ${raceConfig.city}. Local variation may differ from ${raceConfig.climoStationId}. For planning only.`;
 
-    try{
+    try {
       const res = await fetch(url);
-      if(!res.ok) throw new Error("bad climo response");
+      if (!res.ok) throw new Error("bad climo response");
       const data = await res.json();
       populateClimoTable(data, bodyEl, avgRowEl);
-    }catch(err){
+    } catch (err) {
       console.error('Climo load failed:', file, err);
       bodyEl.innerHTML = `<tr><td colspan="5">Climatology data unavailable for ${shortMonthDay(d)}</td></tr>`;
     }
   }
 }
+
 document.addEventListener('DOMContentLoaded', loadClimatology);
+
 </script>
 
 <!-- ============ TERRAIN + ELEVATION ============ -->
