@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Half Marathon Start",
+    "lat": 40.7682,
+    "lon": -77.7559,
+    "miles": 0.0
+  },
+  {
+    "name": "Aid Station 1",
+    "lat": 40.7397,
+    "lon": -77.7525,
+    "miles": 3.6
+  },
+  {
+    "name": "Aid Station 2",
+    "lat": 40.7236,
+    "lon": -77.7911,
+    "miles": 6.7
+  },
+  {
+    "name": "Aid Station 3",
+    "lat": 40.7485,
+    "lon": -77.7763,
+    "miles": 9.4
+  },
+  {
+    "name": "Half Marathon Finish",
+    "lat": 40.7682,
+    "lon": -77.7559,
+    "miles": 12.7
+  }
+]
