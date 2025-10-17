@@ -297,8 +297,9 @@ function buildClimoPanel(panelId){
 
 /* Load climo for each race day (multiDaySpan) */
 async function loadClimatology() {
-  const climoTitle = document.getElementById('climoTitle');
-  climoTitle.textContent = `Climatology – ${raceConfig.city}`;
+const climoTitle = document.getElementById('climoTitle');
+const raceDateStr = start.toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" });
+climoTitle.textContent = `Climatology – ${raceConfig.city} (${raceDateStr})`;
 
   const tabs = document.getElementById('climoTabs');
   const panels = document.getElementById('climoPanels');
