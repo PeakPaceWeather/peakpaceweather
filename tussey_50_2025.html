@@ -15,7 +15,14 @@
   <style>
 /* ===== Base + Responsive (pinch-zoom enabled) ===== */
 html, body { overflow-x: hidden; touch-action: pan-x pan-y; zoom: 1; }
-body { margin: 0; padding: 0; font-family: "Source Sans Pro", Arial, sans-serif; color: #111; background: #fff; line-height: 1.5; }
+body {
+  margin: 0;
+  padding: 0 6px;
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  color: #111;
+  background: #fff;
+  line-height: 1.5;
+}
 :root { --ink:#111; --muted:#555; --line:#ddd; --pp-dark:#003546; --blaze:#37BC7D; --highlight:#FF6700; --hoverRow:#fff3e6; }
 
 /* ===== Layout + Header ===== */
@@ -28,14 +35,46 @@ header { text-align:center; margin:8px auto 14px; }
 header h2 { margin:0; font-size:32px; font-weight:700; }
 #countdown { font-size:20px; font-weight:600; margin-top:6px; color:#333; }
 
-/* ===== Uniform panel widths ===== */
-section, #elevSection, #map, #paceBox { width: 960px; max-width: 960px; margin: 18px auto 0; box-sizing: border-box; }
-section, #elevSection { border:1px solid #ccc; border-radius:8px; background:#fff; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
-section:last-of-type { margin-bottom:24px; }
-section h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700; }
+/* ===== Uniform panel widths (fluid on small screens) ===== */
+section,
+#elevSection,
+#map,
+#paceBox {
+  width: 100%;
+  max-width: 960px;
+  margin: 18px auto 0;
+  box-sizing: border-box;
+}
+
+section,
+#elevSection {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: #fff;
+  padding: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+section:last-of-type {
+  margin-bottom: 24px;
+}
+
+section h3 {
+  text-align: center;
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 700;
+}
 
 /* Map */
-#map { height: 600px; margin-top:10px; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+#map {
+  height: 600px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
 
 /* Elevation */
 #elevWrap { width:100%; position:relative; height:225px; margin-top:10px; }
