@@ -14,7 +14,7 @@
 
   <style>
 /* ===== Base + Responsive (pinch-zoom enabled) ===== */
-html, body { overflow-x: hidden; touch-action: pan-x pan-y; zoom: 1; }
+html, body { margin: 0; padding: 0; }
 body {
   margin: 0;
   padding: 0 6px;
@@ -613,12 +613,14 @@ function bindMarkerTooltip(marker) {
 }
 
 /* Map */
-const map = L.map('map', { keyboard: false, scrollWheelZoom: false, touchZoom: true, zoomControl: true, dragging: true }).setView([40.7682, -77.7559], 12);
+const map = L.map('map', {
+  keyboard: false,
+  scrollWheelZoom: false,
+  touchZoom: 'center',
+  zoomControl: true,
+  dragging: true
+}).setView([40.7682, -77.7559], 12);
 const mapContainer = document.getElementById('map');
-mapContainer.addEventListener('touchstart', (e) => { if (e.touches.length === 1) map.dragging.disable(); else map.dragging.enable(); });
-mapContainer.addEventListener('touchend', () => map.dragging.enable());
-document.documentElement.style.touchAction = "pan-x pan-y pinch-zoom";
-document.body.style.touchAction = "pan-x pan-y pinch-zoom";
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
 
 /* Globals */
