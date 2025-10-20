@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Peak Pace Weather — One-file template with date-driven climatology -->
   <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
-  <title id="pageTitle">Race Title | Peak Pace</title>
+  <meta name="viewport" content="width=1000, user-scalable=yes, initial-scale=1.0, maximum-scale=5.0" />
+  <title id="pageTitle">Tussey mOUnTaiNBACK 50 Mile Relay and Ultramarathon | Peak Pace</title>
 
   <!-- Fonts & Libraries -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
@@ -14,10 +13,10 @@
 
   <style>
 /* ===== Base + Responsive (pinch-zoom enabled) ===== */
-html, body { margin: 0; padding: 0; }
+html, body { overflow-x: hidden; touch-action: pan-x pan-y; zoom: 1; }
 body {
   margin: 0;
-  padding: 0 6px;
+  padding: 0;
   font-family: "Source Sans Pro", Arial, sans-serif;
   color: #111;
   background: #fff;
@@ -26,87 +25,25 @@ body {
 :root { --ink:#111; --muted:#555; --line:#ddd; --pp-dark:#003546; --blaze:#37BC7D; --highlight:#FF6700; --hoverRow:#fff3e6; }
 
 /* ===== Layout + Header ===== */
-.page-wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-}
+.page-wrapper { width: 1000px; margin: 0 auto; padding: 0; box-sizing: border-box; }
 .main-header { text-align: center; font-family: "Montserrat", sans-serif; font-weight: 800; font-size: clamp(36px, 6vw, 52px); letter-spacing: .05em; text-transform: uppercase; color: #000; margin: 28px 0 18px; line-height: 1; }
 header { text-align:center; margin:8px auto 14px; }
 header h2 { margin:0; font-size:32px; font-weight:700; }
 #countdown { font-size:20px; font-weight:600; margin-top:6px; color:#333; }
 
-/* ===== Uniform panel widths (fluid on small screens) ===== */
-section,
-#elevSection,
-#map,
-#paceBox {
-  width: 100%;
-  max-width: 960px;
-  margin: 18px auto 0;
-  box-sizing: border-box;
-}
-
-section,
-#elevSection {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #fff;
-  padding: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
-
-section:last-of-type {
-  margin-bottom: 24px;
-}
-
-section h3 {
-  text-align: center;
-  margin: 0 0 12px;
-  font-size: 20px;
-  font-weight: 700;
-}
+/* ===== Uniform panel widths (fixed like 100 mi + Half) ===== */
+section, #elevSection, #map, #paceBox { width: 960px; max-width: 960px; margin: 18px auto 0; box-sizing: border-box; }
+section, #elevSection { border:1px solid #ccc; border-radius:8px; background:#fff; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+section:last-of-type { margin-bottom:24px; }
+section h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700; }
 
 /* Map */
-#map {
-  height: 600px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-}
+#map { height: 600px; margin-top:10px; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
 
-
-/* ===== Uniform elevation panel width alignment ===== */
-#elevSection {
-  width: 960px;
-  max-width: 960px;
-  margin: 18px auto;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  padding: 16px;
-  box-sizing: border-box;
-}
-
-/* Ensure the chart fills the full panel width with zero overflow */
-#elevWrap {
-  position: relative;
-  width: 100%;
-  height: 225px;
-  margin: 0 auto;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-#elevationChart {
-  position: absolute;
-  inset: 0;
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
-  box-sizing: border-box;
-}
+/* Elevation panel */
+#elevSection { width: 960px; max-width: 960px; margin: 18px auto; border: 1px solid #ccc; border-radius: 8px; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.08); padding: 16px; box-sizing: border-box; }
+#elevWrap { position: relative; width: 100%; height: 225px; margin: 0 auto; padding: 0; box-sizing: border-box; }
+#elevationChart { position: absolute; inset: 0; width: 100% !important; height: 100% !important; display: block; box-sizing: border-box; }
 
 /* Pace box */
 #paceBox { text-align:center; padding:8px; margin:6px auto 0; background:#fff; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,0.08); }
@@ -149,9 +86,9 @@ th { background:#f0f0f0; font-weight:700; }
 .blaze-dot:hover { transform: scale(1.4); cursor:pointer; }
 .blaze-dot.highlighted { transform: scale(1.6); background: var(--highlight); }
 
-/* Climo tabs (auto-hidden for 1 day) */
+/* Climo tabs */
 #climoTabs { display:flex; justify-content:center; margin-bottom:12px; gap:8px; }
-.climoTab { padding:6px 14px; border:1px solid var(--pp-dark); border-radius:6px 6px 0 0; background:#f9f9f9; color:var(--pp-dark); font-size:14px; font-weight:600; cursor:pointer; transition: background .2s ease, color .2s ease; }
+.climoTab { padding:6px 14px; border:1px solid var(--pp-dark); border-radius:6px 6px 0 0; background:#f9f9f9; color:#var(--pp-dark); font-size:14px; font-weight:600; cursor:pointer; transition: background .2s ease, color .2s ease; }
 .climoTab:hover { background: var(--hoverRow); }
 .climoTab.active { background: var(--pp-dark); color:#fff; }
 .climoPanel { display:none; }
@@ -172,7 +109,7 @@ th { background:#f0f0f0; font-weight:700; }
       <div id="countdown">Loading countdown…</div>
     </header>
 
-    <!-- ============ Climatology (date-driven) ============ -->
+    <!-- ============ Climatology ============ -->
     <section id="climatology">
       <h3 id="climoTitle">Climatology</h3>
       <div id="climoTabs"></div>
@@ -226,24 +163,10 @@ th { background:#f0f0f0; font-weight:700; }
   </div>
 </body>
 
-<!-- ============ CONFIG (Edit this block only) ============ -->
+<!-- ============ CONFIG ============ -->
 <script>
-/* Keep this token as requested */
 const MAPBOX_TOKEN = "pk.eyJ1IjoiZGlsbG9uZHVyaW5pY2siLCJhIjoiY21memtlbm83MDNycTJtb3JtdGxucWpkMiJ9.W7Ge6XYCd0Gfl9f7YQ2dNw";
 
-/* ====== EDIT ME FOR EACH RACE ======
-name:             Display name
-date:             Local start time (ISO string OK)
-city:             City label for climatology section title
-climoStationId:   ASOS/airport code used for climatology note
-climoStationName: Friendly station name used for note
-climoBaseUrl:     Base URL where monthly/day JSON lives (placeholder now)
-routeUrl:         Raw JSON (array of [lat,lon])
-stationsUrl:      Raw JSON ({ name, lat, lon, miles }[])
-multiDaySpan:     Number of race days (1 = no tabs; >1 auto-tabs)
-elevationZoom:    Terrain-RGB zoom for elevation sampling
-regionCategory:   WBGT region threshold set (1 default)
-===================================== */
 const raceConfig = {
   name: "Tussey mOUnTaiNBACK 50 Mile Relay and Ultramarathon",
   date: new Date("2025-10-26T07:00-04:00"),
@@ -305,21 +228,12 @@ function paceMinPerMiFromUI(){
 })();
 </script>
 
-<!-- ============ CLIMATOLOGY (date-driven) ============ -->
+<!-- ============ CLIMATOLOGY ============ -->
 <script>
-/* Build month filename like "October_12_Climate.json" */
 function monthName(d){ return d.toLocaleString('en-US', { month:'long' }); }
-function climoFilenameFor(dateObj){
-  const mn = monthName(dateObj);
-  const day = dateObj.getDate();
-  return `${mn}_${day}_Climate.json`;
-}
-/* Human-readable "Oct 12" tab title */
-function shortMonthDay(d){
-  return d.toLocaleString('en-US', { month:'short', day:'numeric' });
-}
+function climoFilenameFor(dateObj){ const mn = monthName(dateObj); const day = dateObj.getDate(); return `${mn}_${day}_Climate.json`; }
+function shortMonthDay(d){ return d.toLocaleString('en-US', { month:'short', day:'numeric' }); }
 
-/* Populate a climo table */
 function populateClimoTable(data, bodyEl, avgRowEl){
   bodyEl.innerHTML = "";
   let sumMax=0, sumMin=0, sumP=0, n=0;
@@ -347,7 +261,6 @@ function populateClimoTable(data, bodyEl, avgRowEl){
   }
 }
 
-/* Build one climo panel DOM node */
 function buildClimoPanel(panelId){
   const panel = document.createElement('div');
   panel.className = 'climoPanel';
@@ -365,21 +278,19 @@ function buildClimoPanel(panelId){
   return panel;
 }
 
-/* Load climo for each race day (multiDaySpan) */
 async function loadClimatology() {
   const start = new Date(raceConfig.date);
   const span = Math.max(1, Number(raceConfig.multiDaySpan) || 1);
 
   const climoTitle = document.getElementById('climoTitle');
   const raceDateStr = start.toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" });
-  climoTitle.textContent = `Climatology – ${raceConfig.city} (${raceDateStr})`;
+  climoTitle.textContent = `Climatology — ${raceConfig.city} (${raceDateStr})`;
 
   const tabs = document.getElementById('climoTabs');
   const panels = document.getElementById('climoPanels');
   tabs.innerHTML = "";
   panels.innerHTML = "";
 
-  // Build tabs/panels
   const tabButtons = [];
   for (let i = 0; i < span; i++) {
     const d = new Date(start.getTime() + i * 24 * 60 * 60 * 1000);
@@ -394,10 +305,8 @@ async function loadClimatology() {
     panels.appendChild(panel);
   }
 
-  // Hide tabs if single day
   if (span === 1) { tabs.style.display = 'none'; }
 
-  // Activate day 0 by default
   function activate(idx) {
     panels.querySelectorAll('.climoPanel').forEach(p => p.classList.remove('active'));
     tabButtons.forEach(b => b.classList.remove('active'));
@@ -410,7 +319,6 @@ async function loadClimatology() {
   }
   activate(0);
 
-  // Fetch/build per day
   for (let i = 0; i < span; i++) {
     const d = new Date(start.getTime() + i * 24 * 60 * 60 * 1000);
     const file = climoFilenameFor(d);
@@ -421,7 +329,6 @@ async function loadClimatology() {
     const avgRowEl = panel.querySelector('#climoAvgRow');
     const noteEl = panel.querySelector('.climoNote');
 
-    // Dynamic note (station + city)
     noteEl.textContent = `Historical climatology for ${shortMonthDay(d)} based on ASOS data from ${raceConfig.climoStationId} (${raceConfig.climoStationName}), near ${raceConfig.city}. Local variation may differ from ${raceConfig.climoStationId}. For planning only.`;
 
     try {
@@ -437,56 +344,17 @@ async function loadClimatology() {
 }
 
 document.addEventListener('DOMContentLoaded', loadClimatology);
-
 </script>
 
 <!-- ============ TERRAIN + ELEVATION ============ -->
 <script>
-function latLonToTileXY(lat, lon, z){
-  const x = Math.floor((lon + 180) / 360 * Math.pow(2, z));
-  const y = Math.floor((1 - Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180)) / Math.PI) / 2 * Math.pow(2, z));
-  return {x,y};
-}
-function latLonToPixelXYInTile(lat, lon, z, tileSize=256){
-  const n = Math.pow(2, z);
-  const xtile = (lon + 180) / 360 * n;
-  const latRad = lat * Math.PI/180;
-  const ytile = (1 - Math.log(Math.tan(latRad) + 1/Math.cos(latRad)) / Math.PI) / 2 * n;
-  const px = Math.floor((xtile - Math.floor(xtile)) * tileSize);
-  const py = Math.floor((ytile - Math.floor(ytile)) * tileSize);
-  return {px, py};
-}
+function latLonToTileXY(lat, lon, z){ const x = Math.floor((lon + 180) / 360 * Math.pow(2, z)); const y = Math.floor((1 - Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180)) / Math.PI) / 2 * Math.pow(2, z)); return {x,y}; }
+function latLonToPixelXYInTile(lat, lon, z, tileSize=256){ const n = Math.pow(2, z); const xtile = (lon + 180) / 360 * n; const latRad = lat * Math.PI/180; const ytile = (1 - Math.log(Math.tan(latRad) + 1/Math.cos(latRad)) / Math.PI) / 2 * n; const px = Math.floor((xtile - Math.floor(xtile)) * tileSize); const py = Math.floor((ytile - Math.floor(ytile)) * tileSize); return {px, py}; }
 function decodeTerrainRGB(r,g,b){ return -10000 + (r*256*256 + g*256 + b) * 0.1; }
-
 const tileCache = new Map();
-async function getTileImageData(z,x,y){
-  const key = `${z}/${x}/${y}`;
-  if (tileCache.has(key)) return tileCache.get(key);
-  const url = `https://api.mapbox.com/v4/mapbox.terrain-rgb/${z}/${x}/${y}.pngraw?access_token=${MAPBOX_TOKEN}`;
-  const img = new Image(); img.crossOrigin = 'anonymous';
-  const loaded = new Promise((res,rej)=>{ img.onload=()=>res(); img.onerror=(e)=>rej(e); });
-  img.src = url; await loaded;
-  const canvas = document.createElement('canvas'); canvas.width=256; canvas.height=256;
-  const ctx = canvas.getContext('2d'); ctx.drawImage(img,0,0);
-  const imageData = ctx.getImageData(0,0,256,256);
-  const record = { imageData }; tileCache.set(key, record); return record;
-}
-async function getElevationMetersAt(lat, lon, z){
-  const {x,y} = latLonToTileXY(lat, lon, z);
-  const {px,py} = latLonToPixelXYInTile(lat, lon, z, 256);
-  try{
-    const { imageData } = await getTileImageData(z,x,y);
-    const idx = (py*256 + px) * 4;
-    const r = imageData.data[idx], g = imageData.data[idx+1], b = imageData.data[idx+2];
-    return decodeTerrainRGB(r,g,b);
-  }catch(e){ return null; }
-}
-function haversineMi(a,b){
-  const R=3958.7613; const toRad=x=>x*Math.PI/180;
-  const dLat=toRad(b[0]-a[0]); const dLon=toRad(b[1]-a[1]); const la1=toRad(a[0]);
-  const h=Math.sin(dLat/2)**2+Math.cos(la1)*Math.cos(toRad(b[0]))*Math.sin(dLon/2)**2;
-  return 2*R*Math.asin(Math.sqrt(h));
-}
+async function getTileImageData(z,x,y){ const key = `${z}/${x}/${y}`; if (tileCache.has(key)) return tileCache.get(key); const url = `https://api.mapbox.com/v4/mapbox.terrain-rgb/${z}/${x}/${y}.pngraw?access_token=${MAPBOX_TOKEN}`; const img = new Image(); img.crossOrigin = 'anonymous'; const loaded = new Promise((res,rej)=>{ img.onload=()=>res(); img.onerror=(e)=>rej(e); }); img.src = url; await loaded; const canvas = document.createElement('canvas'); canvas.width=256; canvas.height=256; const ctx = canvas.getContext('2d'); ctx.drawImage(img,0,0); const imageData = ctx.getImageData(0,0,256,256); const record = { imageData }; tileCache.set(key, record); return record; }
+async function getElevationMetersAt(lat, lon, z){ const {x,y} = latLonToTileXY(lat, lon, z); const {px,py} = latLonToPixelXYInTile(lat, lon, z, 256); try{ const { imageData } = await getTileImageData(z,x,y); const idx = (py*256 + px) * 4; const r = imageData.data[idx], g = imageData.data[idx+1], b = imageData.data[idx+2]; return decodeTerrainRGB(r,g,b); }catch(e){ return null; } }
+function haversineMi(a,b){ const R=3958.7613; const toRad=x=>x*Math.PI/180; const dLat=toRad(b[0]-a[0]); const dLon=toRad(b[1]-a[1]); const la1=toRad(a[0]); const h=Math.sin(dLat/2)**2+Math.cos(la1)*Math.cos(toRad(b[0]))*Math.sin(dLon/2)**2; return 2*R*Math.asin(Math.sqrt(h)); }
 
 let elevChart = null, profileDistances = [], profileElevations = [], currentHighlightIndices = new Set();
 function elevationAtMile(mile) {
@@ -548,7 +416,7 @@ function buildElevationChart(distances, elevations, stations){
           callbacks: {
             title: (ctx) => {
               const station = stations[ctx[0].dataIndex];
-              return `${station.name} – Mile ${station.miles.toFixed(1)}`;
+              return `${station.name} — Mile ${station.miles.toFixed(1)}`;
             },
             label: (ctx) => {
               const station = stations[ctx.dataIndex];
@@ -580,19 +448,18 @@ function buildElevationChart(distances, elevations, stations){
           event.chart.update();
         }
       },
-scales: {
-  x: {
-    type: 'linear',
-    title: { display: true, text: 'Distance (mi)', ticks: { padding: 0 }, grid: { drawTicks: false }, border: { display: true }},
-    min: 0,
-    max: 50.0
-  },
-  y: {
-    title: { display: true, text: 'Elevation (ft)', ticks: { autoSkip: true, maxTicksLimit: 6, padding: 0 }, grid: { drawTicks: false }, border: { display: true }},
-    ticks: { autoSkip: true, maxTicksLimit: 6 }
-  }
-}
-
+      scales: {
+        x: {
+          type: 'linear',
+          title: { display: true, text: 'Distance (mi)', ticks: { padding: 0 }, grid: { drawTicks: false }, border: { display: true }},
+          min: 0,
+          max: 50.0
+        },
+        y: {
+          title: { display: true, text: 'Elevation (ft)', ticks: { autoSkip: true, maxTicksLimit: 6, padding: 0 }, grid: { drawTicks: false }, border: { display: true }},
+          ticks: { autoSkip: true, maxTicksLimit: 6 }
+        }
+      }
     }
   });
   ctx.canvas.addEventListener("mouseleave", () => {
@@ -607,23 +474,12 @@ scales: {
 
 <!-- ============ MAP + MARKERS + FORECASTS ============ -->
 <script>
-function wbgtClass(valF, category=1){
-  if (valF==null) return {label:"—",cls:"wbgt-na",desc:"No data"};
-  if (valF<82) return {label:`${valF.toFixed(0)}° Low`,cls:"wbgt-low",desc:"Safe"};
-  if (valF<85) return {label:`${valF.toFixed(0)}° Mod`,cls:"wbgt-mod",desc:"Caution"};
-  if (valF<88) return {label:`${valF.toFixed(0)}° High`,cls:"wbgt-high",desc:"High risk"};
-  if (valF<90) return {label:`${valF.toFixed(0)}° Very High`,cls:"wbgt-very",desc:"Very high risk"};
-  return {label:`${valF.toFixed(0)}° Extreme`,cls:"wbgt-extreme",desc:"Extreme risk"};
-}
+function wbgtClass(valF, category=1){ if (valF==null) return {label:"—",cls:"wbgt-na",desc:"No data"}; if (valF<82) return {label:`${valF.toFixed(0)}° Low`,cls:"wbgt-low",desc:"Safe"}; if (valF<85) return {label:`${valF.toFixed(0)}° Mod`,cls:"wbgt-mod",desc:"Caution"}; if (valF<88) return {label:`${valF.toFixed(0)}° High`,cls:"wbgt-high",desc:"High risk"}; if (valF<90) return {label:`${valF.toFixed(0)}° Very High`,cls:"wbgt-very",desc:"Very high risk"}; return {label:`${valF.toFixed(0)}° Extreme`,cls:"wbgt-extreme",desc:"Extreme risk"}; }
 function toC(f){return(f-32)*5/9;} function toF(c){return c*9/5+32;}
-function wetBulbC(Tc,RH){ if(isNaN(Tc)||isNaN(RH)) return null;
-  const Tw=Tc*Math.atan(0.151977*Math.sqrt(RH+8.313659))+Math.atan(Tc+RH)-Math.atan(RH-1.676331)+0.00391838*Math.pow(RH,1.5)*Math.atan(0.023101*RH)-4.686035;
-  return Tw;
-}
+function wetBulbC(Tc,RH){ if(isNaN(Tc)||isNaN(RH)) return null; const Tw=Tc*Math.atan(0.151977*Math.sqrt(RH+8.313659))+Math.atan(Tc+RH)-Math.atan(RH-1.676331)+0.00391838*Math.pow(RH,1.5)*Math.atan(0.023101*RH)-4.686035; return Tw; }
 function wbgtShadeF(Tf,RH){const Tw=wetBulbC(toC(Tf),RH); return Tw?toF(Tw):null;}
 function daysUntilRace(){return Math.floor((raceConfig.date-new Date())/(1000*60*60*24));}
 
-/* NOAA */
 async function getNOAAForecast(lat, lon, targetDate) {
   try {
     const pointRes = await fetch(`https://api.weather.gov/points/${lat},${lon}`);
@@ -632,53 +488,28 @@ async function getNOAAForecast(lat, lon, targetDate) {
     const fData = await fRes.json();
     const periods=fData?.properties?.periods||[];
     if (!periods.length) return null;
-    return periods.reduce((p,c)=>
-      Math.abs(new Date(c.startTime)-targetDate) < Math.abs(new Date(p.startTime)-targetDate) ? c : p
-    );
+    return periods.reduce((p,c)=> Math.abs(new Date(c.startTime)-targetDate) < Math.abs(new Date(p.startTime)-targetDate) ? c : p );
   } catch { return null; }
 }
-function bindMarkerTooltip(marker) {
-  marker.bindTooltip("", { direction: "auto", offset: [0, -10], opacity: 0.95, className: "pp-tooltip", sticky: false, autoPan: true });
-}
+function bindMarkerTooltip(marker) { marker.bindTooltip("", { direction: "auto", offset: [0, -10], opacity: 0.95, className: "pp-tooltip", sticky: false, autoPan: true }); }
 
-/* Map */
-const map = L.map('map', {
-  keyboard: false,
-  scrollWheelZoom: false,
-  touchZoom: 'center',
-  zoomControl: true,
-  dragging: true
-}).setView([40.7682, -77.7559], 12);
+const map = L.map('map', { keyboard: false, scrollWheelZoom: false, touchZoom: true, zoomControl: true, dragging: true }).setView([40.7682, -77.7559], 12);
 const mapContainer = document.getElementById('map');
+mapContainer.addEventListener('touchstart', (e) => { if (e.touches.length === 1) map.dragging.disable(); else map.dragging.enable(); });
+mapContainer.addEventListener('touchend', () => map.dragging.enable());
+document.documentElement.style.touchAction = "pan-x pan-y pinch-zoom";
+document.body.style.touchAction = "pan-x pan-y pinch-zoom";
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
 
-/* Globals */
 let markers = [];
 let groupList = [];
 let stationIndexToGroup = [];
 
-function applyMarkerHighlights(activeGroupIdx){
-  markers.forEach((m,i)=>{ const dot = m.getElement()?.querySelector('.blaze-dot'); if (dot) dot.classList.toggle("highlighted", i === activeGroupIdx); });
-}
-function applyChartHighlights(indices){
-  currentHighlightIndices = new Set(indices);
-  if (elevChart){ elevChart.setActiveElements(indices.map(i=>({datasetIndex:1,index:i}))); elevChart.update(); }
-}
-function highlightByStationIndex(stationIdx){
-  const gIdx = stationIndexToGroup[stationIdx];
-  applyMarkerHighlights(gIdx);
-  applyChartHighlights([stationIdx]);
-}
-function highlightByGroupIndex(groupIdx){
-  const indices = groupList[groupIdx].indices;
-  applyMarkerHighlights(groupIdx);
-  applyChartHighlights(indices);
-}
-function clearHighlights(){
-  currentHighlightIndices.clear();
-  markers.forEach(m=>m.getElement()?.querySelector('.blaze-dot')?.classList.remove("highlighted"));
-  if(elevChart){ elevChart.setActiveElements([]); elevChart.update(); }
-}
+function applyMarkerHighlights(activeGroupIdx){ markers.forEach((m,i)=>{ const dot = m.getElement()?.querySelector('.blaze-dot'); if (dot) dot.classList.toggle("highlighted", i === activeGroupIdx); }); }
+function applyChartHighlights(indices){ currentHighlightIndices = new Set(indices); if (elevChart){ elevChart.setActiveElements(indices.map(i=>({datasetIndex:1,index:i}))); elevChart.update(); } }
+function highlightByStationIndex(stationIdx){ const gIdx = stationIndexToGroup[stationIdx]; applyMarkerHighlights(gIdx); applyChartHighlights([stationIdx]); }
+function highlightByGroupIndex(groupIdx){ const indices = groupList[groupIdx].indices; applyMarkerHighlights(groupIdx); applyChartHighlights(indices); }
+function clearHighlights(){ currentHighlightIndices.clear(); markers.forEach(m=>m.getElement()?.querySelector('.blaze-dot')?.classList.remove("highlighted")); if(elevChart){ elevChart.setActiveElements([]); elevChart.update(); } }
 const blazeIcon = L.divIcon({ className:"", html:'<div class="blaze-dot"></div>', iconSize:[20,20], iconAnchor:[10,10] });
 
 function tooltipLinesMapGroup(g, stations) {
@@ -686,14 +517,10 @@ function tooltipLinesMapGroup(g, stations) {
   g.indices.forEach((i, idx) => {
     const s = stations[i];
     if (idx > 0) html += `<hr style="margin:6px 0;">`;
-    html += `<div style="margin-bottom:6px;">
-      <strong>${s.name} – Mile ${s.miles.toFixed(1)}</strong><br>`;
+    html += `<div style=\"margin-bottom:6px;\">\n      <strong>${s.name} — Mile ${s.miles.toFixed(1)}</strong><br>`;
     if (s.forecasts && s.forecasts.length) {
       s.forecasts.forEach(f => {
-        html += `ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}<br>
-                 Temp: ${f.temp}<br>
-                 Wind: ${f.wind}<br>
-                 Conditions: ${f.cond}<br>`;
+        html += `ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}<br>\n                 Temp: ${f.temp}<br>\n                 Wind: ${f.wind}<br>\n                 Conditions: ${f.cond}<br>`;
       });
     } else {
       html += `Forecast: —<br>`;
@@ -703,7 +530,6 @@ function tooltipLinesMapGroup(g, stations) {
   return html;
 }
 
-/* Build everything */
 Promise.all([
   fetch(raceConfig.routeUrl).then(r=>r.json()),
   fetch(raceConfig.stationsUrl).then(r=>r.json())
@@ -713,7 +539,6 @@ Promise.all([
   const line=L.polyline(route,{color:"#000",weight:3}).addTo(map);
   map.fitBounds(line.getBounds());
 
-  // Elevation
   try{
     const {distances,elevations}=await buildElevationProfile(route,raceConfig.elevationZoom);
     buildElevationChart(distances,elevations,stations);
@@ -725,7 +550,6 @@ Promise.all([
     buildElevationChart(distances,elevations,stations);
   }
 
-  // Group stations that share a lat/lon
   const groupsByKey = {};
   stations.forEach((s, idx) => {
     const key = `${s.lat},${s.lon}`;
@@ -734,7 +558,6 @@ Promise.all([
   });
   groupList = Object.values(groupsByKey);
 
-  // Place markers
   groupList.forEach((g, gIdx) => {
     g.indices.forEach(stIdx => { stationIndexToGroup[stIdx] = gIdx; });
     const marker = L.marker([g.lat, g.lon], { icon: blazeIcon }).addTo(map);
@@ -746,12 +569,10 @@ Promise.all([
     marker.on("mouseout", clearHighlights);
   });
 
-  // Initial forecast fill
   updateForecasts();
   groupList.forEach(g => { if (g.marker) g.marker.setTooltipContent(tooltipLinesMapGroup(g, raceConfig.stations)); });
 });
 
-/* Forecast table + updates */
 function daysForecastAvailable(){ return daysUntilRace() <= 7; }
 async function updateForecasts(){
   const tbody = document.getElementById("forecastBody");
@@ -769,37 +590,32 @@ async function updateForecasts(){
   const pace = paceMinPerMiFromUI();
 
   for (const s of (raceConfig.stations || [])){
-    const horizonHours = 6.5 * 24; // NOAA hourly forecast horizon (~156h)
-const now = new Date();
+    const horizonHours = 6.5 * 24; const now = new Date();
+    const eta = new Date(raceConfig.date.getTime() + s.miles * pace * 60000);
+    const timeStr = eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+    const hoursUntilEta = (eta - now) / 3_600_000;
 
-// Calculate ETA and hours from now
-const eta = new Date(raceConfig.date.getTime() + s.miles * pace * 60000);
-const timeStr = eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
-const hoursUntilEta = (eta - now) / 3_600_000;
+    let temp = "—", wind = "—", cond = "Forecast beyond range";
+    let wbgtCell = { label: "—", cls: "wbgt-na", desc: "No data" };
+    let forecastObj = null;
 
-// Default display
-let temp = "—", wind = "—", cond = "Forecast beyond range";
-let wbgtCell = { label: "—", cls: "wbgt-na", desc: "No data" };
-let forecastObj = null;
-
-// Only fetch NOAA forecast if ETA is within 6.5 days
-if (hoursUntilEta <= horizonHours) {
-  const f = await getNOAAForecast(s.lat, s.lon, eta);
-  if (f) {
-    temp = f.temperature ? `${f.temperature}°F` : "—";
-    const speed = f.windSpeed || "", dir = f.windDirection || "";
-    wind = (speed || dir) ? `${speed} ${dir}`.trim() : "—";
-    cond = f.shortForecast || "—";
-    const rh = f.relativeHumidity?.value;
-    const wbgtVal = (f.temperature && rh != null) ? wbgtShadeF(f.temperature, rh) : null;
-    wbgtCell = wbgtClass(wbgtVal, raceConfig.regionCategory);
-    forecastObj = f;
-  } else {
-    cond = "Forecast unavailable";
-  }
-} else {
-  cond = "Forecast beyond range";
-}
+    if (hoursUntilEta <= horizonHours) {
+      const f = await getNOAAForecast(s.lat, s.lon, eta);
+      if (f) {
+        temp = f.temperature ? `${f.temperature}°F` : "—";
+        const speed = f.windSpeed || "", dir = f.windDirection || "";
+        wind = (speed || dir) ? `${speed} ${dir}`.trim() : "—";
+        cond = f.shortForecast || "—";
+        const rh = f.relativeHumidity?.value;
+        const wbgtVal = (f.temperature && rh != null) ? wbgtShadeF(f.temperature, rh) : null;
+        wbgtCell = wbgtClass(wbgtVal, raceConfig.regionCategory);
+        forecastObj = f;
+      } else {
+        cond = "Forecast unavailable";
+      }
+    } else {
+      cond = "Forecast beyond range";
+    }
     s.forecastObj = forecastObj;
 
     const row=document.createElement("tr");
@@ -819,27 +635,21 @@ if (hoursUntilEta <= horizonHours) {
 
   document.getElementById("forecastNote").style.display = forecastsAvailable ? "none" : "block";
   if(forecastsAvailable){
-    document.getElementById("forecastValidLabel").textContent =
-      `Forecast valid as of ${new Date().toLocaleString()}`;
+    document.getElementById("forecastValidLabel").textContent = `Forecast valid as of ${new Date().toLocaleString()}`;
   }
 
   if(groupList && groupList.length){
-    groupList.forEach(g=>{
-      if(g.marker) g.marker.setTooltipContent(tooltipLinesMapGroup(g, raceConfig.stations));
-    });
+    groupList.forEach(g=>{ if(g.marker) g.marker.setTooltipContent(tooltipLinesMapGroup(g, raceConfig.stations)); });
   }
 }
 </script>
 
-<!-- ============ Row highlighting (mobile & desktop) ============ -->
+<!-- ============ Row highlighting ============ -->
 <script>
 function installRowHighlighting() {
   const ids = ["forecastBody"];
-  // include any present climo bodies via query (since panels are created at runtime)
   const addClimoBodies = () => {
-    document.querySelectorAll(".climoBody").forEach(tb => {
-      if (!ids.includes(tb.id)) ids.push(tb); // allow Node ref too
-    });
+    document.querySelectorAll(".climoBody").forEach(tb => { if (!ids.includes(tb.id)) ids.push(tb); });
   };
   addClimoBodies();
 
@@ -855,24 +665,19 @@ function installRowHighlighting() {
     }, { passive: true });
   };
 
-  // forecast
   const forecastBody = document.getElementById("forecastBody");
   attach(forecastBody);
 
-  // climo (after panels built)
-  const observer = new MutationObserver(() => {
-    document.querySelectorAll(".climoBody").forEach(attach);
-  });
+  const observer = new MutationObserver(() => { document.querySelectorAll(".climoBody").forEach(attach); });
   observer.observe(document.getElementById("climatology"), { childList: true, subtree: true });
 }
+
 document.addEventListener("DOMContentLoaded", installRowHighlighting);
 </script>
 
 <!-- ============ Chart.js orientation resize fix ============ -->
 <script>
-window.addEventListener("orientationchange", () => {
-  if (window.elevChart) { setTimeout(() => elevChart.resize(), 500); }
-});
+window.addEventListener("orientationchange", () => { if (window.elevChart) { setTimeout(() => elevChart.resize(), 500); } });
 </script>
 
 </html>
