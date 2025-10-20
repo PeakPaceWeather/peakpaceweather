@@ -69,7 +69,14 @@ html, body {
     .leaflet-marker-icon:hover { transform: scale(1.2); }
 
     #elevWrap { width:100%; position:relative; height:225px; margin-top:10px; }
-    #elevationChart { position:absolute; inset:0; cursor:pointer; }
+    #elevationChart {
+  position: absolute;
+  inset: 0 17px 0 17px; /* 17px = roughly the table's interior padding + border */
+  width: calc(100% - 34px) !important; /* 960 - 34 = 926px interior width */
+  height: 100% !important;
+  display: block;
+  box-sizing: border-box;
+}
 
     .wbgt-low { color:#2e7d32; } .wbgt-mod { color:#f9a825; }
     .wbgt-high { color:#f57c00; } .wbgt-very { color:#c62828; }
@@ -444,6 +451,8 @@ function buildElevationChart(distances, elevations, stations){
     },
     options: {
       responsive:true, maintainAspectRatio:false,
+      layout: { padding: { left: 14, right: 14, top: 0, bottom: 0 } },
+      layout: { padding: { left: 0, right: 0, top: 0, bottom: 0 } },
       plugins: {
         legend: { display:false },
         tooltip: {
@@ -484,8 +493,8 @@ function buildElevationChart(distances, elevations, stations){
         }
       },
       scales: {
-        x: { type:'linear', title:{ display:true, text:'Distance (mi)' }, min:0, max:100.9 },
-        y: { title:{ display:true, text:'Elevation (ft)' }, ticks:{ autoSkip:true, maxTicksLimit:6 } }
+        x: { type:'linear', title:{ display:true, text:'Distance (mi)', ticks: { padding: 0 }, grid: { drawTicks: false }, border: { display: true }}, min:0, max:100.9 },
+        y: { title:{ display:true, text:'Elevation (ft)', ticks: { autoSkip: true, maxTicksLimit: 6, padding: 0 }, grid: { drawTicks: false }, border: { display: true }}, ticks:{ autoSkip:true, maxTicksLimit:6 } }
       }
     }
   });
@@ -705,28 +714,38 @@ async function updateForecasts(){
   const pace = paceMinPerMiFromUI();
 
   for (const s of (raceConfig.stations || [])){
-    const eta = new Date(raceConfig.date.getTime() + s.miles * pace * 60000);
-    const timeStr = eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+    const horizonHours = 6.5 * 24; // NOAA hourly forecast horizon (~156h)
+const now = new Date();
 
-    let temp="—", wind="—", cond="—", wbgtCell={label:"—",cls:"wbgt-na",desc:"No data"};
-    let forecastObj=null;
+// Calculate ETA and hours from now
+const eta = new Date(raceConfig.date.getTime() + s.miles * pace * 60000);
+const timeStr = eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+const hoursUntilEta = (eta - now) / 3_600_000;
 
-    if (forecastsAvailable){
-      const f = await getNOAAForecast(s.lat, s.lon, eta);
-      if (f){
-        const tVal = f.temperature;
-        temp = (tVal!=null) ? `${tVal}°F` : "—";
-        const speed = f.windSpeed || "";
-        const dir = f.windDirection || "";
-        wind = (speed || dir) ? `${speed} ${dir}`.trim() : "—";
-        cond = f.shortForecast || "—";
-        const rh = f.relativeHumidity?.value;
-        const wbgtVal = (f.temperature && rh!=null) ? wbgtShadeF(f.temperature, rh) : null;
-        wbgtCell = wbgtClass(wbgtVal, raceConfig.regionCategory);
-        forecastObj=f;
-      }
-    }
-    s.forecastObj=forecastObj;
+// Default display
+let temp = "—", wind = "—", cond = "Forecast beyond range";
+let wbgtCell = { label: "—", cls: "wbgt-na", desc: "No data" };
+let forecastObj = null;
+
+// Only fetch NOAA forecast if ETA is within 6.5 days
+if (hoursUntilEta <= horizonHours) {
+  const f = await getNOAAForecast(s.lat, s.lon, eta);
+  if (f) {
+    temp = f.temperature ? `${f.temperature}°F` : "—";
+    const speed = f.windSpeed || "", dir = f.windDirection || "";
+    wind = (speed || dir) ? `${speed} ${dir}`.trim() : "—";
+    cond = f.shortForecast || "—";
+    const rh = f.relativeHumidity?.value;
+    const wbgtVal = (f.temperature && rh != null) ? wbgtShadeF(f.temperature, rh) : null;
+    wbgtCell = wbgtClass(wbgtVal, raceConfig.regionCategory);
+    forecastObj = f;
+  } else {
+    cond = "Forecast unavailable";
+  }
+} else {
+  cond = "Forecast beyond range";
+}
+    s.forecastObj = forecastObj;
 
     const row=document.createElement("tr");
     row.innerHTML=`
