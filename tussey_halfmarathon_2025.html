@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Peak Pace Weather — One-file template with date-driven climatology -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=1000, user-scalable=yes, initial-scale=5.0, maximum-scale=5.0" />
+  <meta name="viewport" content="width=1000, user-scalable=yes, initial-scale=1.0, maximum-scale=5.0" />
   <title id="pageTitle">Race Title | Peak Pace</title>
 
   <!-- Fonts & Libraries -->
@@ -186,22 +185,8 @@ th { background:#f0f0f0; font-weight:700; }
 
 <!-- ============ CONFIG (Edit this block only) ============ -->
 <script>
-/* Keep this token as requested */
 const MAPBOX_TOKEN = "pk.eyJ1IjoiZGlsbG9uZHVyaW5pY2siLCJhIjoiY21memtlbm83MDNycTJtb3JtdGxucWpkMiJ9.W7Ge6XYCd0Gfl9f7YQ2dNw";
 
-/* ====== EDIT ME FOR EACH RACE ======
-name:             Display name
-date:             Local start time (ISO string OK)
-city:             City label for climatology section title
-climoStationId:   ASOS/airport code used for climatology note
-climoStationName: Friendly station name used for note
-climoBaseUrl:     Base URL where monthly/day JSON lives (placeholder now)
-routeUrl:         Raw JSON (array of [lat,lon])
-stationsUrl:      Raw JSON ({ name, lat, lon, miles }[])
-multiDaySpan:     Number of race days (1 = no tabs; >1 auto-tabs)
-elevationZoom:    Terrain-RGB zoom for elevation sampling
-regionCategory:   WBGT region threshold set (1 default)
-===================================== */
 const raceConfig = {
   name: "Tussey mOUnTaiNBACK Half Marathon",
   date: new Date("2025-10-26T10:00-04:00"),
@@ -265,19 +250,16 @@ function paceMinPerMiFromUI(){
 
 <!-- ============ CLIMATOLOGY (date-driven) ============ -->
 <script>
-/* Build month filename like "October_12_Climate.json" */
 function monthName(d){ return d.toLocaleString('en-US', { month:'long' }); }
 function climoFilenameFor(dateObj){
   const mn = monthName(dateObj);
   const day = dateObj.getDate();
   return `${mn}_${day}_Climate.json`;
 }
-/* Human-readable "Oct 12" tab title */
 function shortMonthDay(d){
   return d.toLocaleString('en-US', { month:'short', day:'numeric' });
 }
 
-/* Populate a climo table */
 function populateClimoTable(data, bodyEl, avgRowEl){
   bodyEl.innerHTML = "";
   let sumMax=0, sumMin=0, sumP=0, n=0;
@@ -305,7 +287,6 @@ function populateClimoTable(data, bodyEl, avgRowEl){
   }
 }
 
-/* Build one climo panel DOM node */
 function buildClimoPanel(panelId){
   const panel = document.createElement('div');
   panel.className = 'climoPanel';
@@ -323,21 +304,19 @@ function buildClimoPanel(panelId){
   return panel;
 }
 
-/* Load climo for each race day (multiDaySpan) */
 async function loadClimatology() {
   const start = new Date(raceConfig.date);
   const span = Math.max(1, Number(raceConfig.multiDaySpan) || 1);
 
   const climoTitle = document.getElementById('climoTitle');
   const raceDateStr = start.toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" });
-  climoTitle.textContent = `Climatology – ${raceConfig.city} (${raceDateStr})`;
+  climoTitle.textContent = `Climatology — ${raceConfig.city} (${raceDateStr})`;
 
   const tabs = document.getElementById('climoTabs');
   const panels = document.getElementById('climoPanels');
   tabs.innerHTML = "";
   panels.innerHTML = "";
 
-  // Build tabs/panels
   const tabButtons = [];
   for (let i = 0; i < span; i++) {
     const d = new Date(start.getTime() + i * 24 * 60 * 60 * 1000);
@@ -352,10 +331,8 @@ async function loadClimatology() {
     panels.appendChild(panel);
   }
 
-  // Hide tabs if single day
   if (span === 1) { tabs.style.display = 'none'; }
 
-  // Activate day 0 by default
   function activate(idx) {
     panels.querySelectorAll('.climoPanel').forEach(p => p.classList.remove('active'));
     tabButtons.forEach(b => b.classList.remove('active'));
@@ -368,7 +345,6 @@ async function loadClimatology() {
   }
   activate(0);
 
-  // Fetch/build per day
   for (let i = 0; i < span; i++) {
     const d = new Date(start.getTime() + i * 24 * 60 * 60 * 1000);
     const file = climoFilenameFor(d);
@@ -379,7 +355,6 @@ async function loadClimatology() {
     const avgRowEl = panel.querySelector('#climoAvgRow');
     const noteEl = panel.querySelector('.climoNote');
 
-    // Dynamic note (station + city)
     noteEl.textContent = `Historical climatology for ${shortMonthDay(d)} based on ASOS data from ${raceConfig.climoStationId} (${raceConfig.climoStationName}), near ${raceConfig.city}. Local variation may differ from ${raceConfig.climoStationId}. For planning only.`;
 
     try {
@@ -395,7 +370,6 @@ async function loadClimatology() {
 }
 
 document.addEventListener('DOMContentLoaded', loadClimatology);
-
 </script>
 
 <!-- ============ TERRAIN + ELEVATION ============ -->
@@ -506,7 +480,7 @@ function buildElevationChart(distances, elevations, stations){
           callbacks: {
             title: (ctx) => {
               const station = stations[ctx[0].dataIndex];
-              return `${station.name} – Mile ${station.miles.toFixed(1)}`;
+              return `${station.name} — Mile ${station.miles.toFixed(1)}`;
             },
             label: (ctx) => {
               const station = stations[ctx.dataIndex];
@@ -538,19 +512,18 @@ function buildElevationChart(distances, elevations, stations){
           event.chart.update();
         }
       },
-scales: {
-  x: {
-    type: 'linear',
-    title: { display: true, text: 'Distance (mi)', ticks: { padding: 0 }, grid: { drawTicks: false }, border: { display: true }},
-    min: 0,
-    max: 12.75
-  },
-  y: {
-    title: { display: true, text: 'Elevation (ft)', ticks: { autoSkip: true, maxTicksLimit: 6, padding: 0 }, grid: { drawTicks: false }, border: { display: true }},
-    ticks: { autoSkip: true, maxTicksLimit: 6 }
-  }
-}
-
+      scales: {
+        x: {
+          type: 'linear',
+          title: { display: true, text: 'Distance (mi)', ticks: { padding: 0 }, grid: { drawTicks: false }, border: { display: true }},
+          min: 0,
+          max: 12.75
+        },
+        y: {
+          title: { display: true, text: 'Elevation (ft)', ticks: { autoSkip: true, maxTicksLimit: 6, padding: 0 }, grid: { drawTicks: false }, border: { display: true }},
+          ticks: { autoSkip: true, maxTicksLimit: 6 }
+        }
+      }
     }
   });
   ctx.canvas.addEventListener("mouseleave", () => {
@@ -581,7 +554,6 @@ function wetBulbC(Tc,RH){ if(isNaN(Tc)||isNaN(RH)) return null;
 function wbgtShadeF(Tf,RH){const Tw=wetBulbC(toC(Tf),RH); return Tw?toF(Tw):null;}
 function daysUntilRace(){return Math.floor((raceConfig.date-new Date())/(1000*60*60*24));}
 
-/* NOAA */
 async function getNOAAForecast(lat, lon, targetDate) {
   try {
     const pointRes = await fetch(`https://api.weather.gov/points/${lat},${lon}`);
@@ -599,7 +571,6 @@ function bindMarkerTooltip(marker) {
   marker.bindTooltip("", { direction: "auto", offset: [0, -10], opacity: 0.95, className: "pp-tooltip", sticky: false, autoPan: true });
 }
 
-/* Map */
 const map = L.map('map', { keyboard: false, scrollWheelZoom: false, touchZoom: true, zoomControl: true, dragging: true }).setView([40.7682, -77.7559], 12);
 const mapContainer = document.getElementById('map');
 mapContainer.addEventListener('touchstart', (e) => { if (e.touches.length === 1) map.dragging.disable(); else map.dragging.enable(); });
@@ -608,7 +579,6 @@ document.documentElement.style.touchAction = "pan-x pan-y pinch-zoom";
 document.body.style.touchAction = "pan-x pan-y pinch-zoom";
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
 
-/* Globals */
 let markers = [];
 let groupList = [];
 let stationIndexToGroup = [];
@@ -643,7 +613,7 @@ function tooltipLinesMapGroup(g, stations) {
     const s = stations[i];
     if (idx > 0) html += `<hr style="margin:6px 0;">`;
     html += `<div style="margin-bottom:6px;">
-      <strong>${s.name} – Mile ${s.miles.toFixed(1)}</strong><br>`;
+      <strong>${s.name} — Mile ${s.miles.toFixed(1)}</strong><br>`;
     if (s.forecasts && s.forecasts.length) {
       s.forecasts.forEach(f => {
         html += `ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}<br>
@@ -659,7 +629,6 @@ function tooltipLinesMapGroup(g, stations) {
   return html;
 }
 
-/* Build everything */
 Promise.all([
   fetch(raceConfig.routeUrl).then(r=>r.json()),
   fetch(raceConfig.stationsUrl).then(r=>r.json())
@@ -669,7 +638,6 @@ Promise.all([
   const line=L.polyline(route,{color:"#000",weight:3}).addTo(map);
   map.fitBounds(line.getBounds());
 
-  // Elevation
   try{
     const {distances,elevations}=await buildElevationProfile(route,raceConfig.elevationZoom);
     buildElevationChart(distances,elevations,stations);
@@ -681,7 +649,6 @@ Promise.all([
     buildElevationChart(distances,elevations,stations);
   }
 
-  // Group stations that share a lat/lon
   const groupsByKey = {};
   stations.forEach((s, idx) => {
     const key = `${s.lat},${s.lon}`;
@@ -690,7 +657,6 @@ Promise.all([
   });
   groupList = Object.values(groupsByKey);
 
-  // Place markers
   groupList.forEach((g, gIdx) => {
     g.indices.forEach(stIdx => { stationIndexToGroup[stIdx] = gIdx; });
     const marker = L.marker([g.lat, g.lon], { icon: blazeIcon }).addTo(map);
@@ -702,12 +668,10 @@ Promise.all([
     marker.on("mouseout", clearHighlights);
   });
 
-  // Initial forecast fill
   updateForecasts();
   groupList.forEach(g => { if (g.marker) g.marker.setTooltipContent(tooltipLinesMapGroup(g, raceConfig.stations)); });
 });
 
-/* Forecast table + updates */
 function daysForecastAvailable(){ return daysUntilRace() <= 7; }
 async function updateForecasts(){
   const tbody = document.getElementById("forecastBody");
@@ -725,37 +689,33 @@ async function updateForecasts(){
   const pace = paceMinPerMiFromUI();
 
   for (const s of (raceConfig.stations || [])){
-    const horizonHours = 6.5 * 24; // NOAA hourly forecast horizon (~156h)
-const now = new Date();
+    const horizonHours = 6.5 * 24;
+    const now = new Date();
+    const eta = new Date(raceConfig.date.getTime() + s.miles * pace * 60000);
+    const timeStr = eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+    const hoursUntilEta = (eta - now) / 3_600_000;
 
-// Calculate ETA and hours from now
-const eta = new Date(raceConfig.date.getTime() + s.miles * pace * 60000);
-const timeStr = eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
-const hoursUntilEta = (eta - now) / 3_600_000;
+    let temp = "—", wind = "—", cond = "Forecast beyond range";
+    let wbgtCell = { label: "—", cls: "wbgt-na", desc: "No data" };
+    let forecastObj = null;
 
-// Default display
-let temp = "—", wind = "—", cond = "Forecast beyond range";
-let wbgtCell = { label: "—", cls: "wbgt-na", desc: "No data" };
-let forecastObj = null;
-
-// Only fetch NOAA forecast if ETA is within 6.5 days
-if (hoursUntilEta <= horizonHours) {
-  const f = await getNOAAForecast(s.lat, s.lon, eta);
-  if (f) {
-    temp = f.temperature ? `${f.temperature}°F` : "—";
-    const speed = f.windSpeed || "", dir = f.windDirection || "";
-    wind = (speed || dir) ? `${speed} ${dir}`.trim() : "—";
-    cond = f.shortForecast || "—";
-    const rh = f.relativeHumidity?.value;
-    const wbgtVal = (f.temperature && rh != null) ? wbgtShadeF(f.temperature, rh) : null;
-    wbgtCell = wbgtClass(wbgtVal, raceConfig.regionCategory);
-    forecastObj = f;
-  } else {
-    cond = "Forecast unavailable";
-  }
-} else {
-  cond = "Forecast beyond range";
-}
+    if (hoursUntilEta <= horizonHours) {
+      const f = await getNOAAForecast(s.lat, s.lon, eta);
+      if (f) {
+        temp = f.temperature ? `${f.temperature}°F` : "—";
+        const speed = f.windSpeed || "", dir = f.windDirection || "";
+        wind = (speed || dir) ? `${speed} ${dir}`.trim() : "—";
+        cond = f.shortForecast || "—";
+        const rh = f.relativeHumidity?.value;
+        const wbgtVal = (f.temperature && rh != null) ? wbgtShadeF(f.temperature, rh) : null;
+        wbgtCell = wbgtClass(wbgtVal, raceConfig.regionCategory);
+        forecastObj = f;
+      } else {
+        cond = "Forecast unavailable";
+      }
+    } else {
+      cond = "Forecast beyond range";
+    }
     s.forecastObj = forecastObj;
 
     const row=document.createElement("tr");
@@ -791,10 +751,9 @@ if (hoursUntilEta <= horizonHours) {
 <script>
 function installRowHighlighting() {
   const ids = ["forecastBody"];
-  // include any present climo bodies via query (since panels are created at runtime)
   const addClimoBodies = () => {
     document.querySelectorAll(".climoBody").forEach(tb => {
-      if (!ids.includes(tb.id)) ids.push(tb); // allow Node ref too
+      if (!ids.includes(tb.id)) ids.push(tb);
     });
   };
   addClimoBodies();
@@ -811,11 +770,9 @@ function installRowHighlighting() {
     }, { passive: true });
   };
 
-  // forecast
   const forecastBody = document.getElementById("forecastBody");
   attach(forecastBody);
 
-  // climo (after panels built)
   const observer = new MutationObserver(() => {
     document.querySelectorAll(".climoBody").forEach(attach);
   });
