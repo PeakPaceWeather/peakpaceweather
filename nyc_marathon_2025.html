@@ -600,31 +600,41 @@ function buildElevationChart(distances, elevations, stations){
     type: 'line',
     data: {
       datasets: [
-        { label:'Elevation', data: profileDistances.map((d,i)=>({x:d,y:elevations[i]})), parsing:false, borderColor:'#000', pointRadius:0, borderWidth:1.5, fill:false, tension:0.1 },
+        { 
+          label:'Elevation', 
+          data: profileDistances.map((d,i)=>({x:d,y:elevations[i]})), 
+          parsing:false, 
+          borderColor:'#000', 
+          pointRadius:0, 
+          borderWidth:1.5, 
+          fill:false, 
+          tension:0.1 
+        },
         {
-          label:'Aid Stations', type:'scatter', data: stationPoints, parsing:false, 
-          pointRadius:6, pointHoverRadius:10, pointHitRadius:20,
+          label:'Aid Stations', 
+          type:'scatter', 
+          data: stationPoints, 
+          parsing:false, 
+          pointRadius:6, 
+          pointHoverRadius:8, 
           pointBackgroundColor: (c) => {
             const idx = c.dataIndex;
             return (elevChart && currentHighlightIndices.has(idx))
               ? getComputedStyle(document.documentElement).getPropertyValue('--highlight').trim() || '#FF6700'
               : getComputedStyle(document.documentElement).getPropertyValue('--blaze').trim() || '#37BC7D';
           },
-          pointBorderColor:'#222', pointBorderWidth:1
+          pointBorderColor:'#222', 
+          pointBorderWidth:2
         }
       ]
     },
     options: {
-      responsive:true, maintainAspectRatio:false,
-      layout: { padding: { left: 0, right: 0, top: 0, bottom: 0 } },
+      responsive:true, 
+      maintainAspectRatio:false,
       plugins: {
         legend: { display:false },
         tooltip: {
-          enabled:true, 
-          mode: 'nearest',
-          intersect: false,
-          axis: 'x',
-          filter: ctx => ctx.datasetIndex === 1,
+          enabled:true,
           callbacks: {
             title: (ctx) => {
               const station = stations[ctx[0].dataIndex];
@@ -635,72 +645,79 @@ function buildElevationChart(distances, elevations, stations){
               if (station.forecasts && station.forecasts.length) {
                 return station.forecasts.map(f => [
                   `ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}`,
-                  `Temp: ${f.temp}`, `Wind: ${f.wind}`, `Conditions: ${f.cond}`
+                  `Temp: ${f.temp}`, 
+                  `Wind: ${f.wind}`, 
+                  `Conditions: ${f.cond}`
                 ]).flat();
               }
               return ["Forecast: —"];
             }
           },
           backgroundColor:'#fff',
-          borderColor: getComputedStyle(document.documentElement).getPropertyValue('--highlight').trim() || '#FF6700',
-          borderWidth:2, titleColor:'#111', bodyColor:'#111', padding:8, displayColors:false
+          borderColor: '#FF6700',
+          borderWidth:2, 
+          titleColor:'#111', 
+          bodyColor:'#111', 
+          padding:8, 
+          displayColors:false
         }
       },
-      interaction: { mode:'nearest', intersect:false, axis:'x' },
-onHover: (event, elements, chart) => {
-  const canvas = chart.canvas;
-  const canvasPosition = Chart.helpers.getRelativePosition(event, chart);
-  
-  // Account for any canvas offset/padding
-  const chartArea = chart.chartArea;
-  const adjustedX = canvasPosition.x;
-  
-  // Get the x-scale and y-scale
-  const xScale = chart.scales.x;
-  const yScale = chart.scales.y;
-  
-  // Find nearest station considering both X and Y distance in pixel space
-  let nearestIdx = -1;
-  let nearestPixelDist = Infinity;
-  
-  stations.forEach((s, idx) => {
-    // Get pixel positions within the chart area
-    const stationXPixel = xScale.getPixelForValue(s.miles);
-    const stationYPixel = yScale.getPixelForValue(stationPoints[idx].y);
-    
-    // Calculate pixel distance
-    const dx = adjustedX - stationXPixel;
-    const dy = canvasPosition.y - stationYPixel;
-    const pixelDist = Math.sqrt(dx * dx + dy * dy);
-    
-    if (pixelDist < nearestPixelDist) {
-      nearestPixelDist = pixelDist;
-      nearestIdx = idx;
+      interaction: { 
+        mode:'point', 
+        intersect:true 
+      },
+      scales: {
+        x: { 
+          type:'linear', 
+          title:{ display:true, text:'Distance (mi)' }, 
+          min:0, 
+          max:raceConfig.elevMaxDistance 
+        },
+        y: { 
+          title:{ display:true, text:'Elevation (ft)' }, 
+          ticks:{ autoSkip:true, maxTicksLimit:6 } 
+        }
+      }
     }
   });
   
-  // Make threshold adaptive based on chart width
-  const chartWidth = chartArea.right - chartArea.left;
-  const pixelsPerMile = chartWidth / raceConfig.elevMaxDistance;
-  const threshold = Math.max(30, pixelsPerMile * 0.4);
+  // Handle highlighting when hovering
+  ctx.canvas.addEventListener("mousemove", (e) => {
+    const rect = ctx.canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    const xScale = elevChart.scales.x;
+    const yScale = elevChart.scales.y;
+    
+    let nearest = -1;
+    let nearestDist = Infinity;
+    
+    stations.forEach((s, idx) => {
+      const px = xScale.getPixelForValue(s.miles);
+      const py = yScale.getPixelForValue(stationPoints[idx].y);
+      const dist = Math.sqrt((x - px) ** 2 + (y - py) ** 2);
+      
+      if (dist < nearestDist && dist < 30) {
+        nearestDist = dist;
+        nearest = idx;
+      }
+    });
+    
+    if (nearest >= 0) {
+      ctx.canvas.style.cursor = 'pointer';
+      highlightByStationIndex(nearest);
+    } else {
+      ctx.canvas.style.cursor = 'default';
+      clearHighlights();
+    }
+  });
   
-  // Add hysteresis: if we already have an active station, use a larger threshold to keep it
-  const currentThreshold = (activeStationIdx === nearestIdx) ? threshold * 1.5 : threshold;
-  
-  if (nearestPixelDist <= currentThreshold) {
-    canvas.style.cursor = 'pointer';
-    activeStationIdx = nearestIdx;
-    highlightByStationIndex(nearestIdx);
-    chart.tooltip.setActiveElements([{datasetIndex: 1, index: nearestIdx}], {x: adjustedX, y: canvasPosition.y});
-    chart.update('none');
-  } else {
-    canvas.style.cursor = 'default';
-    activeStationIdx = -1;
+  ctx.canvas.addEventListener("mouseleave", () => {
+    ctx.canvas.style.cursor = 'default';
     clearHighlights();
-    chart.tooltip.setActiveElements([], {x:0,y:0});
-    chart.update('none');
-  }
-},
+  });
+}
       scales: {
         x: { type:'linear', title:{ display:true, text:'Distance (mi)', ticks: { padding: 0 }, grid: { drawTicks: false }, border: { display: true }}, min:0, max:raceConfig.elevMaxDistance },
         y: { title:{ display:true, text:'Elevation (ft)', ticks: { autoSkip: true, maxTicksLimit: 6, padding: 0 }, grid: { drawTicks: false }, border: { display: true }}, ticks:{ autoSkip:true, maxTicksLimit:6 } }
