@@ -1,3 +1,4 @@
+[
 {
   "2015": { "station": "NYC", "max_tmpf": 63.0, "min_tmpf": 55.0, "precip": 0.00, "conditions": "Clear" },
   "2016": { "station": "NYC", "max_tmpf": 69.0, "min_tmpf": 54.0, "precip": 0.00, "conditions": "Cloudy" },
@@ -10,3 +11,4 @@
   "2023": { "station": "NYC", "max_tmpf": 48.0, "min_tmpf": 35.0, "precip": 0.00, "conditions": "Clear" },
   "2024": { "station": "NYC", "max_tmpf": 66.0, "min_tmpf": 52.0, "precip": 0.00, "conditions": "Partly Cloudy" }
 }
+]
