@@ -601,7 +601,8 @@ function buildElevationChart(distances, elevations, stations){
       datasets: [
         { label:'Elevation', data: profileDistances.map((d,i)=>({x:d,y:elevations[i]})), parsing:false, borderColor:'#000', pointRadius:0, borderWidth:1.5, fill:false, tension:0.1 },
         {
-          label:'Aid Stations', type:'scatter', data: stationPoints, parsing:false, pointRadius:6, hoverRadius:10, hitRadius:12,
+          label:'Aid Stations', type:'scatter', data: stationPoints, parsing:false, 
+          pointRadius:6, pointHoverRadius:10, pointHitRadius:20,
           pointBackgroundColor: (c) => {
             const idx = c.dataIndex;
             return (elevChart && currentHighlightIndices.has(idx))
@@ -618,7 +619,11 @@ function buildElevationChart(distances, elevations, stations){
       plugins: {
         legend: { display:false },
         tooltip: {
-          enabled:true, filter: ctx => ctx.datasetIndex === 1,
+          enabled:true, 
+          mode: 'nearest',
+          intersect: false,
+          axis: 'x',
+          filter: ctx => ctx.datasetIndex === 1,
           callbacks: {
             title: (ctx) => {
               const station = stations[ctx[0].dataIndex];
@@ -640,18 +645,37 @@ function buildElevationChart(distances, elevations, stations){
           borderWidth:2, titleColor:'#111', bodyColor:'#111', padding:8, displayColors:false
         }
       },
-      interaction: { mode:'point', intersect:true },
-      onHover: (event, elements) => {
-        const canvas = event.chart.canvas;
-        if (elements.length > 0 && elements[0].datasetIndex === 1) {
+      interaction: { mode:'nearest', intersect:false, axis:'x' },
+      onHover: (event, elements, chart) => {
+        const canvas = chart.canvas;
+        const canvasPosition = Chart.helpers.getRelativePosition(event, chart);
+        
+        // Get the x-scale value from mouse position
+        const xScale = chart.scales.x;
+        const xValue = xScale.getValueForPixel(canvasPosition.x);
+        
+        // Find nearest station by distance
+        let nearestIdx = -1;
+        let nearestDist = Infinity;
+        stations.forEach((s, idx) => {
+          const dist = Math.abs(s.miles - xValue);
+          if (dist < nearestDist) {
+            nearestDist = dist;
+            nearestIdx = idx;
+          }
+        });
+        
+        // Only activate if within reasonable distance (0.5 miles)
+        if (nearestDist < 0.5) {
           canvas.style.cursor = 'pointer';
-          const idx = elements[0].index;
-          highlightByStationIndex(idx);
+          highlightByStationIndex(nearestIdx);
+          chart.tooltip.setActiveElements([{datasetIndex: 1, index: nearestIdx}], {x: canvasPosition.x, y: canvasPosition.y});
+          chart.update('none');
         } else {
           canvas.style.cursor = 'default';
           clearHighlights();
-          event.chart.tooltip.setActiveElements([], {x:0,y:0});
-          event.chart.update();
+          chart.tooltip.setActiveElements([], {x:0,y:0});
+          chart.update('none');
         }
       },
       scales: {
@@ -663,7 +687,7 @@ function buildElevationChart(distances, elevations, stations){
   ctx.canvas.addEventListener("mouseleave", () => {
     if (elevChart) {
       elevChart.tooltip.setActiveElements([], {x:0,y:0});
-      elevChart.update();
+      elevChart.update('none');
       clearHighlights();
     }
   });
