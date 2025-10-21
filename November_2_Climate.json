@@ -1,14 +1,12 @@
 [
-{
-  "2015": { "station": "NYC", "max_tmpf": 63.0, "min_tmpf": 55.0, "precip": 0.00, "conditions": "Clear" },
-  "2016": { "station": "NYC", "max_tmpf": 69.0, "min_tmpf": 54.0, "precip": 0.00, "conditions": "Cloudy" },
-  "2017": { "station": "NYC", "max_tmpf": 72.0, "min_tmpf": 59.0, "precip": 0.00, "conditions": "Haze" },
-  "2018": { "station": "NYC", "max_tmpf": 71.6, "min_tmpf": 64.0, "precip": 0.79, "conditions": "Mostly Cloudy with Rain" },
-  "2019": { "station": "NYC", "max_tmpf": 53.0, "min_tmpf": 40.0, "precip": 0.00, "conditions": "Mostly Cloudy" },
-  "2020": { "station": "NYC", "max_tmpf": 44.0, "min_tmpf": 39.0, "precip": "T", "conditions": "Mostly Cloudy with Rain" },
-  "2021": { "station": "NYC", "max_tmpf": 52.0, "min_tmpf": 46.0, "precip": "T", "conditions": "Mostly Cloudy with Rain" },
-  "2022": { "station": "NYC", "max_tmpf": 69.0, "min_tmpf": 56.0, "precip": 0.00, "conditions": "Clear" },
-  "2023": { "station": "NYC", "max_tmpf": 48.0, "min_tmpf": 35.0, "precip": 0.00, "conditions": "Clear" },
-  "2024": { "station": "NYC", "max_tmpf": 66.0, "min_tmpf": 52.0, "precip": 0.00, "conditions": "Partly Cloudy" }
-}
+  { "year": 2015, "max": 63.0, "min": 55.0, "precip": 0.00, "conditions": "Clear" },
+  { "year": 2016, "max": 69.0, "min": 54.0, "precip": 0.00, "conditions": "Cloudy" },
+  { "year": 2017, "max": 72.0, "min": 59.0, "precip": 0.00, "conditions": "Haze" },
+  { "year": 2018, "max": 71.6, "min": 64.0, "precip": 0.79, "conditions": "Mostly Cloudy with Rain" },
+  { "year": 2019, "max": 53.0, "min": 40.0, "precip": 0.00, "conditions": "Mostly Cloudy" },
+  { "year": 2020, "max": 44.0, "min": 39.0, "precip": 0.00, "conditions": "Mostly Cloudy with Rain" },
+  { "year": 2021, "max": 52.0, "min": 46.0, "precip": 0.00, "conditions": "Mostly Cloudy with Rain" },
+  { "year": 2022, "max": 69.0, "min": 56.0, "precip": 0.00, "conditions": "Clear" },
+  { "year": 2023, "max": 48.0, "min": 35.0, "precip": 0.00, "conditions": "Clear" },
+  { "year": 2024, "max": 66.0, "min": 52.0, "precip": 0.00, "conditions": "Partly Cloudy" }
 ]
