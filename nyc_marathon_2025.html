@@ -202,49 +202,12 @@ html, body {
 </div>
 </body>
 
-<!-- ============ CONFIG - EDIT THIS SECTION FOR EACH RACE ============ -->
 <script>
-/* ====== MAPBOX TOKEN ====== */
 const MAPBOX_TOKEN = "pk.eyJ1IjoiZGlsbG9uZHVyaW5pY2siLCJhIjoiY21memtlbm83MDNycTJtb3JtdGxucWpkMiJ9.W7Ge6XYCd0Gfl9f7YQ2dNw";
 
-/* ====== RACE CONFIGURATION ======
- * Edit these values for each race:
- * 
- * name:             Full race name (displayed in header and title)
- * date:             Race start time (use format: new Date("YYYY-MM-DDTHH:MM-04:00"))
- *                   Note: Adjust timezone offset as needed (e.g., -04:00 for EDT, -05:00 for EST)
- *                   If using waves, this should be the EARLIEST start time
- * 
- * waves:            Array of wave start times (OPTIONAL - leave empty array [] to disable)
- *                   Format: [
- *                     { label: "Men's Professional Wheelchair", time: "08:00" },
- *                     { label: "Women's Professional Wheelchair", time: "08:02" },
- *                     { label: "Wave 1", time: "09:10" }
- *                   ]
- *                   Times should be in 24-hour format (HH:MM)
- * 
- * city:             City/location name for climatology display
- * climoStationId:   ASOS/airport code for weather station (e.g., "KUNV")
- * climoStationName: Friendly name of weather station (e.g., "University Park Airport")
- * climoBaseUrl:     GitHub URL where climate JSON files are stored
- * 
- * routeUrl:         GitHub URL to route JSON file (array of [lat, lon] coordinates)
- * stationsUrl:      GitHub URL to stations JSON file (array of {name, lat, lon, miles} objects)
- * 
- * multiDaySpan:     Number of race days (1 = single day, 2+ = multi-day with tabs)
- * elevationZoom:    Mapbox terrain zoom level for elevation sampling (12 is standard)
- * elevMaxDistance:  Maximum distance on elevation chart X-axis (set to race distance)
- * mapCenter:        [latitude, longitude] for initial map center
- * mapZoom:          Initial map zoom level (12 is typical)
- * regionCategory:   WBGT region category (1 = standard)
- */
-
 const raceConfig = {
-  // Basic race info
   name: "TCS NYC Marathon",
-  date: new Date("2025-11-02T08:00-05:00"),  // Earliest wave start time
-  
-  // Wave start times (OPTIONAL - set to [] to disable waves feature)
+  date: new Date("2025-11-02T08:00-05:00"),
   waves: [
     { label: "Men's Professional Wheelchair", time: "08:00" },
     { label: "Women's Professional Wheelchair", time: "08:02" },
@@ -257,54 +220,33 @@ const raceConfig = {
     { label: "Wave 4", time: "10:55" },
     { label: "Wave 5", time: "11:30" }
   ],
-  // Example for races WITHOUT waves:
-  // waves: [],
-  
-  // Climatology settings
   city: "New York, NY",
   climoStationId: "KNYC",
   climoStationName: "NYC Central Park",
   climoBaseUrl: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/",
-  
-  // Route & station data URLs
   routeUrl: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/2025_nyc_marathon_route.json",
   stationsUrl: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/2025_nyc_marathon_stations.json",
-  
-  // Race parameters
-  multiDaySpan: 1,           // Change to 2 for multi-day races
+  multiDaySpan: 1,
   elevationZoom: 12,
-  elevMaxDistance: 26.22,    // Set to total race distance
-  mapCenter: [40.7128, -74.0060],  // [lat, lon]
+  elevMaxDistance: 26.22,
+  mapCenter: [40.7128, -74.0060],
   mapZoom: 12,
   regionCategory: 1
 };
 
 document.getElementById("raceName").textContent = raceConfig.name;
 document.getElementById("pageTitle").textContent = `${raceConfig.name} | Peak Pace`;
-const raceDate = raceConfig.date;
 </script>
 
-<!-- ============ CORE FUNCTIONALITY - DO NOT EDIT BELOW THIS LINE ============ -->
-
-<!-- Countdown & Pace -->
 <script>
-// Get the effective start time based on selected wave
 function getEffectiveStartTime() {
-  if (!raceConfig.waves || raceConfig.waves.length === 0) {
-    return raceConfig.date;
-  }
-  
+  if (!raceConfig.waves || raceConfig.waves.length === 0) return raceConfig.date;
   const waveSelect = document.getElementById('waveSelect');
-  if (!waveSelect || waveSelect.value === '') {
-    return raceConfig.date;
-  }
-  
+  if (!waveSelect || waveSelect.value === '') return raceConfig.date;
   const selectedWave = raceConfig.waves[parseInt(waveSelect.value)];
   const [hours, minutes] = selectedWave.time.split(':').map(Number);
-  
   const waveDate = new Date(raceConfig.date);
   waveDate.setHours(hours, minutes, 0, 0);
-  
   return waveDate;
 }
 
@@ -327,30 +269,22 @@ function paceMinPerMiFromUI(){
 }
 
 (function initPaceAndWaves(){
-  // Initialize wave selector if waves are configured
   if (raceConfig.waves && raceConfig.waves.length > 0) {
     const waveContainer = document.getElementById('waveSelectContainer');
     const waveSelect = document.getElementById('waveSelect');
-    
     waveContainer.style.display = 'flex';
-    
     raceConfig.waves.forEach((wave, index) => {
       const option = document.createElement('option');
       option.value = index;
       option.textContent = `${wave.time} - ${wave.label}`;
       waveSelect.appendChild(option);
     });
-    
-    // Update countdown and forecasts when wave changes
     waveSelect.addEventListener('change', () => {
       updateCountdown();
-      if (typeof updateForecasts === 'function') {
-        updateForecasts();
-      }
+      if (typeof updateForecasts === 'function') updateForecasts();
     });
   }
   
-  // Initialize pace selectors
   const mins=document.getElementById('paceMin'), secs=document.getElementById('paceSec');
   for(let m=4;m<=30;m++){ let o=document.createElement('option'); o.value=m; o.textContent=m; mins.appendChild(o); }
   for(let s=0;s<60;s++){ let o=document.createElement('option'); o.value=s; o.textContent=String(s).padStart(2,'0'); secs.appendChild(o); }
@@ -360,8 +294,6 @@ function paceMinPerMiFromUI(){
     const paceM = String(mins.value).padStart(2,"0");
     const paceS = String(secs.value).padStart(2,"0");
     let confirmText = `Pace set to ${paceM}:${paceS} min/mi`;
-    
-    // Add wave info if applicable
     if (raceConfig.waves && raceConfig.waves.length > 0) {
       const waveSelect = document.getElementById('waveSelect');
       if (waveSelect && waveSelect.value !== '') {
@@ -369,7 +301,6 @@ function paceMinPerMiFromUI(){
         confirmText += ` | Start: ${selectedWave.time}`;
       }
     }
-    
     document.getElementById("paceConfirm").textContent = confirmText;
   }
   
@@ -387,7 +318,6 @@ function paceMinPerMiFromUI(){
 })();
 </script>
 
-<!-- Climatology -->
 <script>
 function monthName(d){ return d.toLocaleString('en-US', { month:'long' }); }
 function climoFilenameFor(dateObj){
@@ -395,9 +325,7 @@ function climoFilenameFor(dateObj){
   const day = dateObj.getDate();
   return `${mn}_${day}_Climate.json`;
 }
-function shortMonthDay(d){
-  return d.toLocaleString('en-US', { month:'short', day:'numeric' });
-}
+function shortMonthDay(d){ return d.toLocaleString('en-US', { month:'short', day:'numeric' }); }
 
 function populateClimoTable(data, bodyEl, avgRowEl) {
   bodyEl.innerHTML = "";
@@ -444,16 +372,13 @@ function buildClimoPanel(panelId){
 async function loadClimatology() {
   const start = new Date(raceConfig.date);
   const span = Math.max(1, Number(raceConfig.multiDaySpan) || 1);
-
   const climoTitle = document.getElementById('climoTitle');
   const raceDateStr = start.toLocaleDateString([], { month: "short", day: "numeric", year: "numeric" });
   climoTitle.textContent = `Climatology — ${raceConfig.city} (${raceDateStr})`;
-
   const tabs = document.getElementById('climoTabs');
   const panels = document.getElementById('climoPanels');
   tabs.innerHTML = "";
   panels.innerHTML = "";
-
   const tabButtons = [];
   for (let i = 0; i < span; i++) {
     const d = new Date(start.getTime() + i * 24 * 60 * 60 * 1000);
@@ -463,13 +388,10 @@ async function loadClimatology() {
     tab.textContent = shortMonthDay(d);
     tabButtons.push(tab);
     tabs.appendChild(tab);
-
     const panel = buildClimoPanel(`climoPanel_${i}`);
     panels.appendChild(panel);
   }
-
   if (span === 1) { tabs.style.display = 'none'; }
-
   function activate(idx) {
     panels.querySelectorAll('.climoPanel').forEach(p => p.classList.remove('active'));
     tabButtons.forEach(b => b.classList.remove('active'));
@@ -481,19 +403,15 @@ async function loadClimatology() {
     tabButtons.forEach((btn, i) => btn.addEventListener('click', () => activate(i)));
   }
   activate(0);
-
   for (let i = 0; i < span; i++) {
     const d = new Date(start.getTime() + i * 24 * 60 * 60 * 1000);
     const file = climoFilenameFor(d);
     const url = raceConfig.climoBaseUrl + file;
-
     const panel = document.getElementById(`climoPanel_${i}`);
     const bodyEl = panel.querySelector('.climoBody');
     const avgRowEl = panel.querySelector('#climoAvgRow');
     const noteEl = panel.querySelector('.climoNote');
-
     noteEl.textContent = `Historical climatology for ${shortMonthDay(d)} based on ASOS data from ${raceConfig.climoStationId} (${raceConfig.climoStationName}), near ${raceConfig.city}. Local variation may differ from ${raceConfig.climoStationId}. For planning only.`;
-
     try {
       const res = await fetch(url);
       if (!res.ok) throw new Error("bad climo response");
@@ -508,13 +426,13 @@ async function loadClimatology() {
 document.addEventListener('DOMContentLoaded', loadClimatology);
 </script>
 
-<!-- Terrain + Elevation -->
 <script>
 function latLonToTileXY(lat, lon, z){
   const x = Math.floor((lon + 180) / 360 * Math.pow(2, z));
   const y = Math.floor((1 - Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180)) / Math.PI) / 2 * Math.pow(2, z));
   return {x,y};
 }
+
 function latLonToPixelXYInTile(lat, lon, z, tileSize=256){
   const n = Math.pow(2, z);
   const xtile = (lon + 180) / 360 * n;
@@ -524,6 +442,7 @@ function latLonToPixelXYInTile(lat, lon, z, tileSize=256){
   const py = Math.floor((ytile - Math.floor(ytile)) * tileSize);
   return {px, py};
 }
+
 function decodeTerrainRGB(r,g,b){ return -10000 + (r*256*256 + g*256 + b) * 0.1; }
 
 const tileCache = new Map();
@@ -531,14 +450,22 @@ async function getTileImageData(z,x,y){
   const key = `${z}/${x}/${y}`;
   if (tileCache.has(key)) return tileCache.get(key);
   const url = `https://api.mapbox.com/v4/mapbox.terrain-rgb/${z}/${x}/${y}.pngraw?access_token=${MAPBOX_TOKEN}`;
-  const img = new Image(); img.crossOrigin = 'anonymous';
+  const img = new Image(); 
+  img.crossOrigin = 'anonymous';
   const loaded = new Promise((res,rej)=>{ img.onload=()=>res(); img.onerror=(e)=>rej(e); });
-  img.src = url; await loaded;
-  const canvas = document.createElement('canvas'); canvas.width=256; canvas.height=256;
-  const ctx = canvas.getContext('2d'); ctx.drawImage(img,0,0);
+  img.src = url; 
+  await loaded;
+  const canvas = document.createElement('canvas'); 
+  canvas.width=256; 
+  canvas.height=256;
+  const ctx = canvas.getContext('2d'); 
+  ctx.drawImage(img,0,0);
   const imageData = ctx.getImageData(0,0,256,256);
-  const record = { imageData }; tileCache.set(key, record); return record;
+  const record = { imageData }; 
+  tileCache.set(key, record); 
+  return record;
 }
+
 async function getElevationMetersAt(lat, lon, z){
   const {x,y} = latLonToTileXY(lat, lon, z);
   const {px,py} = latLonToPixelXYInTile(lat, lon, z, 256);
@@ -547,17 +474,23 @@ async function getElevationMetersAt(lat, lon, z){
     const idx = (py*256 + px) * 4;
     const r = imageData.data[idx], g = imageData.data[idx+1], b = imageData.data[idx+2];
     return decodeTerrainRGB(r,g,b);
-  }catch(e){ return null; }
+  }catch(e){ 
+    return null; 
+  }
 }
+
 function haversineMi(a,b){
-  const R=3958.7613; const toRad=x=>x*Math.PI/180;
-  const dLat=toRad(b[0]-a[0]); const dLon=toRad(b[1]-a[1]); const la1=toRad(a[0]);
+  const R=3958.7613; 
+  const toRad=x=>x*Math.PI/180;
+  const dLat=toRad(b[0]-a[0]); 
+  const dLon=toRad(b[1]-a[1]); 
+  const la1=toRad(a[0]);
   const h=Math.sin(dLat/2)**2+Math.cos(la1)*Math.cos(toRad(b[0]))*Math.sin(dLon/2)**2;
   return 2*R*Math.asin(Math.sqrt(h));
 }
 
 let elevChart = null, profileDistances = [], profileElevations = [], currentHighlightIndices = new Set();
-let activeStationIdx = -1;
+
 function elevationAtMile(mile) {
   if (!profileDistances.length) return null;
   for (let i=1;i<profileDistances.length;i++) {
@@ -571,453 +504,24 @@ function elevationAtMile(mile) {
   }
   return profileElevations[profileElevations.length-1];
 }
+
 async function buildElevationProfile(routeCoords, z){
   const fullDistances = [0];
-  for(let i=1;i<routeCoords.length;i++) { fullDistances[i] = fullDistances[i-1] + haversineMi(routeCoords[i-1], routeCoords[i]); }
+  for(let i=1;i<routeCoords.length;i++) { 
+    fullDistances[i] = fullDistances[i-1] + haversineMi(routeCoords[i-1], routeCoords[i]); 
+  }
   const sampled = [], sampledDistances = [];
-  for (let i=0;i<routeCoords.length;i+=10){ sampled.push(routeCoords[i]); sampledDistances.push(fullDistances[i]); }
+  for (let i=0;i<routeCoords.length;i+=10){ 
+    sampled.push(routeCoords[i]); 
+    sampledDistances.push(fullDistances[i]); 
+  }
   if (sampled[sampled.length-1] !== routeCoords[routeCoords.length-1]) {
     sampled.push(routeCoords[routeCoords.length-1]);
     sampledDistances.push(fullDistances[fullDistances.length-1]);
   }
   const meters=[];
-  for (const [lat,lon] of sampled){ meters.push(await getElevationMetersAt(lat,lon,z)); }
+  for (const [lat,lon] of sampled){ 
+    meters.push(await getElevationMetersAt(lat,lon,z)); 
+  }
   const feet = meters.map(m => (m!=null ? m*3.28084 : null));
-  return { distances: sampledDistances, elevations: feet, sampled };
-}
-function buildElevationChart(distances, elevations, stations){
-  const ctx = document.getElementById('elevationChart').getContext('2d');
-  if(elevChart) elevChart.destroy();
-  profileDistances = distances; profileElevations = elevations;
-  
-  // Create station points with properly interpolated elevations
-  const stationPoints = stations.map(s => {
-    const elev = elevationAtMile(s.miles);
-    return { x: s.miles, y: elev };
-  });
-  
-  elevChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      datasets: [
-        { 
-          label:'Elevation', 
-          data: profileDistances.map((d,i)=>({x:d,y:elevations[i]})), 
-          parsing:false, 
-          borderColor:'#000', 
-          pointRadius:0, 
-          borderWidth:1.5, 
-          fill:false, 
-          tension:0.1 
-        },
-        {
-          label:'Aid Stations', 
-          type:'scatter', 
-          data: stationPoints, 
-          parsing:false, 
-          pointRadius:6, 
-          pointHoverRadius:8, 
-          pointBackgroundColor: (c) => {
-            const idx = c.dataIndex;
-            return (elevChart && currentHighlightIndices.has(idx))
-              ? getComputedStyle(document.documentElement).getPropertyValue('--highlight').trim() || '#FF6700'
-              : getComputedStyle(document.documentElement).getPropertyValue('--blaze').trim() || '#37BC7D';
-          },
-          pointBorderColor:'#222', 
-          pointBorderWidth:2
-        }
-      ]
-    },
-    options: {
-      responsive:true, 
-      maintainAspectRatio:false,
-      plugins: {
-        legend: { display:false },
-        tooltip: {
-          enabled:true,
-          callbacks: {
-            title: (ctx) => {
-              const station = stations[ctx[0].dataIndex];
-              return `${station.name} — Mile ${station.miles.toFixed(1)}`;
-            },
-            label: (ctx) => {
-              const station = stations[ctx.dataIndex];
-              if (station.forecasts && station.forecasts.length) {
-                return station.forecasts.map(f => [
-                  `ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}`,
-                  `Temp: ${f.temp}`, 
-                  `Wind: ${f.wind}`, 
-                  `Conditions: ${f.cond}`
-                ]).flat();
-              }
-              return ["Forecast: —"];
-            }
-          },
-          backgroundColor:'#fff',
-          borderColor: '#FF6700',
-          borderWidth:2, 
-          titleColor:'#111', 
-          bodyColor:'#111', 
-          padding:8, 
-          displayColors:false
-        }
-      },
-      interaction: { 
-        mode:'point', 
-        intersect:true 
-      },
-      scales: {
-        x: { 
-          type:'linear', 
-          title:{ display:true, text:'Distance (mi)' }, 
-          min:0, 
-          max:raceConfig.elevMaxDistance 
-        },
-        y: { 
-          title:{ display:true, text:'Elevation (ft)' }, 
-          ticks:{ autoSkip:true, maxTicksLimit:6 } 
-        }
-      }
-    }
-  });
-  
-  // Handle highlighting when hovering
-  ctx.canvas.addEventListener("mousemove", (e) => {
-    const rect = ctx.canvas.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    const xScale = elevChart.scales.x;
-    const yScale = elevChart.scales.y;
-    
-    let nearest = -1;
-    let nearestDist = Infinity;
-    
-    stations.forEach((s, idx) => {
-      const px = xScale.getPixelForValue(s.miles);
-      const py = yScale.getPixelForValue(stationPoints[idx].y);
-      const dist = Math.sqrt((x - px) ** 2 + (y - py) ** 2);
-      
-      if (dist < nearestDist && dist < 30) {
-        nearestDist = dist;
-        nearest = idx;
-      }
-    });
-    
-    if (nearest >= 0) {
-      ctx.canvas.style.cursor = 'pointer';
-      highlightByStationIndex(nearest);
-    } else {
-      ctx.canvas.style.cursor = 'default';
-      clearHighlights();
-    }
-  });
-  
-  ctx.canvas.addEventListener("mouseleave", () => {
-    ctx.canvas.style.cursor = 'default';
-    clearHighlights();
-  });
-}
-      scales: {
-        x: { type:'linear', title:{ display:true, text:'Distance (mi)', ticks: { padding: 0 }, grid: { drawTicks: false }, border: { display: true }}, min:0, max:raceConfig.elevMaxDistance },
-        y: { title:{ display:true, text:'Elevation (ft)', ticks: { autoSkip: true, maxTicksLimit: 6, padding: 0 }, grid: { drawTicks: false }, border: { display: true }}, ticks:{ autoSkip:true, maxTicksLimit:6 } }
-      }
-    }
-  });
-  ctx.canvas.addEventListener("mouseleave", () => {
-    if (elevChart) {
-      elevChart.tooltip.setActiveElements([], {x:0,y:0});
-      elevChart.update('none');
-      clearHighlights();
-    }
-  });
-}
-</script>
-
-<!-- Map + Markers + Forecasts -->
-<script>
-function wbgtClass(valF, category=1){
-  if (valF==null) return {label:"—",cls:"wbgt-na",desc:"No data"};
-  if (valF<82) return {label:`${valF.toFixed(0)}° Low`,cls:"wbgt-low",desc:"Safe"};
-  if (valF<85) return {label:`${valF.toFixed(0)}° Mod`,cls:"wbgt-mod",desc:"Caution"};
-  if (valF<88) return {label:`${valF.toFixed(0)}° High`,cls:"wbgt-high",desc:"High risk"};
-  if (valF<90) return {label:`${valF.toFixed(0)}° Very High`,cls:"wbgt-very",desc:"Very high risk"};
-  return {label:`${valF.toFixed(0)}° Extreme`,cls:"wbgt-extreme",desc:"Extreme risk"};
-}
-function toC(f){return(f-32)*5/9;} 
-function toF(c){return c*9/5+32;}
-function wetBulbC(Tc,RH){ 
-  if(isNaN(Tc)||isNaN(RH)) return null;
-  const Tw=Tc*Math.atan(0.151977*Math.sqrt(RH+8.313659))+Math.atan(Tc+RH)-Math.atan(RH-1.676331)+0.00391838*Math.pow(RH,1.5)*Math.atan(0.023101*RH)-4.686035;
-  return Tw;
-}
-function wbgtShadeF(Tf,RH){const Tw=wetBulbC(toC(Tf),RH); return Tw?toF(Tw):null;}
-function daysUntilRace(){return Math.floor((raceConfig.date-new Date())/(1000*60*60*24));}
-
-async function getNOAAForecast(lat, lon, targetDate) {
-  try {
-    const pointRes = await fetch(`https://api.weather.gov/points/${lat},${lon}`);
-    const pointData = await pointRes.json();
-    const fRes = await fetch(pointData.properties.forecastHourly);
-    const fData = await fRes.json();
-    const periods=fData?.properties?.periods||[];
-    if (!periods.length) return null;
-    return periods.reduce((p,c)=>
-      Math.abs(new Date(c.startTime)-targetDate) < Math.abs(new Date(p.startTime)-targetDate) ? c : p
-    );
-  } catch { return null; }
-}
-
-function bindMarkerTooltip(marker) {
-  marker.bindTooltip("", { 
-    direction: "auto",
-    offset: [0, -10],
-    opacity: 0.95,
-    className: "pp-tooltip",
-    sticky: false,
-    autoPan: true
-  });
-}
-
-const map = L.map('map', {
-  keyboard: false,
-  scrollWheelZoom: false,
-  touchZoom: true,
-  zoomControl: true,
-  dragging: true
-}).setView(raceConfig.mapCenter, raceConfig.mapZoom);
-
-const mapContainer = document.getElementById('map');
-mapContainer.addEventListener('touchstart', (e) => {
-  if (e.touches.length === 1) {
-    map.dragging.disable();
-  } else {
-    map.dragging.enable();
-  }
-});
-mapContainer.addEventListener('touchend', () => map.dragging.enable());
-
-document.documentElement.style.touchAction = "pan-x pan-y pinch-zoom";
-document.body.style.touchAction = "pan-x pan-y pinch-zoom";
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
-
-let markers = [];
-let groupList = [];
-let stationIndexToGroup = [];
-
-function applyMarkerHighlights(activeGroupIdx){
-  markers.forEach((m,i)=>{
-    const dot = m.getElement()?.querySelector('.blaze-dot');
-    if (dot) dot.classList.toggle("highlighted", i === activeGroupIdx);
-  });
-}
-function applyChartHighlights(indices){
-  currentHighlightIndices = new Set(indices);
-  if (elevChart){
-    elevChart.setActiveElements(indices.map(i=>({datasetIndex:1,index:i})));
-    elevChart.update();
-  }
-}
-function highlightByStationIndex(stationIdx){
-  const gIdx = stationIndexToGroup[stationIdx];
-  applyMarkerHighlights(gIdx);
-  applyChartHighlights([stationIdx]);
-}
-function highlightByGroupIndex(groupIdx){
-  const indices = groupList[groupIdx].indices;
-  applyMarkerHighlights(groupIdx);
-  applyChartHighlights(indices);
-}
-function clearHighlights(){
-  currentHighlightIndices.clear();
-  markers.forEach(m=>m.getElement()?.querySelector('.blaze-dot')?.classList.remove("highlighted"));
-  if(elevChart){ elevChart.setActiveElements([]); elevChart.update(); }
-}
-
-const blazeIcon = L.divIcon({ className:"", html:'<div class="blaze-dot"></div>', iconSize:[20,20], iconAnchor:[10,10] });
-
-function tooltipLinesMapGroup(g, stations) {
-  let html = "";
-  g.indices.forEach((i, idx) => {
-    const s = stations[i];
-    if (idx > 0) html += `<hr style="margin:6px 0;">`;
-    html += `<div style="margin-bottom:6px;">
-      <strong>${s.name} — Mile ${s.miles.toFixed(1)}</strong><br>`;
-    if (s.forecasts && s.forecasts.length) {
-      s.forecasts.forEach(f => {
-        html += `ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}<br>
-                 Temp: ${f.temp}<br>
-                 Wind: ${f.wind}<br>
-                 Conditions: ${f.cond}<br>`;
-      });
-    } else {
-      html += `Forecast: —<br>`;
-    }
-    html += `</div>`;
-  });
-  return html;
-}
-
-Promise.all([
-  fetch(raceConfig.routeUrl).then(r=>r.json()),
-  fetch(raceConfig.stationsUrl).then(r=>r.json())
-]).then(async([route,stations])=>{
-  raceConfig.route=route; raceConfig.stations=stations;
-
-  const line=L.polyline(route,{color:"#000",weight:3}).addTo(map);
-  map.fitBounds(line.getBounds());
-
-  try{
-    const {distances,elevations}=await buildElevationProfile(route,raceConfig.elevationZoom);
-    buildElevationChart(distances,elevations,stations);
-  }catch(e){
-    console.error('Elevation error',e);
-    const distances=[0]; 
-    for(let i=1;i<route.length;i++) distances[i]=distances[i-1]+haversineMi(route[i-1],route[i]);
-    const elevations=distances.map(()=>1500);
-    buildElevationChart(distances,elevations,stations);
-  }
-
-  const groupsByKey = {};
-  stations.forEach((s, idx) => {
-    const key = `${s.lat},${s.lon}`;
-    if (!groupsByKey[key]) groupsByKey[key] = { lat:s.lat, lon:s.lon, indices:[] };
-    groupsByKey[key].indices.push(idx);
-  });
-  groupList = Object.values(groupsByKey);
-
-  groupList.forEach((g, gIdx) => {
-    g.indices.forEach(stIdx => { stationIndexToGroup[stIdx] = gIdx; });
-    const marker = L.marker([g.lat, g.lon], { icon: blazeIcon }).addTo(map);
-    g.marker = marker;
-    markers.push(marker);
-    bindMarkerTooltip(marker);
-    marker.setTooltipContent(tooltipLinesMapGroup(g, stations));
-    marker.on("mouseover", () => highlightByGroupIndex(gIdx));
-    marker.on("mouseout", clearHighlights);
-  });
-
-  updateForecasts();
-  groupList.forEach(g => { if (g.marker) g.marker.setTooltipContent(tooltipLinesMapGroup(g, raceConfig.stations)); });
-});
-
-function daysForecastAvailable(){ return daysUntilRace() <= 7; }
-async function updateForecasts(){
-  const tbody = document.getElementById("forecastBody"); 
-  tbody.innerHTML = "";
-  const forecastsAvailable = daysForecastAvailable();
-
-  if(forecastsAvailable){
-    document.getElementById("forecastValidLabel").textContent = "Fetching latest forecast…";
-  } else {
-    const unlockDate = new Date(raceConfig.date); 
-    unlockDate.setDate(unlockDate.getDate() - 7);
-    document.getElementById("forecastValidLabel").textContent =
-      `Forecast unlocks on ${unlockDate.toLocaleDateString([], {month:"short", day:"numeric", year:"numeric"})}`;
-  }
-
-  const pace = paceMinPerMiFromUI();
-  const effectiveStart = getEffectiveStartTime();
-
-  for (const s of (raceConfig.stations || [])){
-    const horizonHours = 6.5 * 24;
-    const now = new Date();
-    const eta = new Date(effectiveStart.getTime() + s.miles * pace * 60000);
-    const timeStr = eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
-    const hoursUntilEta = (eta - now) / 3_600_000;
-
-    let temp = "—", wind = "—", cond = "Forecast beyond range";
-    let wbgtCell = { label: "—", cls: "wbgt-na", desc: "No data" };
-    let forecastObj = null;
-
-    if (hoursUntilEta <= horizonHours) {
-      const f = await getNOAAForecast(s.lat, s.lon, eta);
-      if (f) {
-        temp = f.temperature ? `${f.temperature}°F` : "—";
-        const speed = f.windSpeed || "", dir = f.windDirection || "";
-        wind = (speed || dir) ? `${speed} ${dir}`.trim() : "—";
-        cond = f.shortForecast || "—";
-        const rh = f.relativeHumidity?.value;
-        const wbgtVal = (f.temperature && rh != null) ? wbgtShadeF(f.temperature, rh) : null;
-        wbgtCell = wbgtClass(wbgtVal, raceConfig.regionCategory);
-        forecastObj = f;
-      } else {
-        cond = "Forecast unavailable";
-      }
-    } else {
-      cond = "Forecast beyond range";
-    }
-    s.forecastObj = forecastObj;
-
-    const row=document.createElement("tr");
-    row.innerHTML=`
-      <td>${s.name}</td>
-      <td>${s.miles.toFixed(1)} mi</td>
-      <td>${timeStr}</td>
-      <td>${temp}</td>
-      <td>${wind}</td>
-      <td>${cond}</td>
-      <td class="${wbgtCell.cls}" title="${wbgtCell.desc}">${wbgtCell.label}</td>`;
-    tbody.appendChild(row);
-    s._row=row;
-
-    s.forecasts=[{ eta,temp,wind,cond, wbgt: wbgtCell.label }];
-  }
-
-  document.getElementById("forecastNote").style.display = forecastsAvailable ? "none" : "block";
-  if(forecastsAvailable){
-    document.getElementById("forecastValidLabel").textContent =
-      `Forecast valid as of ${new Date().toLocaleString()}`;
-  }
-
-  if(groupList && groupList.length){
-    groupList.forEach(g=>{
-      if(g.marker) g.marker.setTooltipContent(tooltipLinesMapGroup(g, raceConfig.stations));
-    });
-  }
-}
-</script>
-
-<!-- Row highlighting -->
-<script>
-function installRowHighlighting() {
-  const ids = ["forecastBody"];
-  const addClimoBodies = () => {
-    document.querySelectorAll(".climoBody").forEach(tb => {
-      if (!ids.includes(tb.id)) ids.push(tb);
-    });
-  };
-  addClimoBodies();
-
-  const attach = (tbody) => {
-    if (!tbody) return;
-    tbody.addEventListener("pointerup", (e) => {
-      const tr = e.target.closest("tr");
-      if (!tr) return;
-      const table = tr.closest("table");
-      const was = tr.classList.contains("highlight-row");
-      table.querySelectorAll("tbody tr").forEach(r => r.classList.remove("highlight-row"));
-      if (!was) tr.classList.add("highlight-row");
-    }, { passive: true });
-  };
-
-  const forecastBody = document.getElementById("forecastBody");
-  attach(forecastBody);
-
-  const observer = new MutationObserver(() => {
-    document.querySelectorAll(".climoBody").forEach(attach);
-  });
-  observer.observe(document.getElementById("climatology"), { childList: true, subtree: true });
-}
-document.addEventListener("DOMContentLoaded", installRowHighlighting);
-</script>
-
-<!-- Chart.js orientation resize fix -->
-<script>
-window.addEventListener("orientationchange", () => {
-  if (window.elevChart) { setTimeout(() => elevChart.resize(), 500); }
-});
-</script>
-
-</html>
+  return
