@@ -588,7 +588,13 @@ function buildElevationChart(distances, elevations, stations){
   const ctx = document.getElementById('elevationChart').getContext('2d');
   if(elevChart) elevChart.destroy();
   profileDistances = distances; profileElevations = elevations;
-  const stationPoints = stations.map(s => ({ x: s.miles, y: elevationAtMile(s.miles) }));
+  
+  // Create station points with properly interpolated elevations
+  const stationPoints = stations.map(s => {
+    const elev = elevationAtMile(s.miles);
+    return { x: s.miles, y: elev };
+  });
+  
   elevChart = new Chart(ctx, {
     type: 'line',
     data: {
