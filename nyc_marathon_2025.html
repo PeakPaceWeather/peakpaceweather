@@ -557,6 +557,7 @@ function haversineMi(a,b){
 }
 
 let elevChart = null, profileDistances = [], profileElevations = [], currentHighlightIndices = new Set();
+let activeStationIdx = -1;
 function elevationAtMile(mile) {
   if (!profileDistances.length) return null;
   for (let i=1;i<profileDistances.length;i++) {
@@ -681,15 +682,20 @@ onHover: (event, elements, chart) => {
   // Make threshold adaptive based on chart width
   const chartWidth = chartArea.right - chartArea.left;
   const pixelsPerMile = chartWidth / raceConfig.elevMaxDistance;
-  const threshold = Math.max(30, pixelsPerMile * 0.4); // At least 30px or 0.4 miles worth
+  const threshold = Math.max(30, pixelsPerMile * 0.4);
   
-  if (nearestPixelDist <= threshold) {
+  // Add hysteresis: if we already have an active station, use a larger threshold to keep it
+  const currentThreshold = (activeStationIdx === nearestIdx) ? threshold * 1.5 : threshold;
+  
+  if (nearestPixelDist <= currentThreshold) {
     canvas.style.cursor = 'pointer';
+    activeStationIdx = nearestIdx;
     highlightByStationIndex(nearestIdx);
     chart.tooltip.setActiveElements([{datasetIndex: 1, index: nearestIdx}], {x: adjustedX, y: canvasPosition.y});
     chart.update('none');
   } else {
     canvas.style.cursor = 'default';
+    activeStationIdx = -1;
     clearHighlights();
     chart.tooltip.setActiveElements([], {x:0,y:0});
     chart.update('none');
