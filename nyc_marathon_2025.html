@@ -241,8 +241,8 @@ const MAPBOX_TOKEN = "pk.eyJ1IjoiZGlsbG9uZHVyaW5pY2siLCJhIjoiY21memtlbm83MDNycTJ
 
 const raceConfig = {
   // Basic race info
-  name: "Your Race Name Here",
-  date: new Date("2025-10-25T08:00-04:00"),  // Earliest wave start time
+  name: "TCS NYC Marathon",
+  date: new Date("2025-11-02T08:00-05:00"),  // Earliest wave start time
   
   // Wave start times (OPTIONAL - set to [] to disable waves feature)
   waves: [
@@ -261,22 +261,22 @@ const raceConfig = {
   // waves: [],
   
   // Climatology settings
-  city: "Your City, State",
-  climoStationId: "KXXX",
-  climoStationName: "Your Airport Name",
-  climoBaseUrl: "https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/refs/heads/main/",
+  city: "New York, NY",
+  climoStationId: "KNYC",
+  climoStationName: "NYC Central Park",
+  climoBaseUrl: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/November_2_Climate.json",
   
   // Route & station data URLs
-  routeUrl: "https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/refs/heads/main/route.json",
-  stationsUrl: "https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/refs/heads/main/stations.json",
+  routeUrl: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/2025_nyc_marathon_route.json",
+  stationsUrl: "https://raw.githubusercontent.com/YOUR-USERNAME/YOUR-REPO/refs/heads/main/2025_nyc_marathon_stations.json",
   
   // Race parameters
   multiDaySpan: 1,           // Change to 2 for multi-day races
   elevationZoom: 12,
-  elevMaxDistance: 100.0,    // Set to total race distance
+  elevMaxDistance: 26.22,    // Set to total race distance
   mapCenter: [40.7682, -77.7559],  // [lat, lon]
   mapZoom: 12,
-  regionCategory: 1
+  regionCategory: 2
 };
 
 document.getElementById("raceName").textContent = raceConfig.name;
