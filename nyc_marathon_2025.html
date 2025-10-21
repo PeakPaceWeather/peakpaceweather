@@ -650,23 +650,31 @@ function buildElevationChart(distances, elevations, stations){
         const canvas = chart.canvas;
         const canvasPosition = Chart.helpers.getRelativePosition(event, chart);
         
-        // Get the x-scale value from mouse position
+        // Get the x-scale and y-scale to convert between pixels and data values
         const xScale = chart.scales.x;
-        const xValue = xScale.getValueForPixel(canvasPosition.x);
+        const yScale = chart.scales.y;
         
-        // Find nearest station by distance
+        // Find nearest station considering both X and Y distance in pixel space
         let nearestIdx = -1;
-        let nearestDist = Infinity;
+        let nearestPixelDist = Infinity;
+        
         stations.forEach((s, idx) => {
-          const dist = Math.abs(s.miles - xValue);
-          if (dist < nearestDist) {
-            nearestDist = dist;
+          const stationXPixel = xScale.getPixelForValue(s.miles);
+          const stationYPixel = yScale.getPixelForValue(stationPoints[idx].y);
+          
+          // Calculate pixel distance
+          const dx = canvasPosition.x - stationXPixel;
+          const dy = canvasPosition.y - stationYPixel;
+          const pixelDist = Math.sqrt(dx * dx + dy * dy);
+          
+          if (pixelDist < nearestPixelDist) {
+            nearestPixelDist = pixelDist;
             nearestIdx = idx;
           }
         });
         
-        // Only activate if within reasonable distance (0.5 miles)
-        if (nearestDist < 0.5) {
+        // Activate if within 25 pixels (about the size of the point + hover radius)
+        if (nearestPixelDist <= 25) {
           canvas.style.cursor = 'pointer';
           highlightByStationIndex(nearestIdx);
           chart.tooltip.setActiveElements([{datasetIndex: 1, index: nearestIdx}], {x: canvasPosition.x, y: canvasPosition.y});
