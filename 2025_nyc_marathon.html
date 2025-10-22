@@ -223,7 +223,13 @@ th { background:#f0f0f0; font-weight:700; }
         <thead>
           <tr><th>Station</th><th>Distance (mi)</th><th>Elapsed</th><th>ETA</th><th>Temp (°F)</th><th>Wind</th><th>Conditions</th></tr>
         </thead>
-        <tbody id="forecastBody"></tbody>
+        <tbody id="forecastBody">
+          <tr id="forecastPlaceholder">
+            <td colspan="7" style="text-align:center; padding:40px 20px; color:#888; font-style:italic;">
+              Select wave start time and input target pace to generate Peak Pace Forecast
+            </td>
+          </tr>
+        </tbody>
       </table>
       <div style="text-align:center; font-size:12px; color:#555; margin-top:12px;">
         <span id="forecastValidLabel"></span>
@@ -286,9 +292,21 @@ function updateCountdown() {
   const el = document.getElementById("countdown");
   const raceDateStr = raceConfig.date.toLocaleString([], { month:"long", day:"numeric", year:"numeric" });
   if (diff <= 0) { el.textContent = `${raceDateStr} (RACE DAY IS HERE!)`; return; }
+  
   const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const daysText = days === 1 ? "1 Day Until Race Day" : `${days} Days Until Race Day`;
-  el.textContent = `${raceDateStr} (${daysText})`;
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  
+  let countdownText = "";
+  if (days > 0) {
+    countdownText = `${days} ${days === 1 ? 'Day' : 'Days'}`;
+  }
+  if (hours > 0 || days > 0) {
+    if (days > 0) countdownText += " and ";
+    countdownText += `${hours} ${hours === 1 ? 'Hour' : 'Hours'}`;
+  }
+  countdownText += " Until Race Day";
+  
+  el.textContent = `${raceDateStr} (${countdownText})`;
 }
 setInterval(updateCountdown, 60000);
 updateCountdown();
