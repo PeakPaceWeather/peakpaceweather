@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- AACR Philadelphia Marathon - Peak Pace Weather Forecast -->
+  <!-- Peak Pace Weather — AACR Philadelphia Marathon -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
-  <title>AACR Philadelphia Marathon | Peak Pace Weather</title>
+  <title id="pageTitle">AACR Philadelphia Marathon | Peak Pace</title>
 
   <!-- Fonts & Libraries -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 
   <style>
-/* ===== Base + Responsive ===== */
+/* ===== Base + Responsive (pinch-zoom enabled) ===== */
 html, body { overflow-x: hidden; touch-action: pan-x pan-y; zoom: 1; }
 body { margin: 0; padding: 0; font-family: "Source Sans Pro", Arial, sans-serif; color: #111; background: #fff; line-height: 1.5; }
 :root { --ink:#111; --muted:#555; --line:#ddd; --pp-dark:#003546; --blaze:#37BC7D; --highlight:#FF6700; --hoverRow:#fff3e6; }
@@ -25,12 +25,13 @@ header { text-align:center; margin:8px auto 14px; }
 header h2 { margin:0; font-size:32px; font-weight:700; }
 #countdown { font-size:20px; font-weight:600; margin-top:6px; color:#333; }
 
-/* ===== Panels ===== */
-section, #elevSection, #map, #paceBox, #stationToggleBox { width: 960px; max-width: 960px; margin: 18px auto 0; box-sizing: border-box; }
-section, #elevSection, #stationToggleBox { border:1px solid #ccc; border-radius:8px; background:#fff; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+/* ===== Uniform panel widths ===== */
+section, #elevSection, #map, #paceBox { width: 960px; max-width: 960px; margin: 18px auto 0; box-sizing: border-box; }
+section, #elevSection { border:1px solid #ccc; border-radius:8px; background:#fff; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
 section:last-of-type { margin-bottom:24px; }
 section h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700; }
 
+/* Map */
 #map { height: 600px; margin-top:10px; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
 
 /* Elevation */
@@ -38,155 +39,48 @@ section h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700
 #elevWrap { position:relative; width:100%; height:225px; margin:0 auto; padding:0; box-sizing:border-box; }
 #elevationChart { position:absolute; inset:0; width:100% !important; height:100% !important; display:block; box-sizing:border-box; cursor:pointer; }
 
-/* Station Toggle Box */
-#stationToggleBox {
-  padding: 20px;
-  margin: 18px auto;
-}
-#stationToggleBox h3 { margin-top: 0; }
-.toggle-group {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  margin: 15px 0;
-}
-.radio-option {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-}
-.radio-option input[type="radio"] {
-  cursor: pointer;
-  width: 18px;
-  height: 18px;
-}
-.radio-option label {
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  margin: 0;
-}
-.toggle-note {
-  font-size: 12px;
-  color: #FF6700;
-  text-align: center;
-  margin-top: 12px;
-  font-style: italic;
-}
+/* ===== Pace & Wave Control Bar ===== */
+#paceBox { text-align:center; padding:20px 24px; margin:18px auto; background:#fff; border:1px solid #ccc; border-radius:10px; box-shadow:0 2px 4px rgba(0,0,0,0.08); }
+#paceBox.loading { opacity: 0.6; pointer-events: none; }
 
-/* Pace Box */
-#paceBox { text-align:center; padding:10px 12px; margin:10px auto 0; background:#fff; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 4px rgba(0,0,0,0.08); }
-#paceControls { display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap; }
-#paceControls label { font-size:14px; font-weight:600; color:#000; }
-#paceControls select { font-size:13px; border:1px solid var(--pp-dark); border-radius:6px; padding:4px 6px; background:#fff; color:var(--ink); cursor:pointer; min-width:110px; }
-#paceControls button { font-size:13px; font-weight:600; border:1px solid var(--pp-dark); border-radius:6px; color:#fff; background:var(--pp-dark); cursor:pointer; padding:6px 10px; transition:background .2s ease; }
-#paceControls button:hover:not(:disabled) { background:var(--highlight); }
-#paceControls button:disabled { opacity: 0.5; cursor: not-allowed; }
-#paceConfirm { font-size:13px; color:var(--muted); margin-left:6px; }
+.control-row { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid #eee; }
+.control-row:last-of-type { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+.control-row label { font-weight:700; color:#000; font-size:15px; }
+.control-row select, .control-row input { font-size:14px; border:1px solid #ccc; border-radius:6px; background:#fff; color:#111; padding:8px 12px; cursor:pointer; height:38px; }
+#stationSelect { min-width: 380px; }
+#waveSelect { min-width: 380px; }
+#customTimeInput { display:none; min-width: 150px; }
+#paceMin, #paceSec { min-width:65px; width:65px; }
 
-/* Corral/Pace Box Styling */
-#paceBox {
-  padding: 20px 24px;
-  margin: 18px auto;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-  width: 960px;
-  max-width: 960px;
-}
-#corralRow, #paceRow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-#corralRow {
-  margin-bottom: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #eee;
-}
-#corralRow label, #paceRow label {
-  font-weight: 700;
-  color: #000;
-  font-size: 15px;
-}
-#corralSelect, #paceMin, #paceSec {
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  background: #fff;
-  color: #111;
-  padding: 8px 12px;
-  cursor: pointer;
-  height: 38px;
-}
-#corralSelect {
-  min-width: 380px;
-}
-#paceMin, #paceSec {
-  min-width: 65px;
-  width: 65px;
-}
-.pace-input-group {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  white-space: nowrap;
-}
-.pace-input-group span {
-  color: #666;
-  font-size: 16px;
-  font-weight: 700;
-}
-#paceGo {
-  font-size: 14px;
-  font-weight: 600;
-  border: 1px solid #003546;
-  border-radius: 6px;
-  color: #fff;
-  background: #003546;
-  cursor: pointer;
-  padding: 9px 20px;
-  height: 38px;
-  transition: background 0.2s ease;
-  margin-left: 4px;
-}
-#paceGo:hover:not(:disabled) { background: #FF6700; }
-#paceGo:disabled { opacity: 0.5; cursor: not-allowed; }
-#paceConfirm {
-  font-size: 14px;
-  color: #888;
-  margin-left: 12px;
-  font-style: italic;
-}
-#paceConfirm.success {
-  color: #37BC7D;
-  font-style: normal;
-  font-weight: 500;
-}
+.pace-input-group { display:flex; align-items:center; gap:6px; white-space:nowrap; }
+.pace-input-group span { color:#666; font-size:16px; font-weight:700; }
+
+#paceGo { font-size:14px; font-weight:600; border:1px solid #003546; border-radius:6px; color:#fff; background:#003546; cursor:pointer; padding:9px 20px; height:38px; transition:background 0.2s ease; margin-left:4px; }
+#paceGo:hover { background:#FF6700; }
+#paceGo:disabled { background:#ccc; cursor:not-allowed; border-color:#ccc; }
+
+#paceConfirm { font-size:14px; color:#888; margin-left:12px; font-style:italic; }
+#paceConfirm.success { color:#37BC7D; font-style:normal; font-weight:500; }
 
 /* Tables */
 table { width:100%; border-collapse:collapse; }
 th, td { border:1px solid #ccc; padding:8px; text-align:center; font-size:14px; }
 th { background:#f0f0f0; font-weight:700; }
+#climoAvgRow { font-weight:700; background:#f5f5f5; }
 
-/* Hover */
-#forecastBody tr:hover { background: var(--hoverRow); }
+/* Hover (desktop) */
+#forecastBody tr:hover, .climoBody tr:hover { background: var(--hoverRow); }
 
-/* Tap highlight */
-#forecastBody tr { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+/* Tap highlight (mobile & desktop) */
+#forecastBody tr, .climoBody tr { cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .highlight-row { background: var(--hoverRow) !important; box-shadow: inset 0 0 0 2px var(--highlight); transition: background .2s ease, box-shadow .2s ease; }
 
 .note { font-size:12px; text-align:center; margin-top:8px; color:var(--muted); }
 
-/* Leaflet styles */
+/* Leaflet styles & tooltips */
 .leaflet-marker-icon { cursor:pointer; transition: transform 150ms ease; }
 .leaflet-marker-icon:hover { transform: scale(1.2); }
-.leaflet-tooltip { background:#fff; border:2px solid var(--highlight); border-radius:8px; color:var(--ink); font-size:13px; font-weight:500; line-height:1.4; box-shadow:0 2px 8px rgba(0,0,0,0.15); padding:6px 10px; }
+.leaflet-tooltip, .pp-tooltip { background:#fff; border:2px solid var(--highlight); border-radius:8px; color:var(--ink); font-size:13px; font-weight:500; line-height:1.4; box-shadow:0 2px 8px rgba(0,0,0,0.15); padding:6px 10px; }
 .leaflet-control a { background-color:var(--pp-dark) !important; color:#fff !important; border:1px solid var(--pp-dark) !important; width:30px !important; height:30px !important; line-height:30px !important; text-align:center; font-size:16px; }
 .leaflet-control a:hover { background-color: var(--blaze) !important; border-color: var(--blaze) !important; }
 
@@ -195,10 +89,23 @@ th { background:#f0f0f0; font-weight:700; }
 .blaze-dot:hover { transform: scale(1.4); cursor:pointer; }
 .blaze-dot.highlighted { transform: scale(1.6); background: var(--highlight); }
 
-/* Leaflet container */
+/* Climo tabs */
+#climoTabs { display:flex; justify-content:center; margin-bottom:12px; gap:8px; }
+.climoTab { padding:6px 14px; border:1px solid var(--pp-dark); border-radius:6px 6px 0 0; background:#f9f9f9; color:var(--pp-dark); font-size:14px; font-weight:600; cursor:pointer; transition: background .2s ease, color .2s ease; }
+.climoTab:hover { background: var(--hoverRow); }
+.climoTab.active { background: var(--pp-dark); color:#fff; }
+.climoPanel { display:none; }
+.climoPanel.active { display:block; }
+
+/* Prevent focus-snap on Leaflet */
 .leaflet-container { scroll-margin-top:0; scroll-behavior:auto; }
 .leaflet-container:focus { outline:none; scroll-margin-top:0; }
-  </style>
+
+/* Loading spinner */
+.spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #f3f3f3; border-top: 2px solid var(--pp-dark); border-radius: 50%; animation: spin 1s linear infinite; margin-left: 8px; vertical-align: middle; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+</style>
 </head>
 
 <body>
@@ -206,29 +113,51 @@ th { background:#f0f0f0; font-weight:700; }
     <div class="main-header">PEAK PACE WEATHER</div>
 
     <header>
-      <h2>AACR Philadelphia Marathon 2025</h2>
+      <h2 id="raceName">AACR Philadelphia Marathon</h2>
       <div id="countdown">Loading countdown…</div>
     </header>
 
-    <!-- Station Frequency Toggle -->
-    <section id="stationToggleBox">
-      <h3>Weather Station Frequency</h3>
-      <div class="toggle-group">
-        <div class="radio-option">
-          <input type="radio" id="opt1" name="stationFreq" value="option1">
-          <label for="opt1">Every Mile (27 stations)</label>
-        </div>
-        <div class="radio-option">
-          <input type="radio" id="opt2" name="stationFreq" value="option2">
-          <label for="opt2">Every 5K (9 stations)</label>
-        </div>
-        <div class="radio-option">
-          <input type="radio" id="opt3" name="stationFreq" value="option3" checked>
-          <label for="opt3">Official Aid Stations (16 stations)</label>
+    <!-- ============ Climatology (date-driven) ============ -->
+    <section id="climatology">
+      <h3 id="climoTitle">Climatology</h3>
+      <div id="climoTabs"></div>
+      <div id="climoPanels"></div>
+    </section>
+
+    <!-- Pace Controls -->
+    <div id="paceBox">
+      <div class="control-row">
+        <label for="stationSelect">Step 1 - Station Option:</label>
+        <select id="stationSelect">
+          <option value="">Select forecast locations...</option>
+          <option value="option1">Every Mile Marker (0-26)</option>
+          <option value="option2">Every 5K Split (8 locations)</option>
+          <option value="option3">Aid Stations (16 locations)</option>
+        </select>
+      </div>
+      
+      <div class="control-row">
+        <label for="waveSelect">Step 2 - Corral Start Time:</label>
+        <select id="waveSelect" disabled>
+          <option value="">Complete Step 1 first</option>
+        </select>
+        <input type="time" id="customTimeInput" />
+      </div>
+      
+      <div class="control-row">
+        <label for="paceMin">Step 3 - Target Pace (min/mi):</label>
+        <div class="pace-input-group">
+          <select id="paceMin" disabled><option>--</option></select>
+          <span>:</span>
+          <select id="paceSec" disabled><option>--</option></select>
         </div>
       </div>
-      <div id="toggleNote" class="toggle-note"></div>
-    </section>
+      
+      <div class="control-row">
+        <button id="paceGo" disabled>Step 4 - Generate Peak Pace Forecast</button>
+        <span id="paceConfirm">Complete steps 1-3 above</span>
+      </div>
+    </div>
 
     <!-- Map -->
     <div id="map"></div>
@@ -236,361 +165,831 @@ th { background:#f0f0f0; font-weight:700; }
     <!-- Elevation -->
     <section id="elevSection">
       <h3>Elevation Profile</h3>
-      <div id="elevWrap">
-        <canvas id="elevationChart"></canvas>
+      <div id="elevWrap"><canvas id="elevationChart"></canvas></div>
+    </section>
+
+    <!-- Forecast Summary -->
+    <section id="summary">
+      <h3 id="tableHeader" style="margin-bottom:14px;">Peak Pace Forecast</h3>
+      <table>
+        <thead>
+          <tr><th>Station</th><th>Distance (mi)</th><th>Elapsed</th><th>ETA</th><th>Temp (°F)</th><th>Wind</th><th>Conditions</th></tr>
+        </thead>
+        <tbody id="forecastBody">
+          <tr id="forecastPlaceholder">
+            <td colspan="7" style="text-align:center; padding:40px 20px; color:#888; font-style:italic;">
+              Complete steps 1-4 above to generate your Peak Pace Forecast
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="text-align:center; font-size:12px; color:#555; margin-top:12px;">
+        <span id="forecastValidLabel"></span>
+        <br>
+        <span id="sourceLabel" style="color:#777;"></span>
       </div>
     </section>
 
-    <!-- Pace -->
-    <div id="paceBox">
-      <div id="corralRow">
-        <label for="corralSelect">Corral/Start Time:</label>
-        <select id="corralSelect"></select>
-      </div>
-      <div id="paceRow">
-        <label for="paceMin">Target Pace (min/mi):</label>
-        <div class="pace-input-group">
-          <select id="paceMin"></select>
-          <span>:</span>
-          <select id="paceSec"></select>
-        </div>
-        <button id="paceGo">Generate Peak Pace Forecast</button>
-        <div id="paceConfirm"></div>
-      </div>
-    </div>
-
-    <!-- Forecast -->
-    <section id="forecastSection">
-      <h3>Peak Pace Forecast</h3>
-      <div id="forecastValidLabel" style="font-size:12px; color:#666; text-align:center; margin-bottom:8px;"></div>
-      <div id="sourceLabel" style="font-size:12px; color:#666; text-align:center; margin-bottom:8px;"></div>
-      <table id="forecastTable">
-        <thead>
-          <tr>
-            <th>Location</th>
-            <th>Distance</th>
-            <th>Elapsed Time</th>
-            <th>ETA</th>
-            <th>Temperature</th>
-            <th>Wind</th>
-            <th>Conditions</th>
-          </tr>
-        </thead>
-        <tbody id="forecastBody"></tbody>
-      </table>
+    <!-- Sources -->
+    <section id="sources">
+      <h3>Data Sources</h3>
+      <ul style="font-size:13px; color:#555; line-height:1.5;">
+        <li>Climatology: Iowa State University <a href="https://mesonet.agron.iastate.edu/request/download.phtml" target="_blank" rel="noopener">IEM ASOS Archive</a></li>
+        <li>Elevation: Mapbox Terrain-RGB</li>
+        <li>Weather Forecasts: NOAA/NWS API (near-term) and Open-Meteo (extended range)</li>
+      </ul>
     </section>
   </div>
-
-  <script>
-    // ============================================================
-    // EMBEDDED DATA - All route and station data
-    // ============================================================
-    const PHILLY_ROUTE = [[39.962120000000006, -75.17641], [39.96157167873861, -75.17565996991296], [39.961023352643885, -75.17490995185526], [39.960475021716, -75.17415994582656], [39.959926685955146, -75.17340995182654], [39.959378345361465, -75.1726599698549], [39.958830000000006, -75.17191000000001], [39.958560000000006, -75.17157], [39.95837, -75.17143], [39.957770000000004, -75.1713], [39.95768, -75.17125], [39.957550000000005, -75.17113], [39.957440000000005, -75.17098], [39.957390000000004, -75.17077], [39.95738, -75.17061000000001], [39.957300000000004, -75.17009], [39.95712, -75.16967000000001], [39.95698, -75.16941], [39.95676, -75.16906], [39.956163338884636, -75.16825998611112], [39.95556667227047, -75.16745998618174], [39.95497, -75.16666000000001], [39.954820000000005, -75.16639], [39.95478000000001, -75.16626000000001], [39.95469500174158, -75.1656299994879], [39.95461, -75.165], [39.954600000000006, -75.16475000000001], [39.95452, -75.16474000000001], [39.954530000000005, -75.16467], [39.95447, -75.16458], [39.95439000159216, -75.1639699992383], [39.95431000000001, -75.16336000000001], [39.95436, -75.16334], [39.954280001793165, -75.16269499929398], [39.9542, -75.16205000000001], [39.95427, -75.16204], [39.95413577968321, -75.16095782952313], [39.95400154930486, -75.15987566329385], [39.95386730886503, -75.15879350131246], [39.953733058363824, -75.15771134357924], [39.95359879780133, -75.15662919009446], [39.953464527177616, -75.15554704085842], [39.953330246492776, -75.1544648958714], [39.9531959557469, -75.15338275513366], [39.95306165494008, -75.1523006186455], [39.9529273440724, -75.1512184864072], [39.95279302314393, -75.15013635841903], [39.95265869215479, -75.14905423468129], [39.95252435110506, -75.14797211519425], [39.95239, -75.14689], [39.952450000000006, -75.14687], [39.952450000000006, -75.14679000000001], [39.95313500011528, -75.14666500124312], [39.95382, -75.14654], [39.9542, -75.14641], [39.954096672814984, -75.14556333068857], [39.9539933394711, -75.14471666393548], [39.95389, -75.14387], [39.95384000000001, -75.14388000000001], [39.95373, -75.14303000000001], [39.953720000000004, -75.143], [39.95371000222662, -75.14227999987199], [39.953700000000005, -75.14156000000001], [39.95358, -75.14068], [39.95347, -75.14013], [39.95346, -75.14013], [39.95344, -75.14003000000001], [39.95293500016522, -75.1401950012025], [39.95243000000001, -75.14036], [39.95177, -75.14055], [39.951170000149006, -75.14069666924848], [39.95057000011318, -75.14084333592388], [39.94997, -75.14099], [39.94912250047439, -75.14118500725128], [39.948275000622075, -75.14138000967058], [39.94742750044309, -75.14157500725821], [39.946580000000004, -75.14177000000001], [39.945820000000005, -75.14193], [39.94512, -75.14206], [39.94458999991527, -75.14214000063667], [39.94406, -75.14222000000001]];
-    
-    const OPTION1_STATIONS = [
-      {"name": "Mile 0 (Start)", "miles": 0, "lat": 39.962120000000006, "lon": -75.17641},
-      {"name": "Mile 1", "miles": 1, "lat": 39.95631, "lon": -75.16491},
-      {"name": "Mile 2", "miles": 2, "lat": 39.94959, "lon": -75.14208},
-      {"name": "Mile 3", "miles": 3, "lat": 39.93455, "lon": -75.14326},
-      {"name": "Mile 4", "miles": 4, "lat": 39.93968, "lon": -75.15121},
-      {"name": "Mile 5", "miles": 5, "lat": 39.94588, "lon": -75.15511},
-      {"name": "Mile 6", "miles": 6, "lat": 39.95372, "lon": -75.18259},
-      {"name": "Mile 7", "miles": 7, "lat": 39.95936, "lon": -75.18989},
-      {"name": "Mile 8", "miles": 8, "lat": 39.97003, "lon": -75.19622},
-      {"name": "Mile 9", "miles": 9, "lat": 39.97883, "lon": -75.20318},
-      {"name": "Mile 10", "miles": 10, "lat": 39.98485, "lon": -75.20888},
-      {"name": "Mile 11", "miles": 11, "lat": 39.98876, "lon": -75.21268},
-      {"name": "Mile 12", "miles": 12, "lat": 40.00112, "lon": -75.20484},
-      {"name": "Mile 13", "miles": 13, "lat": 40.01189, "lon": -75.21012},
-      {"name": "Mile 14", "miles": 14, "lat": 40.02096, "lon": -75.21658},
-      {"name": "Mile 15", "miles": 15, "lat": 40.02411, "lon": -75.21970},
-      {"name": "Mile 16", "miles": 16, "lat": 40.02373, "lon": -75.21820},
-      {"name": "Mile 17", "miles": 17, "lat": 40.01452, "lon": -75.20486},
-      {"name": "Mile 18", "miles": 18, "lat": 40.00908, "lon": -75.19692},
-      {"name": "Mile 19", "miles": 19, "lat": 40.00229, "lon": -75.19069},
-      {"name": "Mile 20", "miles": 20, "lat": 39.99442, "lon": -75.19264},
-      {"name": "Mile 21", "miles": 21, "lat": 39.98709, "lon": -75.20074},
-      {"name": "Mile 22", "miles": 22, "lat": 39.97946, "lon": -75.19639},
-      {"name": "Mile 23", "miles": 23, "lat": 39.97355, "lon": -75.19055},
-      {"name": "Mile 24", "miles": 24, "lat": 39.96627, "lon": -75.17912},
-      {"name": "Mile 25", "miles": 25, "lat": 39.96273, "lon": -75.17543},
-      {"name": "Mile 26", "miles": 26, "lat": 39.96396, "lon": -75.17726}
-    ];
-
-    const OPTION2_STATIONS = [
-      {"name": "0.0K (Start)", "miles": 0, "lat": 39.962120000000006, "lon": -75.17641},
-      {"name": "5.0K (3.1 mi)", "miles": 3.10686, "lat": 39.93455, "lon": -75.14326},
-      {"name": "10.0K (6.2 mi)", "miles": 6.21372, "lat": 39.95436, "lon": -75.18098},
-      {"name": "15.0K (9.3 mi)", "miles": 9.32058, "lat": 39.97883, "lon": -75.20318},
-      {"name": "20.0K (12.4 mi)", "miles": 12.42744, "lat": 40.00112, "lon": -75.20484},
-      {"name": "25.0K (15.5 mi)", "miles": 15.5343, "lat": 40.02411, "lon": -75.21970},
-      {"name": "30.0K (18.6 mi)", "miles": 18.64116, "lat": 40.00908, "lon": -75.19692},
-      {"name": "35.0K (21.7 mi)", "miles": 21.74802, "lat": 39.98709, "lon": -75.20074},
-      {"name": "42.2K (Finish)", "miles": 26.2, "lat": 39.96396, "lon": -75.17726}
-    ];
-
-    const OPTION3_STATIONS = [
-      {"name": "Mile 0 (Start)", "miles": 0, "lat": 39.962120000000006, "lon": -75.17641},
-      {"name": "Aid 1 (2.3mi)", "miles": 2.3, "lat": 39.95328878826027, "lon": -75.14007940619219},
-      {"name": "Aid 2 (3.7mi)", "miles": 3.7, "lat": 39.93349954347537, "lon": -75.14380023697072},
-      {"name": "Aid 3 (5.1mi)", "miles": 5.1, "lat": 39.94682633775574, "lon": -75.1513768255921},
-      {"name": "Aid 4 (7.1mi)", "miles": 7.1, "lat": 39.95340381105215, "lon": -75.18428635735891},
-      {"name": "Aid 5 (8.5mi)", "miles": 8.5, "lat": 39.96837418476066, "lon": -75.1926544176862},
-      {"name": "Aid 6 (10.2mi)", "miles": 10.2, "lat": 39.98012063714047, "lon": -75.2136684863924},
-      {"name": "Aid 7 (11.8mi)", "miles": 11.8, "lat": 39.9799695771364, "lon": -75.20644},
-      {"name": "Aid 8 (14.4mi)", "miles": 14.4, "lat": 39.96735805301819, "lon": -75.18135690230305},
-      {"name": "Aid 9A (16.2mi)", "miles": 16.2, "lat": 39.98468227046648, "lon": -75.20309966931039},
-      {"name": "Aid 10A (17.8mi)", "miles": 17.8, "lat": 40.004297874514286, "lon": -75.1907766898945},
-      {"name": "Aid 11A (18.9mi)", "miles": 18.9, "lat": 40.013236188052694, "lon": -75.20666064802874},
-      {"name": "Aid 12A (19.8mi)", "miles": 19.8, "lat": 40.02167993524602, "lon": -75.2175101067689},
-      {"name": "Aid 12B (20.2mi)", "miles": 20.2, "lat": 40.025376716106926, "lon": -75.22323087700566},
-      {"name": "Aid 11B (21.3mi)", "miles": 21.3, "lat": 40.01689770265348, "lon": -75.2126331857505},
-      {"name": "Mile 26 (Finish)", "miles": 26.2, "lat": 39.96396, "lon": -75.17726}
-    ];
-
-    const CORRAL_DATA = [
-      { label: "Pushrim Wheelchairs", time: "06:55", minutes: 6*60+55 },
-      { label: "Corral A (2:06-2:59)", time: "07:00", minutes: 7*60 },
-      { label: "Corral B (3:00-3:29)", time: "07:10", minutes: 7*60+10 },
-      { label: "Corral C (3:30-3:44)", time: "07:10", minutes: 7*60+10 },
-      { label: "Corral D (3:45-3:59)", time: "07:20", minutes: 7*60+20 },
-      { label: "Corral E (4:00)", time: "07:20", minutes: 7*60+20 },
-      { label: "Corral F (4:00-4:30)", time: "07:30", minutes: 7*60+30 },
-      { label: "Corral G (4:30-4:59)", time: "07:30", minutes: 7*60+30 },
-      { label: "Corral H (5:00-7:00)", time: "07:40", minutes: 7*60+40 }
-    ];
-
-    // ============================================================
-    // STATE & CONFIG
-    // ============================================================
-    const raceConfig = {
-      raceName: "AACR Philadelphia Marathon",
-      raceDate: new Date("2025-11-23T07:00:00-05:00"),
-      timezone: "America/New_York"
-    };
-
-    let currentStationSet = 'option3'; // default to aid stations
-    let allStations = {
-      option1: OPTION1_STATIONS,
-      option2: OPTION2_STATIONS,
-      option3: OPTION3_STATIONS
-    };
-    let raceConfig_stations = OPTION3_STATIONS;
-    let stationChanged = false;
-
-    const map = L.map("map").setView([39.962, -75.176], 11);
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution: '© OpenStreetMap contributors',
-      maxZoom: 19
-    }).addTo(map);
-
-    let markers = [];
-    let groupList = [];
-    let currentHighlightIndices = new Set();
-    let elevChart = null;
-
-    // ============================================================
-    // HELPERS
-    // ============================================================
-    function haversineMi(from, to) {
-      const R = 3959;
-      const lat1 = from[0] * Math.PI / 180;
-      const lat2 = to[0] * Math.PI / 180;
-      const dLat = (to[0] - from[0]) * Math.PI / 180;
-      const dLon = (to[1] - from[1]) * Math.PI / 180;
-      const a = Math.sin(dLat/2)**2 + Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLon/2)**2;
-      return R * 2 * Math.asin(Math.sqrt(a));
-    }
-
-    function formatElapsedFromMinutes(mins) {
-      const h = Math.floor(mins / 60);
-      const m = Math.floor(mins % 60);
-      return `${h}:${m.toString().padStart(2, '0')}`;
-    }
-
-    function paceMinPerMiFromUI() {
-      const min = parseInt(document.getElementById("paceMin").value) || 0;
-      const sec = parseInt(document.getElementById("paceSec").value) || 0;
-      return min + sec / 60;
-    }
-
-    // ============================================================
-    // BUILD MAP AND CHART
-    // ============================================================
-    function buildMap() {
-      // Clear existing markers
-      markers.forEach(m => map.removeLayer(m));
-      markers = [];
-      groupList = [];
-
-      // Draw route
-      const line = L.polyline(PHILLY_ROUTE, {color: "#000", weight: 3}).addTo(map);
-      map.fitBounds(line.getBounds());
-
-      // Group stations by lat/lon
-      const groupsByKey = {};
-      raceConfig_stations.forEach((s, idx) => {
-        const key = `${s.lat},${s.lon}`;
-        if (!groupsByKey[key]) groupsByKey[key] = { lat:s.lat, lon:s.lon, indices:[] };
-        groupsByKey[key].indices.push(idx);
-      });
-      groupList = Object.values(groupsByKey);
-
-      const blazeIcon = L.divIcon({ className:"", html:'<div class="blaze-dot"></div>', iconSize:[20,20], iconAnchor:[10,10] });
-      groupList.forEach((g) => {
-        const marker = L.marker([g.lat, g.lon], { icon: blazeIcon }).addTo(map);
-        g.marker = marker;
-        markers.push(marker);
-      });
-    }
-
-    function buildElevationChart() {
-      // Calculate distances for elevation profile
-      const distances = [0];
-      for(let i = 1; i < PHILLY_ROUTE.length; i++) {
-        distances[i] = distances[i-1] + haversineMi(PHILLY_ROUTE[i-1], PHILLY_ROUTE[i]);
-      }
-      
-      const elevations = distances.map(() => 50 + Math.random() * 100); // placeholder
-
-      const ctx = document.getElementById("elevationChart").getContext("2d");
-      if (elevChart) elevChart.destroy();
-      
-      elevChart = new Chart(ctx, {
-        type: "line",
-        data: {
-          labels: distances.map(d => d.toFixed(1)),
-          datasets: [{
-            label: "Elevation (ft)",
-            data: elevations,
-            borderColor: "#003546",
-            backgroundColor: "rgba(0,53,70,0.1)",
-            fill: true,
-            tension: 0.4,
-            pointRadius: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          scales: {
-            y: { beginAtZero: true },
-            x: { display: true }
-          }
-        }
-      });
-    }
-
-    // ============================================================
-    // STATION FREQUENCY TOGGLE
-    // ============================================================
-    document.querySelectorAll('input[name="stationFreq"]').forEach(radio => {
-      radio.addEventListener('change', (e) => {
-        const oldSet = currentStationSet;
-        currentStationSet = e.target.value;
-        raceConfig_stations = allStations[currentStationSet];
-        
-        if (oldSet !== currentStationSet) {
-          stationChanged = true;
-          document.getElementById("paceGo").disabled = true;
-          document.getElementById("toggleNote").textContent = "⚠ Station frequency changed. Please regenerate forecast.";
-          document.getElementById("forecastBody").innerHTML = "";
-        }
-        
-        buildMap();
-        buildElevationChart();
-      });
-    });
-
-    // ============================================================
-    // INITIALIZE UI
-    // ============================================================
-    document.addEventListener("DOMContentLoaded", () => {
-      // Countdown
-      const now = new Date();
-      const daysLeft = Math.ceil((raceConfig.raceDate - now) / (1000 * 60 * 60 * 24));
-      document.getElementById("countdown").textContent = `${daysLeft} days away`;
-
-      // Populate corral dropdown
-      const corralSelect = document.getElementById("corralSelect");
-      CORRAL_DATA.forEach(c => {
-        const opt = document.createElement("option");
-        opt.value = c.minutes * 60; // seconds
-        opt.textContent = `${c.label} (${c.time})`;
-        corralSelect.appendChild(opt);
-      });
-
-      // Populate pace dropdowns
-      const paceMinSelect = document.getElementById("paceMin");
-      const paceSecSelect = document.getElementById("paceSec");
-      for(let m = 6; m <= 12; m++) {
-        const opt = document.createElement("option");
-        opt.value = m;
-        opt.textContent = m;
-        paceMinSelect.appendChild(opt);
-      }
-      for(let s = 0; s < 60; s += 15) {
-        const opt = document.createElement("option");
-        opt.value = s;
-        opt.textContent = s.toString().padStart(2, '0');
-        paceSecSelect.appendChild(opt);
-      }
-      paceMinSelect.value = 9;
-      paceSecSelect.value = 0;
-
-      // Build map and chart
-      buildMap();
-      buildElevationChart();
-
-      // Forecast button
-      document.getElementById("paceGo").addEventListener("click", async () => {
-        stationChanged = false;
-        document.getElementById("toggleNote").textContent = "";
-        document.getElementById("paceGo").disabled = false;
-        await updateForecasts();
-      });
-    });
-
-    async function updateForecasts() {
-      const tbody = document.getElementById("forecastBody");
-      tbody.innerHTML = "";
-
-      const pace = paceMinPerMiFromUI();
-      const startTimeSeconds = parseInt(document.getElementById("corralSelect").value);
-      const startTime = new Date(raceConfig.raceDate.getTime() + startTimeSeconds * 1000);
-      
-      for (const s of raceConfig_stations) {
-        const elapsedStr = formatElapsedFromMinutes(s.miles * pace);
-        const eta = new Date(startTime.getTime() + s.miles * pace * 60000);
-        const timeStr = eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
-        
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${s.name}</td>
-          <td>${s.miles.toFixed(2)} mi</td>
-          <td>${elapsedStr}</td>
-          <td>${timeStr}</td>
-          <td>—</td>
-          <td>—</td>
-          <td>Forecast ready</td>`;
-        tbody.appendChild(row);
-      }
-    }
-
-    // Row highlighting
-    document.addEventListener("DOMContentLoaded", () => {
-      const tbody = document.getElementById("forecastBody");
-      if (tbody) {
-        tbody.addEventListener("pointerup", (e) => {
-          const tr = e.target.closest("tr");
-          if (!tr) return;
-          const was = tr.classList.contains("highlight-row");
-          tbody.querySelectorAll("tr").forEach(r => r.classList.remove("highlight-row"));
-          if (!was) tr.classList.add("highlight-row");
-        }, { passive: true });
-      }
-    });
-  </script>
 </body>
+
+<!-- ============ CONFIG ============ -->
+<script>
+const MAPBOX_TOKEN = "pk.eyJ1IjoiZGlsbG9uZHVyaW5pY2siLCJhIjoiY21memtlbm83MDNycTJtb3JtdGxucWpkMiJ9.W7Ge6XYCd0Gfl9f7YQ2dNw";
+
+const raceConfig = {
+  name: "AACR Philadelphia Marathon",
+  date: new Date("2025-11-23T07:00:00-05:00"),
+  city: "Philadelphia, PA",
+  climoStationId: "KPHL",
+  climoStationName: "Philadelphia International Airport",
+  climoBaseUrl: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/",
+  routeUrl: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/2025_Philly_Route.json",
+  stationUrls: {
+    option1: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/2025_Philly_Stations_Option1.json",
+    option2: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/2025_Philly_Stations_Option2.json",
+    option3: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/2025_Philly_Stations_Option3.json"
+  },
+  multiDaySpan: 1,
+  elevationZoom: 13,
+  route: null,
+  stations: null
+};
+</script>
+
+<!-- ============ COUNTDOWN ============ -->
+<script>
+function updateCountdown() {
+  const diff = raceConfig.date - new Date();
+  const el = document.getElementById("countdown");
+  const raceDateStr = raceConfig.date.toLocaleString([], { month:"long", day:"numeric", year:"numeric" });
+  if (diff <= 0) { el.textContent = `${raceDateStr} (Today)`; return; }
+  
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  
+  let countdownText = "";
+  if (days > 0) {
+    countdownText = `${days} ${days === 1 ? 'Day' : 'Days'}`;
+  }
+  if (hours > 0 || days > 0) {
+    if (days > 0) countdownText += " and ";
+    countdownText += `${hours} ${hours === 1 ? 'Hour' : 'Hours'}`;
+  }
+  countdownText += " Until Race Day";
+  
+  el.textContent = `${raceDateStr} (${countdownText})`;
+}
+setInterval(updateCountdown, 60000);
+updateCountdown();
+</script>
+
+<!-- ============ PACE & UI CONTROLS ============ -->
+<script>
+function paceMinPerMiFromUI(){
+  const m = Number(document.getElementById('paceMin').value) || 0;
+  const s = Number(document.getElementById('paceSec').value) || 0;
+  return m + s/60;
+}
+function formatElapsedFromMinutes(mins){
+  const totalSeconds = Math.round(mins * 60);
+  const h = Math.floor(totalSeconds / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
+  const s = totalSeconds % 60;
+  return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+// Initialize pace dropdowns
+(function initPace(){
+  const mins=document.getElementById('paceMin'), secs=document.getElementById('paceSec');
+  for(let m=4;m<=30;m++){ let o=document.createElement('option'); o.value=m; o.textContent=m; mins.appendChild(o); }
+  for(let s=0;s<60;s++){ let o=document.createElement('option'); o.value=s; o.textContent=String(s).padStart(2,'0'); secs.appendChild(o); }
+  mins.value=9; secs.value=0;
+})();
+
+// Step 1: Station selection
+document.getElementById('stationSelect').addEventListener('change', async function() {
+  const option = this.value;
+  if (!option) return;
+  
+  // Enable Step 2
+  const waveSelect = document.getElementById('waveSelect');
+  waveSelect.disabled = false;
+  waveSelect.innerHTML = `
+    <option value="06:55">6:55 AM - Push Rim Wheelchair Athletes</option>
+    <option value="07:00" selected>7:00 AM - Corrals A & B</option>
+    <option value="07:10">7:10 AM - Corrals C & D</option>
+    <option value="07:20">7:20 AM - Corrals E & F</option>
+    <option value="07:30">7:30 AM - Corrals G & H</option>
+    <option value="custom">Custom Start Time</option>
+  `;
+  
+  // Load station data
+  try {
+    const res = await fetch(raceConfig.stationUrls[option]);
+    raceConfig.stations = await res.json();
+    console.log(`Loaded ${raceConfig.stations.length} stations for ${option}`);
+    
+    // Redraw markers if map is ready
+    if (window.mapReady) {
+      redrawMarkers();
+    }
+  } catch(e) {
+    console.error('Failed to load stations:', e);
+  }
+  
+  checkAllStepsComplete();
+});
+
+// Step 2: Wave/Corral selection
+document.getElementById('waveSelect').addEventListener('change', function() {
+  const customInput = document.getElementById('customTimeInput');
+  if (this.value === 'custom') {
+    customInput.style.display = 'inline-block';
+    customInput.value = '07:00';
+  } else {
+    customInput.style.display = 'none';
+    const [hh, mm] = this.value.split(':').map(Number);
+    const base = new Date(raceConfig.date);
+    base.setHours(hh, mm, 0, 0);
+    raceConfig.date = base;
+  }
+  
+  // Enable Step 3
+  document.getElementById('paceMin').disabled = false;
+  document.getElementById('paceSec').disabled = false;
+  
+  checkAllStepsComplete();
+});
+
+document.getElementById('customTimeInput').addEventListener('change', function() {
+  const [hh, mm] = this.value.split(':').map(Number);
+  const base = new Date("2025-11-23T00:00:00-05:00");
+  base.setHours(hh, mm, 0, 0);
+  raceConfig.date = base;
+  checkAllStepsComplete();
+});
+
+// Step 3: Pace selection
+document.getElementById('paceMin').addEventListener('change', checkAllStepsComplete);
+document.getElementById('paceSec').addEventListener('change', checkAllStepsComplete);
+
+function checkAllStepsComplete() {
+  const step1 = document.getElementById('stationSelect').value !== '';
+  const step2 = document.getElementById('waveSelect').value !== '';
+  const step3 = document.getElementById('paceMin').value !== '--';
+  
+  const goBtn = document.getElementById('paceGo');
+  const confirmEl = document.getElementById('paceConfirm');
+  
+  if (step1 && step2 && step3) {
+    goBtn.disabled = false;
+    confirmEl.textContent = 'Ready to generate forecast!';
+    confirmEl.classList.remove('success');
+  } else {
+    goBtn.disabled = true;
+    let msg = 'Complete ';
+    const missing = [];
+    if (!step1) missing.push('step 1');
+    if (!step2) missing.push('step 2');
+    if (!step3) missing.push('step 3');
+    msg += missing.join(', ');
+    confirmEl.textContent = msg;
+    confirmEl.classList.remove('success');
+  }
+}
+
+// Step 4: Generate forecast
+document.getElementById('paceGo').addEventListener('click', async function() {
+  const paceBox = document.getElementById('paceBox');
+  const goBtn = this;
+  const confirmEl = document.getElementById('paceConfirm');
+  
+  // Disable all controls
+  paceBox.classList.add('loading');
+  goBtn.disabled = true;
+  
+  // Show loading state
+  const originalText = goBtn.textContent;
+  goBtn.innerHTML = 'Generating Forecast<span class="spinner"></span>';
+  
+  try {
+    await updateForecasts();
+    
+    // Success message
+    const paceM = String(document.getElementById('paceMin').value).padStart(2,"0");
+    const paceS = String(document.getElementById('paceSec').value).padStart(2,"0");
+    const startTimeStr = raceConfig.date.toLocaleTimeString([], { hour:"numeric", minute:"2-digit" }).toLowerCase();
+    
+    confirmEl.textContent = `Forecast generated! Start: ${startTimeStr} | Pace: ${paceM}:${paceS} min/mi`;
+    confirmEl.classList.add('success');
+  } catch(e) {
+    confirmEl.textContent = 'Error generating forecast. Please try again.';
+    confirmEl.style.color = '#d00';
+  } finally {
+    // Re-enable controls
+    goBtn.innerHTML = originalText;
+    goBtn.disabled = false;
+    paceBox.classList.remove('loading');
+  }
+});
+</script>
+
+<!-- ============ CLIMATOLOGY (date-driven) ============ -->
+<script>
+function monthName(d){ return d.toLocaleString('en-US', { month:'long' }); }
+function climoFilenameFor(dateObj){ const mn = monthName(dateObj); const day = dateObj.getDate(); return `${mn}_${day}_Climate.json`; }
+function shortMonthDay(d){ return d.toLocaleString('en-US', { month:'short', day:'numeric' }); }
+
+function populateClimoTable(data, bodyEl, avgRowEl){
+  bodyEl.innerHTML = "";
+  let sumMax=0, sumMin=0, sumP=0, n=0;
+  data.forEach(row => {
+    const max = Number(row.max), min = Number(row.min);
+    let precipDisplay, precipValue;
+    if (row.precip === "T" || row.precip === "t") {
+      precipDisplay = "T";
+      precipValue = 0;
+    } else {
+      precipValue = Number(row.precip);
+      precipDisplay = isNaN(precipValue) ? "—" : precipValue.toFixed(2);
+    }
+    
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${row.year}</td>
+      <td>${isNaN(max) ? "—" : max.toFixed(1)}</td>
+      <td>${isNaN(min) ? "—" : min.toFixed(1)}</td>
+      <td>${precipDisplay}</td>
+      <td>${row.conditions || "—"}</td>`;
+    bodyEl.appendChild(tr);
+    if(!isNaN(max)) sumMax+=max;
+    if(!isNaN(min)) sumMin+=min;
+    if(!isNaN(precipValue)) sumP+=precipValue;
+    n++;
+  });
+  if(n>0){
+    avgRowEl.innerHTML = `<td>Averages</td>
+      <td>${(sumMax/n).toFixed(1)}</td>
+      <td>${(sumMin/n).toFixed(1)}</td>
+      <td>${(sumP/n).toFixed(2)}</td>
+      <td>—</td>`;
+  }
+}
+
+function buildClimoPanel(panelId){
+  const panel = document.createElement('div');
+  panel.className = 'climoPanel';
+  panel.id = panelId;
+  panel.innerHTML = `
+    <table>
+      <thead><tr>
+        <th>Year</th><th>Max Temp (°F)</th><th>Min Temp (°F)</th>
+        <th>Precipitation (")</th><th>Conditions</th>
+      </tr></thead>
+      <tbody class="climoBody"></tbody>
+      <tfoot><tr id="climoAvgRow"><td>Averages</td><td>—</td><td>—</td><td>—</td><td>—</td></tr></tfoot>
+    </table>
+    <div class="note climoNote"></div>`;
+  return panel;
+}
+
+async function loadClimatology() {
+  const start = new Date(raceConfig.date);
+  const span = Math.max(1, Number(raceConfig.multiDaySpan) || 1);
+
+  const climoTitle = document.getElementById('climoTitle');
+  const raceDateStr = start.toLocaleDateString([], { month:"long", day:"numeric" });
+  climoTitle.textContent = `Climatology – ${raceDateStr} – ${raceConfig.city}`;
+
+  const tabs = document.getElementById('climoTabs');
+  const panels = document.getElementById('climoPanels');
+  tabs.innerHTML = ""; panels.innerHTML = "";
+
+  const tabButtons = [];
+  for (let i = 0; i < span; i++) {
+    const d = new Date(start.getTime() + i*24*60*60*1000);
+    const tab = document.createElement('button');
+    tab.className = 'climoTab';
+    tab.dataset.dayIndex = String(i);
+    tab.textContent = shortMonthDay(d);
+    tabButtons.push(tab);
+    tabs.appendChild(tab);
+
+    const panel = buildClimoPanel(`climoPanel_${i}`);
+    panels.appendChild(panel);
+  }
+
+  if (span === 1) { tabs.style.display = 'none'; }
+
+  function activate(idx){
+    panels.querySelectorAll('.climoPanel').forEach(p => p.classList.remove('active'));
+    tabButtons.forEach(b => b.classList.remove('active'));
+    const p = document.getElementById(`climoPanel_${idx}`);
+    if (p) p.classList.add('active');
+    if (span>1 && tabButtons[idx]) tabButtons[idx].classList.add('active');
+  }
+  if (span>1) tabButtons.forEach((btn,i)=>btn.addEventListener('click',()=>activate(i)));
+  activate(0);
+
+  for (let i=0; i<span; i++){
+    const d = new Date(start.getTime() + i*24*60*60*1000);
+    const file = climoFilenameFor(d);
+    const url = raceConfig.climoBaseUrl + file;
+
+    const panel = document.getElementById(`climoPanel_${i}`);
+    const bodyEl = panel.querySelector('.climoBody');
+    const avgRowEl = panel.querySelector('#climoAvgRow');
+    const noteEl = panel.querySelector('.climoNote');
+
+    noteEl.textContent = `10-year climatology (2015-2024) from KPHL (Philadelphia International Airport). The airport is 7 miles southwest of the Art Museum start. Weather conditions can vary across the course and from year to year.`;
+
+    try{
+      const res = await fetch(url);
+      if(!res.ok) throw new Error("bad climo response");
+      const data = await res.json();
+      populateClimoTable(data, bodyEl, avgRowEl);
+    }catch(err){
+      console.error('Climo load failed:', file, err);
+      bodyEl.innerHTML = `<tr><td colspan="5">Climatology data unavailable for ${shortMonthDay(d)}</td></tr>`;
+    }
+  }
+}
+document.addEventListener('DOMContentLoaded', loadClimatology);
+</script>
+
+<!-- ============ TERRAIN + ELEVATION ============ -->
+<script>
+function latLonToTileXY(lat, lon, z){
+  const x = Math.floor((lon + 180) / 360 * Math.pow(2, z));
+  const y = Math.floor((1 - Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180)) / Math.PI) / 2 * Math.pow(2, z));
+  return {x,y};
+}
+function latLonToPixelXYInTile(lat, lon, z, tileSize=256){
+  const n = Math.pow(2, z);
+  const xtile = (lon + 180) / 360 * n;
+  const latRad = lat * Math.PI/180;
+  const ytile = (1 - Math.log(Math.tan(latRad) + 1/Math.cos(latRad)) / Math.PI) / 2 * n;
+  const px = Math.floor((xtile - Math.floor(xtile)) * tileSize);
+  const py = Math.floor((ytile - Math.floor(ytile)) * tileSize);
+  return {px, py};
+}
+function decodeTerrainRGB(r,g,b){ return -10000 + (r*256*256 + g*256 + b) * 0.1; }
+
+const tileCache = new Map();
+async function getTileImageData(z,x,y){
+  const key = `${z}/${x}/${y}`;
+  if (tileCache.has(key)) return tileCache.get(key);
+  const url = `https://api.mapbox.com/v4/mapbox.terrain-rgb/${z}/${x}/${y}.pngraw?access_token=${MAPBOX_TOKEN}`;
+  const img = new Image(); img.crossOrigin = 'anonymous';
+  const loaded = new Promise((res,rej)=>{ img.onload=()=>res(); img.onerror=(e)=>rej(e); });
+  img.src = url; await loaded;
+  const canvas = document.createElement('canvas'); canvas.width=256; canvas.height=256;
+  const ctx = canvas.getContext('2d'); ctx.drawImage(img,0,0);
+  const imageData = ctx.getImageData(0,0,256,256);
+  const record = { imageData }; tileCache.set(key, record); return record;
+}
+async function getElevationMetersAt(lat, lon, z){
+  const {x,y} = latLonToTileXY(lat, lon, z);
+  const {px,py} = latLonToPixelXYInTile(lat, lon, z, 256);
+  try{
+    const { imageData } = await getTileImageData(z,x,y);
+    const idx = (py*256 + px) * 4;
+    const r = imageData.data[idx], g = imageData.data[idx+1], b = imageData.data[idx+2];
+    return decodeTerrainRGB(r,g,b);
+  }catch(e){ return null; }
+}
+function haversineMi(a,b){
+  const R=3958.7613; const toRad=x=>x*Math.PI/180;
+  const dLat=toRad(b[0]-a[0]); const dLon=toRad(b[1]-a[1]); const la1=toRad(a[0]);
+  const h=Math.sin(dLat/2)**2+Math.cos(la1)*Math.cos(toRad(b[0]))*Math.sin(dLon/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h));
+}
+
+let elevChart = null, profileDistances = [], profileElevations = [], currentHighlightIndices = new Set();
+function elevationAtMile(mile) {
+  if (!profileDistances.length) return null;
+  for (let i=1;i<profileDistances.length;i++) {
+    if (profileDistances[i] >= mile) {
+      const d0 = profileDistances[i-1], d1 = profileDistances[i];
+      const e0 = profileElevations[i-1], e1 = profileElevations[i-1] == null ? null : profileElevations[i];
+      if (e0==null || e1==null) return null;
+      const t = (mile-d0)/(d1-d0);
+      return e0 + t*(e1-e0);
+    }
+  }
+  return profileElevations[profileElevations.length-1];
+}
+async function buildElevationProfile(routeCoords, z){
+  const fullDistances = [0];
+  for(let i=1;i<routeCoords.length;i++) fullDistances[i] = fullDistances[i-1] + haversineMi(routeCoords[i-1], routeCoords[i]);
+  const sampled = [], sampledDistances = [];
+  for (let i=0;i<routeCoords.length;i+=10){ sampled.push(routeCoords[i]); sampledDistances.push(fullDistances[i]); }
+  if (sampled[sampled.length-1] !== routeCoords[routeCoords.length-1]) {
+    sampled.push(routeCoords[routeCoords.length-1]);
+    sampledDistances.push(fullDistances[fullDistances.length-1]);
+  }
+  const meters=[];
+  for (const [lat,lon] of sampled){ meters.push(await getElevationMetersAt(lat,lon,z)); }
+  const feet = meters.map(m => (m!=null ? m*3.28084 : null));
+  return { distances: sampledDistances, elevations: feet, sampled };
+}
+function buildElevationChart(distances, elevations, stations){
+  const ctx = document.getElementById('elevationChart').getContext('2d');
+  if(elevChart) elevChart.destroy();
+  profileDistances = distances; profileElevations = elevations;
+  const stationPoints = stations.map(s => ({ x: s.miles, y: elevationAtMile(s.miles) }));
+  elevChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      datasets: [
+        { label:'Elevation', data: profileDistances.map((d,i)=>({x:d,y:elevations[i]})), parsing:false, borderColor:'#000', pointRadius:0, borderWidth:1.5, fill:false, tension:0.1 },
+        {
+          label:'Stations', type:'scatter', data: stationPoints, parsing:false, pointRadius:6, hoverRadius:10, hitRadius:12,
+          pointBackgroundColor: (c) => {
+            const idx = c.dataIndex;
+            return (elevChart && currentHighlightIndices.has(idx))
+              ? getComputedStyle(document.documentElement).getPropertyValue('--highlight').trim() || '#FF6700'
+              : getComputedStyle(document.documentElement).getPropertyValue('--blaze').trim() || '#37BC7D';
+          },
+          pointBorderColor:'#222', pointBorderWidth:1
+        }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      layout: { padding: { left: 0, right: 0, top: 0, bottom: 0 } },
+      plugins: {
+        legend: { display:false },
+        tooltip: {
+          enabled:true, filter: ctx => ctx.datasetIndex === 1,
+          callbacks: {
+            title: (ctx) => {
+              const station = stations[ctx[0].dataIndex];
+              return `${station.name} – Mile ${station.miles.toFixed(1)}`;
+            },
+            label: (ctx) => {
+              const station = stations[ctx.dataIndex];
+              const pace = paceMinPerMiFromUI();
+              const elapsed = formatElapsedFromMinutes(station.miles * pace);
+              if (station.forecasts && station.forecasts.length) {
+                return station.forecasts.map(f => [
+                  `Elapsed: ${elapsed}`,
+                  `ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}`,
+                  `Temp: ${f.temp}`, `Wind: ${f.wind}`, `Conditions: ${f.cond}`
+                ]).flat();
+              }
+              return [`Elapsed: ${elapsed}`, "Forecast: —"];
+            }
+          },
+          backgroundColor:'#fff',
+          borderColor: getComputedStyle(document.documentElement).getPropertyValue('--highlight').trim() || '#FF6700',
+          borderWidth:2, titleColor:'#111', bodyColor:'#111', padding:8, displayColors:false
+        }
+      },
+      interaction: { mode:'point', intersect:true },
+      onHover: (event, elements) => {
+        const canvas = event.chart.canvas;
+        if (elements.length > 0 && elements[0].datasetIndex === 1) {
+          canvas.style.cursor = 'pointer';
+          const idx = elements[0].index;
+          highlightByStationIndex(idx);
+        } else {
+          canvas.style.cursor = 'default';
+          clearHighlights();
+          event.chart.tooltip.setActiveElements([], {x:0,y:0});
+          event.chart.update();
+        }
+      },
+      scales: {
+        x: { type:'linear', title:{ display:true, text:'Distance (mi)' }, min:0, max:26.2 },
+        y: { title:{ display:true, text:'Elevation (ft)' }, ticks:{ autoSkip:true, maxTicksLimit:6 } }
+      }
+    }
+  });
+  ctx.canvas.addEventListener("mouseleave", () => {
+    if (elevChart) {
+      elevChart.tooltip.setActiveElements([], {x:0,y:0});
+      elevChart.update();
+      clearHighlights();
+    }
+  });
+}
+</script>
+
+<!-- ============ MAP + MARKERS + FORECASTS ============ -->
+<script>
+async function getNOAAForecast(lat, lon, targetDate) {
+  try {
+    const pointRes = await fetch(`https://api.weather.gov/points/${lat},${lon}`);
+    const pointData = await pointRes.json();
+    const fRes = await fetch(pointData.properties.forecastHourly);
+    const fData = await fRes.json();
+    const periods=fData?.properties?.periods||[];
+    if (!periods.length) return null;
+    return periods.reduce((p,c)=>
+      Math.abs(new Date(c.startTime)-targetDate) < Math.abs(new Date(p.startTime)-targetDate) ? c : p
+    );
+  } catch { return null; }
+}
+
+async function getOpenMeteoForecast(lat, lon, targetDate) {
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,wind_speed_10m,wind_direction_10m,weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto`;
+    const res = await fetch(url);
+    const data = await res.json();
+    
+    if (!data.hourly || !data.hourly.time) return null;
+    
+    const times = data.hourly.time.map(t => new Date(t));
+    let closestIdx = 0;
+    let minDiff = Math.abs(times[0] - targetDate);
+    
+    for (let i = 1; i < times.length; i++) {
+      const diff = Math.abs(times[i] - targetDate);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIdx = i;
+      }
+    }
+    
+    const weatherCode = data.hourly.weather_code[closestIdx];
+    const weatherDescriptions = {
+      0: "Clear", 1: "Mainly Clear", 2: "Partly Cloudy", 3: "Overcast",
+      45: "Foggy", 48: "Depositing Rime Fog",
+      51: "Light Drizzle", 53: "Moderate Drizzle", 55: "Dense Drizzle",
+      56: "Light Freezing Drizzle", 57: "Dense Freezing Drizzle",
+      61: "Slight Rain", 63: "Moderate Rain", 65: "Heavy Rain",
+      66: "Light Freezing Rain", 67: "Heavy Freezing Rain",
+      71: "Slight Snow", 73: "Moderate Snow", 75: "Heavy Snow",
+      77: "Snow Grains",
+      80: "Slight Rain Showers", 81: "Moderate Rain Showers", 82: "Violent Rain Showers",
+      85: "Slight Snow Showers", 86: "Heavy Snow Showers",
+      95: "Thunderstorm", 96: "Thunderstorm with Slight Hail", 99: "Thunderstorm with Heavy Hail"
+    };
+    
+    const temp = data.hourly.temperature_2m[closestIdx];
+    const windSpeed = data.hourly.wind_speed_10m[closestIdx];
+    const windDir = data.hourly.wind_direction_10m[closestIdx];
+    const windDirCardinal = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.round(windDir / 22.5) % 16];
+    
+    return {
+      temperature: Math.round(temp),
+      windSpeed: `${Math.round(windSpeed)} mph`,
+      windDirection: windDirCardinal,
+      shortForecast: weatherDescriptions[weatherCode] || "Unknown"
+    };
+  } catch (err) {
+    console.error('OpenMeteo error:', err);
+    return null;
+  }
+}
+
+function bindMarkerTooltip(marker) {
+  marker.bindTooltip("", { direction: "auto", offset: [0, -10], opacity: 0.95, className: "pp-tooltip", sticky: false, autoPan: true });
+}
+
+const map = L.map('map', {
+  keyboard: false,
+  scrollWheelZoom: false,
+  touchZoom: 'center',
+  zoomControl: true,
+  dragging: true
+}).setView([39.9652, -75.1800], 12);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+
+let markers = [];
+let groupList = [];
+let stationIndexToGroup = [];
+window.mapReady = false;
+
+function applyMarkerHighlights(activeGroupIdx){
+  markers.forEach((m,i)=>{ const dot = m.getElement()?.querySelector('.blaze-dot'); if (dot) dot.classList.toggle("highlighted", i === activeGroupIdx); });
+}
+function applyChartHighlights(indices){
+  currentHighlightIndices = new Set(indices);
+  if (elevChart){ elevChart.setActiveElements(indices.map(i=>({datasetIndex:1,index:i}))); elevChart.update(); }
+}
+function highlightByStationIndex(stationIdx){
+  const gIdx = stationIndexToGroup[stationIdx];
+  applyMarkerHighlights(gIdx);
+  applyChartHighlights([stationIdx]);
+}
+function highlightByGroupIndex(groupIdx){
+  const indices = groupList[groupIdx].indices;
+  applyMarkerHighlights(groupIdx);
+  applyChartHighlights(indices);
+}
+function clearHighlights(){
+  currentHighlightIndices.clear();
+  markers.forEach(m=>m.getElement()?.querySelector('.blaze-dot')?.classList.remove("highlighted"));
+  if(elevChart){ elevChart.setActiveElements([]); elevChart.update(); }
+}
+const blazeIcon = L.divIcon({ className:"", html:'<div class="blaze-dot"></div>', iconSize:[20,20], iconAnchor:[10,10] });
+
+function tooltipLinesMapGroup(g, stations) {
+  let html = "";
+  g.indices.forEach((i, idx) => {
+    const s = stations[i];
+    if (idx > 0) html += `<hr style="margin:6px 0;">`
+    const pace = paceMinPerMiFromUI();
+    const elapsed = formatElapsedFromMinutes(s.miles * pace);
+    html += `<div style="margin-bottom:6px;">
+      <strong>${s.name} – Mile ${s.miles.toFixed(1)}</strong><br>`;
+    if (s.forecasts && s.forecasts.length) {
+      s.forecasts.forEach(f => {
+        html += `Elapsed: ${elapsed}<br>
+                 ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}<br>
+                 Temp: ${f.temp}<br>
+                 Wind: ${f.wind}<br>
+                 Conditions: ${f.cond}<br>`;
+      });
+    } else {
+      html += `Elapsed: ${elapsed}<br>Forecast: —<br>`;
+    }
+    html += `</div>`;
+  });
+  return html;
+}
+
+function redrawMarkers() {
+  // Clear existing markers
+  markers.forEach(m => m.remove());
+  markers = [];
+  groupList = [];
+  stationIndexToGroup = [];
+  
+  if (!raceConfig.stations) return;
+  
+  // Group stations by lat/lon
+  const groupsByKey = {};
+  raceConfig.stations.forEach((s, idx) => {
+    const key = `${s.lat},${s.lon}`;
+    if (!groupsByKey[key]) groupsByKey[key] = { lat:s.lat, lon:s.lon, indices:[] };
+    groupsByKey[key].indices.push(idx);
+  });
+  groupList = Object.values(groupsByKey);
+  
+  // Place markers
+  groupList.forEach((g, gIdx) => {
+    g.indices.forEach(stIdx => { stationIndexToGroup[stIdx] = gIdx; });
+    const marker = L.marker([g.lat, g.lon], { icon: blazeIcon }).addTo(map);
+    g.marker = marker;
+    markers.push(marker);
+    bindMarkerTooltip(marker);
+    marker.setTooltipContent(tooltipLinesMapGroup(g, raceConfig.stations));
+    marker.on("mouseover", () => highlightByGroupIndex(gIdx));
+    marker.on("mouseout", clearHighlights);
+  });
+  
+  // Rebuild elevation chart with new stations
+  if (raceConfig.route && profileDistances.length) {
+    buildElevationChart(profileDistances, profileElevations, raceConfig.stations);
+  }
+}
+
+// Load route and initial setup
+fetch(raceConfig.routeUrl).then(r=>r.json()).then(async(route)=>{
+  raceConfig.route = route;
+  
+  const line = L.polyline(route, {color:"#000", weight:3}).addTo(map);
+  map.fitBounds(line.getBounds());
+  
+  // Build elevation
+  try {
+    const {distances, elevations} = await buildElevationProfile(route, raceConfig.elevationZoom);
+    profileDistances = distances;
+    profileElevations = elevations;
+  } catch(e) {
+    console.error('Elevation error', e);
+    const distances = [0];
+    for(let i=1; i<route.length; i++) distances[i] = distances[i-1] + haversineMi(route[i-1], route[i]);
+    profileDistances = distances;
+    profileElevations = distances.map(() => 100);
+  }
+  
+  window.mapReady = true;
+});
+
+async function updateForecasts(){
+  const tbody = document.getElementById("forecastBody");
+  const validLabel = document.getElementById("forecastValidLabel");
+  const sourceLabel = document.getElementById("sourceLabel");
+  tbody.innerHTML = "";
+
+  const pace = paceMinPerMiFromUI();
+  const now = new Date();
+  const noaaHorizonHours = 6.5 * 24;
+  const openMeteoHorizonHours = 16 * 24;
+
+  let minHrs = Infinity;
+  for (const s of (raceConfig.stations || [])){
+    const eta = new Date(raceConfig.date.getTime() + s.miles * pace * 60000);
+    const hrs = (eta - now) / 3_600_000;
+    if (hrs < minHrs) minHrs = hrs;
+  }
+
+  if (minHrs <= noaaHorizonHours) {
+    validLabel.textContent = `Forecast valid as of ${new Date().toLocaleString()}`;
+    sourceLabel.textContent = `Source: NOAA forecastHourly`;
+  } else if (minHrs <= openMeteoHorizonHours) {
+    validLabel.textContent = `Forecast valid as of ${new Date().toLocaleString()}`;
+    sourceLabel.textContent = `Source: Open-Meteo`;
+  } else {
+    validLabel.textContent = ``;
+    sourceLabel.textContent = ``;
+  }
+
+  for (const s of (raceConfig.stations || [])){
+    const elapsedStr = formatElapsedFromMinutes(s.miles * pace);
+    const eta = new Date(raceConfig.date.getTime() + s.miles * pace * 60000);
+    const timeStr = eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+    const hoursUntilEta = (eta - now) / 3_600_000;
+
+    let temp = "—", wind = "—", cond = "Forecast beyond range";
+    let forecastObj = null;
+
+    if (hoursUntilEta <= noaaHorizonHours) {
+      const f = await getNOAAForecast(s.lat, s.lon, eta);
+      if (f) {
+        temp = f.temperature != null ? `${f.temperature}°F` : "—";
+        const speed = f.windSpeed || "", dir = f.windDirection || "";
+        wind = (speed || dir) ? `${speed} ${dir}`.trim() : "—";
+        cond = f.shortForecast || "—";
+        forecastObj = f;
+      } else {
+        cond = "Forecast unavailable";
+      }
+    } else if (hoursUntilEta <= openMeteoHorizonHours) {
+      const f = await getOpenMeteoForecast(s.lat, s.lon, eta);
+      if (f) {
+        temp = f.temperature != null ? `${f.temperature}°F` : "—";
+        const speed = f.windSpeed || "", dir = f.windDirection || "";
+        wind = (speed || dir) ? `${speed} ${dir}`.trim() : "—";
+        cond = f.shortForecast || "—";
+        forecastObj = f;
+      } else {
+        cond = "Forecast unavailable";
+      }
+    } else {
+      cond = "Forecast beyond range";
+    }
+
+    s.forecastObj = forecastObj;
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${s.name}</td>
+      <td>${s.miles.toFixed(1)} mi</td>
+      <td>${elapsedStr}</td>
+      <td>${timeStr}</td>
+      <td>${temp}</td>
+      <td>${wind}</td>
+      <td>${cond}</td>`;
+    tbody.appendChild(row);
+    s._row = row;
+
+    s.forecasts = [{ eta, temp, wind, cond, elapsed: elapsedStr }];
+  }
+
+  // Update marker tooltips
+  if(groupList && groupList.length){
+    groupList.forEach(g=>{
+      if(g.marker) g.marker.setTooltipContent(tooltipLinesMapGroup(g, raceConfig.stations));
+    });
+  }
+}
+</script>
+
+<!-- ============ Row highlighting ============ -->
+<script>
+function installRowHighlighting() {
+  const attach = (tbody) => {
+    if (!tbody) return;
+    tbody.addEventListener("pointerup", (e) => {
+      const tr = e.target.closest("tr");
+      if (!tr) return;
+      const table = tr.closest("table");
+      const was = tr.classList.contains("highlight-row");
+      table.querySelectorAll("tbody tr").forEach(r => r.classList.remove("highlight-row"));
+      if (!was) tr.classList.add("highlight-row");
+    }, { passive: true });
+  };
+  attach(document.getElementById("forecastBody"));
+  const observer = new MutationObserver(() => {
+    document.querySelectorAll(".climoBody").forEach(attach);
+  });
+  observer.observe(document.getElementById("climatology"), { childList: true, subtree: true });
+}
+document.addEventListener("DOMContentLoaded", installRowHighlighting);
+</script>
 </html>
