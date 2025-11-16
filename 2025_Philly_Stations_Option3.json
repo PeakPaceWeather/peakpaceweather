@@ -1,98 +1,116 @@
 [
   {
-    "name": "Aid Station 1 (Mile 2.3)",
+    "name": "Start",
+    "miles": 0.0,
+    "lat": 39.962120000000006,
+    "lon": -75.17641
+  },
+  {
+    "name": "Aid Station 1",
     "miles": 2.3,
     "lat": 39.95328878826027,
     "lon": -75.14007940619219
   },
   {
-    "name": "Aid Station 2 (Mile 3.7)",
+    "name": "Aid Station 2",
     "miles": 3.7,
     "lat": 39.93349954347537,
     "lon": -75.14380023697072
   },
   {
-    "name": "Aid Station 3 (Mile 5.1)",
+    "name": "Aid Station 3",
     "miles": 5.1,
     "lat": 39.94682633775574,
     "lon": -75.1513768255921
   },
   {
-    "name": "Aid Station 4 (Mile 7.1)",
+    "name": "Aid Station 4",
     "miles": 7.1,
     "lat": 39.95340381105215,
     "lon": -75.18428635735891
   },
   {
-    "name": "Aid Station 5 (Mile 8.5)",
+    "name": "Aid Station 5",
     "miles": 8.5,
     "lat": 39.96837418476066,
     "lon": -75.1926544176862
   },
   {
-    "name": "Aid Station 6 (Mile 10.2)",
+    "name": "Aid Station 6",
     "miles": 10.2,
     "lat": 39.98012063714047,
     "lon": -75.2136684863924
   },
   {
-    "name": "Aid Station 7 (Mile 11.8)",
+    "name": "Aid Station 7",
     "miles": 11.8,
     "lat": 39.9799695771364,
     "lon": -75.20644
   },
   {
-    "name": "Aid Station 8 (Mile 14.4)",
+    "name": "Half Marathon",
+    "miles": 13.1,
+    "lat": 39.97347,
+    "lon": -75.19349
+  },
+  {
+    "name": "Aid Station 8",
     "miles": 14.4,
     "lat": 39.96735805301819,
     "lon": -75.18135690230305
   },
   {
-    "name": "Aid Station 9A/B (Mile 16.2)",
+    "name": "Aid Station 9 (1st Pass)",
     "miles": 16.2,
     "lat": 39.98468227046648,
     "lon": -75.20309966931039
   },
   {
-    "name": "Aid Station 10A/B (Mile 17.8)",
+    "name": "Aid Station 10 (1st Pass)",
     "miles": 17.8,
     "lat": 40.004297874514286,
     "lon": -75.1907766898945
   },
   {
-    "name": "Aid Station 11A/B (Mile 18.9)",
+    "name": "Aid Station 11 (1st Pass)",
     "miles": 18.9,
     "lat": 40.013236188052694,
     "lon": -75.20666064802874
   },
   {
-    "name": "Aid Station 12A (Mile 19.8)",
+    "name": "Aid Station 12A",
     "miles": 19.8,
     "lat": 40.02167993524602,
     "lon": -75.2175101067689
   },
   {
-    "name": "Aid Station 12B (Mile 20.2)",
+    "name": "Aid Station 12B",
     "miles": 20.2,
     "lat": 40.025376716106926,
     "lon": -75.22323087700566
   },
   {
-    "name": "Aid Station 11C (Mile 21.3)",
+    "name": "Aid Station 11 (2nd Pass)",
     "miles": 21.3,
     "lat": 40.01689770265348,
     "lon": -75.2126331857505
   },
   {
-    "name": "Aid Station 10C (Mile 22.3)",
+    "name": "Aid Station 10 (2nd Pass)",
     "miles": 22.3,
     "lat": 40.00954081704464,
     "lon": -75.19761931486387
   },
   {
-    "name": "Aid Station 9C (Mile 24.2)",
+    "name": "Aid Station 9 (2nd Pass)",
     "miles": 24.2,
     "lat": 39.987633635914754,
     "lon": -75.19959483476092
+  },
+  {
+    "name": "Finish",
+    "miles": 26.2,
+    "lat": 39.96798,
+    "lon": -75.18359
   }
 ]
