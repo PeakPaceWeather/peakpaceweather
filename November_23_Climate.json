@@ -1,72 +1,72 @@
 [
   {
     "year": "2024",
-    "max": 52.0,
+    "max": 52,
     "min": 37.4,
     "precip": 0.02,
-    "conditions": "Mostly Cloudy"
+    "conditions": "Partly Cloudy"
   },
   {
     "year": "2023",
-    "max": 53.0,
-    "min": 47.0,
-    "precip": "T",
+    "max": 53,
+    "min": 47,
+    "precip": 0,
     "conditions": "Partly Cloudy"
   },
   {
     "year": "2022",
-    "max": 59.0,
-    "min": 34.0,
-    "precip": "T",
-    "conditions": "Partly Cloudy"
+    "max": 59,
+    "min": 34,
+    "precip": 0,
+    "conditions": "Clear"
   },
   {
     "year": "2021",
-    "max": 45.0,
-    "min": 34.0,
-    "precip": "T",
+    "max": 45,
+    "min": 34,
+    "precip": 0,
     "conditions": "Partly Cloudy"
   },
   {
     "year": "2020",
-    "max": 59.0,
-    "min": 47.0,
+    "max": 59,
+    "min": 47,
     "precip": 0.38,
-    "conditions": "Light Rain"
+    "conditions": "Partly Cloudy"
   },
   {
     "year": "2019",
-    "max": 44.0,
-    "min": 32.0,
-    "precip": "T",
+    "max": 44,
+    "min": 32,
+    "precip": 0,
     "conditions": "Partly Cloudy"
   },
   {
     "year": "2018",
-    "max": 33.0,
-    "min": 16.0,
-    "precip": "T",
-    "conditions": "Cold and Clear"
+    "max": 33,
+    "min": 16,
+    "precip": 0,
+    "conditions": "Clear"
   },
   {
     "year": "2017",
-    "max": 42.0,
-    "min": 32.0,
-    "precip": "T",
+    "max": 42,
+    "min": 32,
+    "precip": 0,
     "conditions": "Partly Cloudy"
   },
   {
     "year": "2016",
-    "max": 50.0,
-    "min": 32.0,
-    "precip": "T",
+    "max": 50,
+    "min": 32,
+    "precip": 0,
     "conditions": "Partly Cloudy"
   },
   {
     "year": "2015",
-    "max": 45.0,
-    "min": 34.0,
-    "precip": "T",
+    "max": 45,
+    "min": 34,
+    "precip": 0,
     "conditions": "Partly Cloudy"
   }
 ]
