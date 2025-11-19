@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Peak Pace Weather</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+<style>
+    body {
+        background-color: white;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: black;
+        text-align: center;
+    }
+    #wrapper {
+        margin-top: 40px;
+    }
+    .race-section {
+        margin: 25px 0;
+    }
+    .race-month {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: black;
+    }
+    .race-link {
+        display: inline-block;
+        text-decoration: none;
+        font-size: 1rem;
+        font-weight: normal;
+        color: #555;
+    }
+    .race-link:hover {
+        text-decoration: underline;
+        color: #000;
+    }
+    #header-title {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 800;
+        font-size: clamp(36px, 6vw, 52px);
+        letter-spacing: .05em;
+        text-transform: uppercase;
+        color: #000;
+        margin: 28px 0 18px;
+        line-height: 1;
+    }
+</style>
+</head>
+<body>
+<div id="wrapper">
+    <div id="header-title">PEAK PACE WEATHER</div>
+    <div id="date"></div>
+    <div id="clock" style="margin-bottom: 25px;"></div>
+    <div class="race-section">
+        <div class="race-month">NOVEMBER 2025</div>
+        <a href="2025_Philly_Marathon.html" class="race-link">Philadelphia Marathon</a>
+    </div>
+    <div class="race-section">
+        <div class="race-month">DECEMBER 2025</div>
+        <a href="#" class="race-link">CIM</a>
+    </div>
+    <div class="race-section">
+        <div class="race-month">JANUARY 2026</div>
+        <a href="#" class="race-link">TBD</a>
+    </div>
+    <div class="race-section">
+        <div class="race-month">FEBRUARY 2026</div>
+        <a href="#" class="race-link">TBD</a>
+    </div>
+    <div class="race-section">
+        <div class="race-month">MARCH 2026</div>
+        <a href="#" class="race-link">TBD</a>
+    </div>
+    <div class="race-section">
+        <div class="race-month">APRIL 2026</div>
+        <a href="#" class="race-link">Boston Marathon</a>
+    </div>
+    <div class="race-section">
+        <div class="race-month">MAY 2026</div>
+        <a href="#" class="race-link">Pittsburgh Marathon</a>
+    </div>
+</div>
+<script>
+    function updateDate() {
+        const today = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        document.getElementById("date").textContent = today.toLocaleDateString(undefined, options);
+    }
+    function updateClock() {
+        const now = new Date();
+        const timeString = now.toLocaleTimeString();
+        document.getElementById("clock").textContent = timeString;
+    }
+    updateDate();
+    updateClock();
+    setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
