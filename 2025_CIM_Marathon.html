@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Peak Pace Weather – California International Marathon -->
+  <!-- Peak Pace Weather â€“ California International Marathon -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
   <title id="pageTitle">California International Marathon | Peak Pace</title>
@@ -41,7 +41,7 @@ section h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700
 
 /* ===== Pace & Wave Control Bar ===== */
 #paceBox { text-align:center; padding:20px 24px; margin:18px auto; background:#fff; border:1px solid #ccc; border-radius:10px; box-shadow:0 2px 4px rgba(0,0,0,0.08); }
-#paceBox h3 { margin:0 0 20px; font-size:22px; font-weight:700; color:var(--pp-dark); }
+#paceBox h3 { margin:0 0 20px; font-size:22px; font-weight:700; }
 #paceBox.loading { opacity: 0.6; pointer-events: none; }
 
 .control-row { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid #eee; }
@@ -68,7 +68,7 @@ section h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700
 .forecastTab:hover { background: var(--hoverRow); }
 .forecastTab.active { background: var(--pp-dark); color:#fff; }
 .forecastTab.loading { opacity: 0.6; cursor: wait; }
-.forecastTab.loading::after { content: ' ⏳'; }
+.forecastTab.loading::after { content: ' â³'; }
 
 /* Forecast source toggle */
 #forecastSourceToggle { display:none; justify-content:center; margin-bottom:12px; gap:8px; }
@@ -279,13 +279,39 @@ function formatElapsedFromMinutes(mins){
   return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
 
+// Format time in Pacific timezone with PST/PDT indication
+function formatPacificTime(date, includeTimezone = false) {
+  const options = { 
+    hour: "numeric", 
+    minute: "2-digit",
+    timeZone: "America/Los_Angeles"
+  };
+  const timeStr = date.toLocaleTimeString([], options);
+  
+  if (!includeTimezone) return timeStr;
+  
+  // Determine if PST or PDT based on date
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  const day = date.getDate();
+  
+  // PST: Nov first Sunday to March second Sunday
+  // PDT: March second Sunday to Nov first Sunday
+  // December 7 is always in PST
+  const isDST = month > 2 && month < 10; // Rough approximation
+  const tz = isDST ? "PDT" : "PST";
+  
+  return `${timeStr} ${tz}`;
+}
+
 // Initialize pace dropdowns
-(function initPace(){
+document.addEventListener('DOMContentLoaded', function() {
   const mins=document.getElementById('paceMin'), secs=document.getElementById('paceSec');
   for(let m=4;m<=30;m++){ let o=document.createElement('option'); o.value=m; o.textContent=m; mins.appendChild(o); }
   for(let s=0;s<60;s++){ let o=document.createElement('option'); o.value=s; o.textContent=String(s).padStart(2,'0'); secs.appendChild(o); }
   mins.value=9; secs.value=0;
-})();
+  checkAllStepsComplete();
+});
 
 // Start time handling
 document.getElementById('startTimeInput').addEventListener('change', function() {
@@ -392,7 +418,7 @@ document.getElementById('paceGo').addEventListener('click', async function() {
     // Success message
     const paceM = String(document.getElementById('paceMin').value).padStart(2,"0");
     const paceS = String(document.getElementById('paceSec').value).padStart(2,"0");
-    const startTimeStr = raceConfig.date.toLocaleTimeString([], { hour:"numeric", minute:"2-digit" }).toLowerCase();
+    const startTimeStr = formatPacificTime(raceConfig.date);
     const optionName = getOptionName('option1');
     
     confirmEl.textContent = `Start Time: ${startTimeStr} | Target Pace: ${paceM}:${paceS} min/mi | Forecast Markers: ${optionName}`;
@@ -596,7 +622,7 @@ function switchToStationOption(option) {
   if (!loadedOptions.has(option)) {
     // Show loading message in table
     const tbody = document.getElementById('forecastBody');
-    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:40px 20px; color:#888; font-style:italic;">Loading forecast data for this option... ⏳</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:40px 20px; color:#888; font-style:italic;">Loading forecast data for this option... â³</td></tr>';
     
     // Update active tab
     document.querySelectorAll('.forecastTab').forEach(tab => {
@@ -629,7 +655,7 @@ function switchToStationOption(option) {
   if (confirmEl.classList.contains('success')) {
     const paceM = String(document.getElementById('paceMin').value).padStart(2,"0");
     const paceS = String(document.getElementById('paceSec').value).padStart(2,"0");
-    const startTimeStr = raceConfig.date.toLocaleTimeString([], { hour:"numeric", minute:"2-digit" }).toLowerCase();
+    const startTimeStr = formatPacificTime(raceConfig.date);
     const optionName = getOptionName(option);
     confirmEl.textContent = `Start Time: ${startTimeStr} | Target Pace: ${paceM}:${paceS} min/mi | Forecast Markers: ${optionName}`;
   }
@@ -691,10 +717,13 @@ function buildClimatologyTabs() {
   tabs.innerHTML = '';
   panels.innerHTML = '';
   
+  // Update main climatology title
+  document.getElementById('climoTitle').textContent = 'Climatology for December 7';
+  
   // Create two tabs: Start and Finish
   const startTab = document.createElement('button');
   startTab.className = 'climoTab active';
-  startTab.textContent = 'Start Climate (7:00 AM Folsom)';
+  startTab.textContent = 'Start: Folsom, CA';
   startTab.addEventListener('click', () => {
     document.querySelectorAll('.climoTab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.climoPanel').forEach(p => p.classList.remove('active'));
@@ -704,7 +733,7 @@ function buildClimatologyTabs() {
   
   const finishTab = document.createElement('button');
   finishTab.className = 'climoTab';
-  finishTab.textContent = 'Finish Climate (Sacramento)';
+  finishTab.textContent = 'Finish: Sacramento, CA';
   finishTab.addEventListener('click', () => {
     document.querySelectorAll('.climoTab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('.climoPanel').forEach(p => p.classList.remove('active'));
@@ -721,11 +750,10 @@ function buildClimatologyTabs() {
   startPanel.className = 'climoPanel active';
   startPanel.innerHTML = `
     <table>
-      <thead><tr><th>Year</th><th>Temperature (°F)</th><th>Conditions</th><th>Precipitation (")</th></tr></thead>
-      <tbody id="startClimateBody"></tbody>
-      <tfoot><tr id="startAvgRow"><td>Average</td><td>—</td><td>—</td><td>—</td></tr></tfoot>
+      <thead><tr><th>Year</th><th>Temperature (°F)</th><th>Conditions</th></tr></thead>
+      <tbody id="startClimateBody" class="climoBody"></tbody>
     </table>
-    <div class="note">10-year start climate (2015-2024) from MHR (Mather Airport near Folsom) at 7:00 AM on December 7. Data source: <a href="https://mesonet.agron.iastate.edu/request/download.phtml" target="_blank" rel="noopener">Iowa State IEM ASOS Archive</a>.</div>
+    <div class="note">The California International Marathon starts in Folsom, CA at 7:00 AM PST. This table shows observed weather conditions at that exact time on December 7 from 2015-2024, recorded at Mather Airport (MHR), located approximately 5 miles from the start line. Historical data provides insight into typical race morning conditions, though actual race day weather may vary. Runners should note that conditions change throughout the course as you descend into Sacramento and as the morning warms. Data source: <a href="https://mesonet.agron.iastate.edu/request/download.phtml" target="_blank" rel="noopener">Iowa State IEM ASOS Archive</a>.</div>
   `;
   
   const finishPanel = document.createElement('div');
@@ -745,31 +773,16 @@ function displayStartClimate() {
   if (!startClimateData) return;
   
   const tbody = document.getElementById('startClimateBody');
-  const avgRow = document.getElementById('startAvgRow');
   tbody.innerHTML = '';
   
-  let sumTemp = 0;
-  let count = 0;
-  
   startClimateData.forEach(row => {
-    const temp = parseFloat(row.temp);
-    if (!isNaN(temp)) {
-      sumTemp += temp;
-      count++;
-    }
-    
     const tr = document.createElement('tr');
     tr.innerHTML = `
       <td>${row.year}</td>
       <td>${row.temp}°F</td>
-      <td>${row.conditions}</td>
-      <td>${row.precip}</td>`;
+      <td>${row.conditions}</td>`;
     tbody.appendChild(tr);
   });
-  
-  if (count > 0) {
-    avgRow.innerHTML = `<td>Average</td><td>${(sumTemp/count).toFixed(1)}°F</td><td>—</td><td>—</td>`;
-  }
 }
 
 function updateFinishClimate(pace) {
@@ -808,28 +821,15 @@ function updateFinishClimate(pace) {
   }
   
   // Display finish climate
-  const finishStr = finishTime.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+  const finishStr = formatPacificTime(finishTime, true);
   
   let html = `
     <h4 style="text-align:center; margin-bottom:12px;">Estimated Finish Time: ${finishStr}</h4>
     <table>
-      <thead><tr><th>Year</th><th>Start Temp (°F)</th><th>Start Conditions</th><th>Finish Temp (°F)</th><th>Finish Conditions</th><th>Precipitation (")</th></tr></thead>
-      <tbody>`;
-  
-  let sumStartTemp = 0, sumFinishTemp = 0, count = 0;
+      <thead><tr><th>Year</th><th>Start Temp (°F)</th><th>Start Conditions</th><th>Finish Temp (°F)</th><th>Finish Conditions</th></tr></thead>
+      <tbody class="climoBody">`;
   
   climateForTime.forEach(row => {
-    const startTemp = parseFloat(row.start_temp);
-    const finishTemp = parseFloat(row.finish_temp);
-    
-    if (!isNaN(startTemp)) {
-      sumStartTemp += startTemp;
-      count++;
-    }
-    if (!isNaN(finishTemp)) {
-      sumFinishTemp += finishTemp;
-    }
-    
     html += `
       <tr>
         <td>${row.year}</td>
@@ -837,21 +837,12 @@ function updateFinishClimate(pace) {
         <td>${row.start_conditions}</td>
         <td>${row.finish_temp}°F</td>
         <td>${row.finish_conditions}</td>
-        <td>${row.precip}</td>
       </tr>`;
   });
   
   html += `</tbody>
-    <tfoot><tr style="font-weight:700; background:#f5f5f5;">
-      <td>Average</td>
-      <td>${count > 0 ? (sumStartTemp/count).toFixed(1) : '—'}°F</td>
-      <td>—</td>
-      <td>${count > 0 ? (sumFinishTemp/count).toFixed(1) : '—'}°F</td>
-      <td>—</td>
-      <td>—</td>
-    </tr></tfoot>
     </table>
-    <div class="note">10-year finish climate (2015-2024) for December 7 at your estimated finish time. Shows conditions at race start (Folsom) and finish (Sacramento). Data source: <a href="https://mesonet.agron.iastate.edu/request/download.phtml" target="_blank" rel="noopener">Iowa State IEM ASOS Archive</a>.</div>
+    <div class="note">This point-to-point marathon experiences changing conditions as runners descend from Folsom (elevation ~230 ft) to downtown Sacramento (elevation ~30 ft). The table above shows historical weather at both the start and your estimated finish time based on 10 years of data (2015-2024). Temperature typically rises throughout the race as the sun climbs and runners move into the urban heat of Sacramento. Wind patterns can shift as well. Use this data to plan your fueling and pacing strategy. Data source: <a href="https://mesonet.agron.iastate.edu/request/download.phtml" target="_blank" rel="noopener">Iowa State IEM ASOS Archive</a>.</div>
   `;
   
   document.getElementById('finishClimateContent').innerHTML = html;
@@ -977,7 +968,7 @@ function buildElevationChart(distances, elevations, stations){
               if (station.forecasts && station.forecasts.length) {
                 return station.forecasts.map(f => [
                   `Elapsed: ${elapsed}`,
-                  `ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}`,
+                  `ETA: ${formatPacificTime(f.eta, true)}`,
                   `Temp: ${f.temp}`, `Wind: ${f.wind}`, `Conditions: ${f.cond}`
                 ]).flat();
               }
@@ -1142,7 +1133,7 @@ function tooltipLinesMapGroup(g, stations) {
     if (s.forecasts && s.forecasts.length) {
       s.forecasts.forEach(f => {
         html += `Elapsed: ${elapsed}<br>
-                 ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}<br>
+                 ETA: ${formatPacificTime(f.eta, true)}<br>
                  Temp: ${f.temp}<br>
                  Wind: ${f.wind}<br>
                  Conditions: ${f.cond}<br>`;
@@ -1192,13 +1183,24 @@ fetch(raceConfig.routeUrl).then(r=>r.json()).then(async(route)=>{
   raceConfig.route = route;
   
   const line = L.polyline(route, {color:"#000", weight:3}).addTo(map);
-  map.fitBounds(line.getBounds());
+  map.fitBounds(line.getBounds(), {padding: [30, 30]});
   
   // Build elevation
   try {
     const {distances, elevations} = await buildElevationProfile(route, raceConfig.elevationZoom);
     profileDistances = distances;
     profileElevations = elevations;
+    
+    // Load mile markers (option1) by default and display on map and elevation
+    const stations1 = await fetch(raceConfig.stationUrls.option1).then(r => r.json());
+    raceConfig.allStations = { option1: stations1 };
+    
+    // Draw markers on map
+    redrawMarkers('option1');
+    
+    // Build elevation chart with mile markers
+    buildElevationChart(profileDistances, profileElevations, stations1);
+    
   } catch(e) {
     console.error('Elevation error', e);
     const distances = [0];
@@ -1253,7 +1255,7 @@ async function updateForecastsForOption(opt, sourceToFetch = 'both'){
   for (const s of stations) {
     const elapsedStr = formatElapsedFromMinutes(s.miles * pace);
     const eta = new Date(raceConfig.date.getTime() + s.miles * pace * 60000);
-    const timeStr = eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+    const timeStr = formatPacificTime(eta, true);
     const hoursUntilEta = (eta - now) / 3_600_000;
 
     // Initialize if first time
