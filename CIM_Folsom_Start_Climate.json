@@ -1,0 +1,62 @@
+[
+  {
+    "year": "2015",
+    "temp": "59",
+    "conditions": "Mostly Cloudy",
+    "precip": "0.00"
+  },
+  {
+    "year": "2016",
+    "temp": "36",
+    "conditions": "Clear",
+    "precip": "0.00"
+  },
+  {
+    "year": "2017",
+    "temp": "39",
+    "conditions": "Clear",
+    "precip": "0.00"
+  },
+  {
+    "year": "2018",
+    "temp": "41",
+    "conditions": "Clear",
+    "precip": "0.00"
+  },
+  {
+    "year": "2019",
+    "temp": "55",
+    "conditions": "Mist/Fog",
+    "precip": "0.00"
+  },
+  {
+    "year": "2020",
+    "temp": "39",
+    "conditions": "Clear",
+    "precip": "0.00"
+  },
+  {
+    "year": "2021",
+    "temp": "48",
+    "conditions": "Mist/Fog",
+    "precip": "0.01"
+  },
+  {
+    "year": "2022",
+    "temp": "36",
+    "conditions": "Mist/Fog",
+    "precip": "0.00"
+  },
+  {
+    "year": "2023",
+    "temp": "48",
+    "conditions": "Clear",
+    "precip": "0.00"
+  },
+  {
+    "year": "2024",
+    "temp": "43",
+    "conditions": "Mist/Fog",
+    "precip": "0.00"
+  }
+]
