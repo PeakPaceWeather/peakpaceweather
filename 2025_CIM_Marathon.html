@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Peak Pace Weather – California International Marathon -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+  <title id="pageTitle">California International Marathon | Peak Pace</title>
+
+  <!-- Fonts & Libraries -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+
+  <style>
+/* ===== Base + Responsive (pinch-zoom enabled) ===== */
+html, body { overflow-x: hidden; touch-action: pan-x pan-y; zoom: 1; }
+body { margin: 0; padding: 0; font-family: "Source Sans Pro", Arial, sans-serif; color: #111; background: #fff; line-height: 1.5; }
+:root { --ink:#111; --muted:#555; --line:#ddd; --pp-dark:#003546; --blaze:#37BC7D; --highlight:#FF6700; --hoverRow:#fff3e6; }
+
+/* ===== Layout + Header ===== */
+.page-wrapper { width: 1000px; margin: 0 auto; padding: 0; box-sizing: border-box; }
+.main-header { text-align: center; font-family: "Montserrat", sans-serif; font-weight: 800; font-size: clamp(36px, 6vw, 52px); letter-spacing: .05em; text-transform: uppercase; color: #000; margin: 28px 0 18px; line-height: 1; }
+header { text-align:center; margin:8px auto 14px; }
+header h2 { margin:0; font-size:32px; font-weight:700; }
+#countdown { font-size:20px; font-weight:600; margin-top:6px; color:#333; }
+
+/* ===== Uniform panel widths ===== */
+section, #elevSection, #map, #paceBox { width: 960px; max-width: 960px; margin: 18px auto 0; box-sizing: border-box; }
+section, #elevSection { border:1px solid #ccc; border-radius:8px; background:#fff; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+section:last-of-type { margin-bottom:24px; }
+section h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700; }
+
+/* Map */
+#map { height: 600px; margin-top:10px; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+
+/* Elevation */
+#elevSection { width: 960px; max-width: 960px; margin: 18px auto; border: 1px solid #ccc; border-radius: 8px; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.08); padding: 16px; box-sizing: border-box; }
+#elevWrap { position:relative; width:100%; height:225px; margin:0 auto; padding:0; box-sizing:border-box; }
+#elevationChart { position:absolute; inset:0; width:100% !important; height:100% !important; display:block; box-sizing:border-box; cursor:pointer; }
+
+/* ===== Pace & Wave Control Bar ===== */
+#paceBox { text-align:center; padding:20px 24px; margin:18px auto; background:#fff; border:1px solid #ccc; border-radius:10px; box-shadow:0 2px 4px rgba(0,0,0,0.08); }
+#paceBox h3 { margin:0 0 20px; font-size:22px; font-weight:700; color:var(--pp-dark); }
+#paceBox.loading { opacity: 0.6; pointer-events: none; }
+
+.control-row { display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:16px; padding-bottom:16px; border-bottom:1px solid #eee; }
+.control-row:last-of-type { margin-bottom:0; padding-bottom:0; border-bottom:none; }
+.control-row label { font-weight:700; color:#000; font-size:15px; white-space:nowrap; }
+.control-row select, .control-row input { font-size:14px; border:1px solid #ccc; border-radius:6px; background:#fff; color:#111; padding:8px 12px; cursor:pointer; height:38px; }
+#customTimeInput { display:none; min-width: 150px; }
+#paceMin, #paceSec { min-width:65px; width:65px; }
+
+.pace-input-group { display:flex; align-items:center; gap:6px; white-space:nowrap; }
+.pace-input-group span { color:#666; font-size:16px; font-weight:700; }
+
+#paceGo { font-size:14px; font-weight:600; border:1px solid #003546; border-radius:6px; color:#fff; background:#003546; cursor:pointer; padding:9px 20px; height:38px; transition:background 0.2s ease; margin-left:4px; }
+#paceGo:hover { background:#FF6700; }
+#paceGo:disabled { background:#ccc; cursor:not-allowed; border-color:#ccc; }
+
+#paceConfirm { font-size:14px; color:#888; margin-left:12px; font-style:italic; }
+#paceConfirm.success { color:#FF6700; font-style:normal; font-weight:600; }
+
+/* Forecast tabs */
+#forecastTabs { display:none; justify-content:center; margin-bottom:12px; gap:8px; }
+#forecastTabs.visible { display:flex; }
+.forecastTab { padding:8px 16px; border:1px solid var(--pp-dark); border-radius:6px 6px 0 0; background:#f9f9f9; color:var(--pp-dark); font-size:14px; font-weight:600; cursor:pointer; transition: background .2s ease, color .2s ease; }
+.forecastTab:hover { background: var(--hoverRow); }
+.forecastTab.active { background: var(--pp-dark); color:#fff; }
+.forecastTab.loading { opacity: 0.6; cursor: wait; }
+.forecastTab.loading::after { content: ' ⏳'; }
+
+/* Forecast source toggle */
+#forecastSourceToggle { display:none; justify-content:center; margin-bottom:12px; gap:8px; }
+#forecastSourceToggle.visible { display:flex; }
+.sourceToggleBtn { padding:6px 12px; border:1px solid #666; border-radius:6px; background:#f9f9f9; color:#666; font-size:13px; font-weight:600; cursor:pointer; transition: background .2s ease, color .2s ease; }
+.sourceToggleBtn:hover { background: var(--hoverRow); }
+.sourceToggleBtn.active { background: #666; color:#fff; }
+
+/* Tables */
+table { width:100%; border-collapse:collapse; }
+th, td { border:1px solid #ccc; padding:8px; text-align:center; font-size:14px; }
+th { background:#f0f0f0; font-weight:700; }
+#climoAvgRow { font-weight:700; background:#f5f5f5; }
+
+/* Hover (desktop) */
+#forecastBody tr:hover, .climoBody tr:hover { background: var(--hoverRow); }
+
+/* Tap highlight (mobile & desktop) */
+#forecastBody tr, .climoBody tr { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.highlight-row { background: var(--hoverRow) !important; box-shadow: inset 0 0 0 2px var(--highlight); transition: background .2s ease, box-shadow .2s ease; }
+
+.note { font-size:12px; text-align:center; margin-top:8px; color:var(--muted); }
+
+/* Leaflet styles & tooltips */
+.leaflet-marker-icon { cursor:pointer; transition: transform 150ms ease; }
+.leaflet-marker-icon:hover { transform: scale(1.2); }
+.leaflet-tooltip, .pp-tooltip { background:#fff; border:2px solid var(--highlight); border-radius:8px; color:var(--ink); font-size:13px; font-weight:500; line-height:1.4; box-shadow:0 2px 8px rgba(0,0,0,0.15); padding:6px 10px; }
+.leaflet-control a { background-color:var(--pp-dark) !important; color:#fff !important; border:1px solid var(--pp-dark) !important; width:30px !important; height:30px !important; line-height:30px !important; text-align:center; font-size:16px; }
+.leaflet-control a:hover { background-color: var(--blaze) !important; border-color: var(--blaze) !important; }
+
+/* Blaze markers */
+.blaze-dot { width:20px; height:20px; background:var(--blaze); border:2px solid #222; border-radius:50%; transition:transform .2s ease; transform-origin:center; }
+.blaze-dot:hover { transform: scale(1.4); cursor:pointer; }
+.blaze-dot.highlighted { transform: scale(1.6); background: var(--highlight); }
+
+/* Climo tabs */
+#climoTabs { display:flex; justify-content:center; margin-bottom:12px; gap:8px; }
+.climoTab { padding:6px 14px; border:1px solid var(--pp-dark); border-radius:6px 6px 0 0; background:#f9f9f9; color:var(--pp-dark); font-size:14px; font-weight:600; cursor:pointer; transition: background .2s ease, color .2s ease; }
+.climoTab:hover { background: var(--hoverRow); }
+.climoTab.active { background: var(--pp-dark); color:#fff; }
+.climoPanel { display:none; }
+.climoPanel.active { display:block; }
+
+/* Prevent focus-snap on Leaflet */
+.leaflet-container { scroll-margin-top:0; scroll-behavior:auto; }
+.leaflet-container:focus { outline:none; scroll-margin-top:0; }
+
+/* Loading spinner */
+.spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #f3f3f3; border-top: 2px solid var(--pp-dark); border-radius: 50%; animation: spin 1s linear infinite; margin-left: 8px; vertical-align: middle; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+</style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <div class="main-header">PEAK PACE WEATHER</div>
+
+    <header>
+      <h2 id="raceName">California International Marathon</h2>
+      <div id="countdown">Loading countdown…</div>
+    </header>
+
+    <!-- ============ Climatology (dual system: start + finish) ============ -->
+    <section id="climatology">
+      <h3 id="climoTitle">Climatology</h3>
+      <div id="climoTabs"></div>
+      <div id="climoPanels"></div>
+    </section>
+
+    <!-- Pace Controls -->
+    <div id="paceBox">
+      <h3>Generate Peak Pace Forecast</h3>
+      
+      <div class="control-row">
+        <label for="startTimeInput">Start Time:</label>
+        <input type="time" id="startTimeInput" value="07:00" />
+      </div>
+      
+      <div class="control-row">
+        <label for="paceMin">Input Target Pace (min/mile):</label>
+        <div class="pace-input-group">
+          <select id="paceMin"></select>
+          <span>:</span>
+          <select id="paceSec"></select>
+        </div>
+      </div>
+      
+      <div class="control-row">
+        <button id="paceGo">Generate Peak Pace Forecast</button>
+        <span id="paceConfirm">Input forecast parameters</span>
+      </div>
+    </div>
+
+    <!-- Map -->
+    <div id="map"></div>
+
+    <!-- Elevation -->
+    <section id="elevSection">
+      <h3>Elevation Profile</h3>
+      <div id="elevWrap"><canvas id="elevationChart"></canvas></div>
+    </section>
+
+    <!-- Forecast Summary -->
+    <section id="summary">
+      <h3 id="tableHeader" style="margin-bottom:14px;">Peak Pace Forecast</h3>
+      <div id="forecastTabs"></div>
+      <div id="forecastSourceToggle"></div>
+      <table>
+        <thead>
+          <tr><th>Station</th><th>Distance (mi)</th><th>Elapsed</th><th>ETA</th><th>Temp (°F)</th><th>Wind</th><th>Conditions</th></tr>
+        </thead>
+        <tbody id="forecastBody">
+          <tr id="forecastPlaceholder">
+            <td colspan="7" style="text-align:center; padding:40px 20px; color:#888; font-style:italic;">
+              Input forecast parameters above and click "Generate Peak Pace Forecast"
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="text-align:center; font-size:12px; color:#555; margin-top:12px;">
+        <span id="forecastValidLabel"></span>
+        <br>
+        <span id="sourceLabel" style="color:#777;"></span>
+      </div>
+    </section>
+
+    <!-- Sources -->
+    <section id="sources">
+      <h3>Data Sources</h3>
+      <ul style="font-size:13px; color:#555; line-height:1.5;">
+        <li>Climatology: Iowa State University <a href="https://mesonet.agron.iastate.edu/request/download.phtml" target="_blank" rel="noopener">IEM ASOS Archive</a> (MHR for Folsom start, data for Sacramento finish)</li>
+        <li>Elevation: Mapbox Terrain-RGB</li>
+        <li>Weather Forecasts: NOAA/NWS API (near-term) and Open-Meteo (extended range)</li>
+      </ul>
+    </section>
+  </div>
+</body>
+
+<!-- ============ CONFIG ============ -->
+<script>
+const MAPBOX_TOKEN = "pk.eyJ1IjoiZGlsbG9uZHVyaW5pY2siLCJhIjoiY21memtlbm83MDNycTJtb3JtdGxucWpkMiJ9.W7Ge6XYCd0Gfl9f7YQ2dNw";
+
+const raceConfig = {
+  name: "California International Marathon",
+  date: new Date("2025-12-07T07:00:00-08:00"),
+  city: "Folsom to Sacramento, CA",
+  climoBaseUrl: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/",
+  routeUrl: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/2025_CIM_Route.json",
+  stationUrls: {
+    option1: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/2025_CIM_Stations_Option1.json",
+    option2: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/2025_CIM_Stations_Option2.json",
+    option3: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/2025_CIM_Stations_Option3.json"
+  },
+  startClimateUrl: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/CIM_Folsom_Start_Climate.json",
+  finishClimateUrl: "https://raw.githubusercontent.com/PeakPaceWeather/peakpaceweather/refs/heads/main/CIM_December_7_Comprehensive_Climate.json",
+  elevationZoom: 13,
+  route: null,
+  allStations: {} // Will hold all 3 station options
+};
+
+// Current active option
+let currentStationOption = 'option1';
+let currentForecastSource = 'noaa'; // 'noaa' or 'openmeteo'
+let bothSourcesAvailable = false;
+let loadedOptions = new Set(); // Track which station options have been loaded
+</script>
+
+<!-- ============ COUNTDOWN ============ -->
+<script>
+function updateCountdown() {
+  const diff = raceConfig.date - new Date();
+  const el = document.getElementById("countdown");
+  const raceDateStr = raceConfig.date.toLocaleString([], { month:"long", day:"numeric", year:"numeric" });
+  if (diff <= 0) { el.textContent = `${raceDateStr} (Today)`; return; }
+  
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  
+  let countdownText = "";
+  if (days > 0) {
+    countdownText = `${days} ${days === 1 ? 'Day' : 'Days'}`;
+  }
+  if (hours > 0 || days > 0) {
+    if (days > 0) countdownText += " and ";
+    countdownText += `${hours} ${hours === 1 ? 'Hour' : 'Hours'}`;
+  }
+  countdownText += " Until Race Day";
+  
+  el.textContent = `${raceDateStr} (${countdownText})`;
+}
+setInterval(updateCountdown, 60000);
+updateCountdown();
+</script>
+
+<!-- ============ PACE & UI CONTROLS ============ -->
+<script>
+function paceMinPerMiFromUI(){
+  const m = Number(document.getElementById('paceMin').value) || 0;
+  const s = Number(document.getElementById('paceSec').value) || 0;
+  return m + s/60;
+}
+function formatElapsedFromMinutes(mins){
+  const totalSeconds = Math.round(mins * 60);
+  const h = Math.floor(totalSeconds / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
+  const s = totalSeconds % 60;
+  return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+// Initialize pace dropdowns
+(function initPace(){
+  const mins=document.getElementById('paceMin'), secs=document.getElementById('paceSec');
+  for(let m=4;m<=30;m++){ let o=document.createElement('option'); o.value=m; o.textContent=m; mins.appendChild(o); }
+  for(let s=0;s<60;s++){ let o=document.createElement('option'); o.value=s; o.textContent=String(s).padStart(2,'0'); secs.appendChild(o); }
+  mins.value=9; secs.value=0;
+})();
+
+// Start time handling
+document.getElementById('startTimeInput').addEventListener('change', function() {
+  const [hh, mm] = this.value.split(':').map(Number);
+  const base = new Date("2025-12-07T00:00:00-08:00");
+  base.setHours(hh, mm, 0, 0);
+  raceConfig.date = base;
+  checkAllStepsComplete();
+});
+
+// Pace selection
+document.getElementById('paceMin').addEventListener('change', checkAllStepsComplete);
+document.getElementById('paceSec').addEventListener('change', checkAllStepsComplete);
+
+function checkAllStepsComplete() {
+  const step1 = document.getElementById('startTimeInput').value !== '';
+  const step2 = document.getElementById('paceMin').value !== '';
+  
+  const goBtn = document.getElementById('paceGo');
+  const confirmEl = document.getElementById('paceConfirm');
+  
+  if (step1 && step2) {
+    goBtn.disabled = false;
+    confirmEl.textContent = 'Ready to generate forecast';
+    confirmEl.classList.remove('success');
+  } else {
+    goBtn.disabled = true;
+    confirmEl.textContent = 'Input forecast parameters';
+    confirmEl.classList.remove('success');
+  }
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+  checkAllStepsComplete();
+});
+
+// Generate forecast - loads ALL station options
+document.getElementById('paceGo').addEventListener('click', async function() {
+  const paceBox = document.getElementById('paceBox');
+  const goBtn = this;
+  const confirmEl = document.getElementById('paceConfirm');
+  
+  // Disable controls
+  paceBox.classList.add('loading');
+  goBtn.disabled = true;
+  
+  // Show loading
+  const originalText = goBtn.textContent;
+  goBtn.innerHTML = 'Generating Forecast<span class="spinner"></span>';
+  
+  try {
+    // Hide source toggle initially (will show after Open-Meteo loads)
+    document.getElementById('forecastSourceToggle').classList.remove('visible');
+    
+    // Load all 3 station JSON files (fast)
+    const [stations1, stations2, stations3] = await Promise.all([
+      fetch(raceConfig.stationUrls.option1).then(r => r.json()),
+      fetch(raceConfig.stationUrls.option2).then(r => r.json()),
+      fetch(raceConfig.stationUrls.option3).then(r => r.json())
+    ]);
+    
+    raceConfig.allStations = {
+      option1: stations1,
+      option2: stations2,
+      option3: stations3
+    };
+    
+    // Calculate bothSourcesAvailable FIRST before deciding what to fetch
+    const pace = paceMinPerMiFromUI();
+    const now = new Date();
+    const noaaHorizonHours = 6.5 * 24;
+    let minHrs = Infinity;
+    const stations = raceConfig.allStations.option1;
+    for (const s of stations) {
+      const eta = new Date(raceConfig.date.getTime() + s.miles * pace * 60000);
+      const hrs = (eta - now) / 3_600_000;
+      if (hrs < minHrs) minHrs = hrs;
+    }
+    bothSourcesAvailable = (minHrs <= noaaHorizonHours);
+    console.log(`Race is ${minHrs.toFixed(1)} hours away. NOAA available: ${minHrs <= noaaHorizonHours}, Both sources: ${bothSourcesAvailable}`);
+    
+    // Clear loaded options
+    loadedOptions.clear();
+    
+    // Generate forecasts ONLY for option1 with NOAA only (if available) - super fast initial load
+    await updateForecastsForOption('option1', bothSourcesAvailable ? 'noaa' : 'openmeteo');
+    loadedOptions.add('option1');
+    
+    // Show tabs (with loading states for option2 and option3)
+    buildForecastTabs();
+    
+    // Display first option
+    switchToStationOption('option1');
+    
+    // Update source label for initial display
+    const sourceLabel = document.getElementById("sourceLabel");
+    if (bothSourcesAvailable) {
+      sourceLabel.textContent = `Currently showing: NOAA forecastHourly (Open-Meteo loading...)`;
+    } else {
+      sourceLabel.textContent = `Source: Open-Meteo`;
+    }
+    
+    // Success message
+    const paceM = String(document.getElementById('paceMin').value).padStart(2,"0");
+    const paceS = String(document.getElementById('paceSec').value).padStart(2,"0");
+    const startTimeStr = raceConfig.date.toLocaleTimeString([], { hour:"numeric", minute:"2-digit" }).toLowerCase();
+    const optionName = getOptionName('option1');
+    
+    confirmEl.textContent = `Start Time: ${startTimeStr} | Target Pace: ${paceM}:${paceS} min/mi | Forecast Markers: ${optionName}`;
+    confirmEl.classList.add('success');
+    
+    // Update finish climate display
+    updateFinishClimate(pace);
+    
+    // Background load option2 and option3
+    loadRemainingOptionsInBackground();
+    
+  } catch(e) {
+    console.error('Forecast error:', e);
+    confirmEl.textContent = 'Error generating forecast. Please try again.';
+    confirmEl.style.color = '#d00';
+  } finally {
+    goBtn.innerHTML = originalText;
+    goBtn.disabled = false;
+    paceBox.classList.remove('loading');
+  }
+});
+
+async function loadRemainingOptionsInBackground() {
+  // If both sources available, load Open-Meteo for option1 first (for toggle)
+  if (bothSourcesAvailable) {
+    console.log('Loading Open-Meteo for comparison...');
+    try {
+      await updateForecastsForOption('option1', 'openmeteo');
+      console.log('Open-Meteo loaded! Building source toggle...');
+      // Update source label to show toggle is available
+      const sourceLabel = document.getElementById("sourceLabel");
+      sourceLabel.textContent = `Currently showing: NOAA forecastHourly`;
+      // Enable source toggle - force rebuild
+      const toggleContainer = document.getElementById('forecastSourceToggle');
+      toggleContainer.innerHTML = '';
+      toggleContainer.classList.remove('visible');
+      buildSourceToggle();
+      console.log('Source toggle built!');
+    } catch(e) {
+      console.error('Error loading Open-Meteo for option1:', e);
+    }
+  }
+  
+  // Load option2 (5K Splits)
+  try {
+    await updateForecastsForOption('option2', 'both');
+    loadedOptions.add('option2');
+    updateTabLoadingState('option2');
+  } catch(e) {
+    console.error('Error loading option2:', e);
+  }
+  
+  // Load option3 (Aid Stations)
+  try {
+    await updateForecastsForOption('option3', 'both');
+    loadedOptions.add('option3');
+    updateTabLoadingState('option3');
+  } catch(e) {
+    console.error('Error loading option3:', e);
+  }
+}
+
+function updateTabLoadingState(option) {
+  const tab = document.querySelector(`[data-option="${option}"]`);
+  if (tab && tab.classList.contains('loading')) {
+    tab.classList.remove('loading');
+    tab.textContent = getOptionLabel(option);
+    
+    // If user is currently viewing this option (waiting for it), refresh the display
+    if (tab.classList.contains('active')) {
+      switchToStationOption(option);
+    }
+  }
+}
+
+function getOptionLabel(option) {
+  const labels = {
+    option1: 'Mile Splits',
+    option2: '5K Splits',
+    option3: 'Aid Stations'
+  };
+  return labels[option] || option;
+}
+
+function getOptionName(option) {
+  const names = {
+    option1: 'Mile Splits',
+    option2: '5K Splits',
+    option3: 'Aid Stations'
+  };
+  return names[option] || option;
+}
+
+function buildForecastTabs() {
+  const tabsContainer = document.getElementById('forecastTabs');
+  tabsContainer.innerHTML = '';
+  tabsContainer.classList.add('visible');
+  
+  const options = [
+    { key: 'option1', label: 'Mile Splits' },
+    { key: 'option2', label: '5K Splits' },
+    { key: 'option3', label: 'Aid Stations' }
+  ];
+  
+  options.forEach(opt => {
+    const tab = document.createElement('button');
+    tab.className = 'forecastTab';
+    tab.dataset.option = opt.key;
+    
+    // Check if this option is loaded
+    if (loadedOptions.has(opt.key)) {
+      tab.textContent = opt.label;
+    } else {
+      tab.textContent = opt.label;
+      tab.classList.add('loading');
+    }
+    
+    tab.addEventListener('click', () => switchToStationOption(opt.key));
+    tabsContainer.appendChild(tab);
+  });
+  
+  // Activate first tab
+  tabsContainer.querySelector('.forecastTab').classList.add('active');
+}
+
+function buildSourceToggle() {
+  const toggleContainer = document.getElementById('forecastSourceToggle');
+  toggleContainer.innerHTML = '';
+  toggleContainer.classList.add('visible');
+  
+  const sources = [
+    { key: 'noaa', label: 'NOAA Forecast' },
+    { key: 'openmeteo', label: 'Open-Meteo Forecast' }
+  ];
+  
+  sources.forEach(src => {
+    const btn = document.createElement('button');
+    btn.className = 'sourceToggleBtn';
+    btn.textContent = src.label;
+    btn.dataset.source = src.key;
+    btn.addEventListener('click', () => switchForecastSource(src.key));
+    toggleContainer.appendChild(btn);
+  });
+  
+  // Activate current source
+  toggleContainer.querySelector(`[data-source="${currentForecastSource}"]`).classList.add('active');
+}
+
+function switchForecastSource(source) {
+  currentForecastSource = source;
+  
+  // Update active toggle button
+  document.querySelectorAll('.sourceToggleBtn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.source === source);
+  });
+  
+  // Update all station data to use the selected source
+  for (const opt in raceConfig.allStations) {
+    const stations = raceConfig.allStations[opt];
+    stations.forEach(s => {
+      let displayForecast;
+      if (source === 'noaa' && s.noaaForecast) {
+        displayForecast = s.noaaForecast;
+      } else if (source === 'openmeteo' && s.openMeteoForecast) {
+        displayForecast = s.openMeteoForecast;
+      } else {
+        displayForecast = { temp: "—", wind: "—", cond: "Unavailable" };
+      }
+      
+      s.temp = displayForecast.temp;
+      s.wind = displayForecast.wind;
+      s.cond = displayForecast.cond;
+      s.forecasts = [{ 
+        eta: new Date(raceConfig.date.getTime() + s.miles * paceMinPerMiFromUI() * 60000),
+        temp: displayForecast.temp, 
+        wind: displayForecast.wind, 
+        cond: displayForecast.cond, 
+        elapsed: s.elapsed 
+      }];
+    });
+  }
+  
+  // Refresh the current display
+  displayForecastTable(currentStationOption);
+  
+  // Update map tooltips
+  if(groupList && groupList.length){
+    groupList.forEach(g=>{
+      if(g.marker) g.marker.setTooltipContent(tooltipLinesMapGroup(g, raceConfig.allStations[currentStationOption]));
+    });
+  }
+  
+  // Update source label
+  const sourceLabel = document.getElementById("sourceLabel");
+  const sourceName = source === 'noaa' ? 'NOAA forecastHourly' : 'Open-Meteo';
+  sourceLabel.textContent = `Currently showing: ${sourceName}`;
+}
+
+function switchToStationOption(option) {
+  // Check if option is loaded
+  if (!loadedOptions.has(option)) {
+    // Show loading message in table
+    const tbody = document.getElementById('forecastBody');
+    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:40px 20px; color:#888; font-style:italic;">Loading forecast data for this option... ⏳</td></tr>';
+    
+    // Update active tab
+    document.querySelectorAll('.forecastTab').forEach(tab => {
+      tab.classList.toggle('active', tab.dataset.option === option);
+    });
+    
+    return; // Exit, wait for background load to complete
+  }
+  
+  currentStationOption = option;
+  
+  // Update active tab
+  document.querySelectorAll('.forecastTab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.option === option);
+  });
+  
+  // Update table
+  displayForecastTable(option);
+  
+  // Update map markers
+  redrawMarkers(option);
+  
+  // Update elevation chart
+  if (raceConfig.route && profileDistances.length) {
+    buildElevationChart(profileDistances, profileElevations, raceConfig.allStations[option]);
+  }
+  
+  // Update confirmation message
+  const confirmEl = document.getElementById('paceConfirm');
+  if (confirmEl.classList.contains('success')) {
+    const paceM = String(document.getElementById('paceMin').value).padStart(2,"0");
+    const paceS = String(document.getElementById('paceSec').value).padStart(2,"0");
+    const startTimeStr = raceConfig.date.toLocaleTimeString([], { hour:"numeric", minute:"2-digit" }).toLowerCase();
+    const optionName = getOptionName(option);
+    confirmEl.textContent = `Start Time: ${startTimeStr} | Target Pace: ${paceM}:${paceS} min/mi | Forecast Markers: ${optionName}`;
+  }
+}
+
+function displayForecastTable(option) {
+  const tbody = document.getElementById('forecastBody');
+  tbody.innerHTML = '';
+  
+  const stations = raceConfig.allStations[option];
+  if (!stations) return;
+  
+  stations.forEach(s => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${s.name}</td>
+      <td>${s.miles.toFixed(1)} mi</td>
+      <td>${s.elapsed || '—'}</td>
+      <td>${s.etaStr || '—'}</td>
+      <td>${s.temp || '—'}</td>
+      <td>${s.wind || '—'}</td>
+      <td>${s.cond || '—'}</td>`;
+    tbody.appendChild(row);
+  });
+}
+</script>
+
+<!-- ============ CLIMATOLOGY (dual system) ============ -->
+<script>
+let startClimateData = null;
+let finishClimateData = null;
+
+async function loadClimatology() {
+  try {
+    // Load both climate datasets
+    const [startData, finishData] = await Promise.all([
+      fetch(raceConfig.startClimateUrl).then(r => r.json()),
+      fetch(raceConfig.finishClimateUrl).then(r => r.json())
+    ]);
+    
+    startClimateData = startData;
+    finishClimateData = finishData;
+    
+    // Build the dual tab system
+    buildClimatologyTabs();
+    
+    // Display start climate by default
+    displayStartClimate();
+    
+  } catch(err) {
+    console.error('Climatology load failed:', err);
+    document.getElementById('climoTitle').textContent = 'Climatology data unavailable';
+  }
+}
+
+function buildClimatologyTabs() {
+  const tabs = document.getElementById('climoTabs');
+  const panels = document.getElementById('climoPanels');
+  tabs.innerHTML = '';
+  panels.innerHTML = '';
+  
+  // Create two tabs: Start and Finish
+  const startTab = document.createElement('button');
+  startTab.className = 'climoTab active';
+  startTab.textContent = 'Start Climate (7:00 AM Folsom)';
+  startTab.addEventListener('click', () => {
+    document.querySelectorAll('.climoTab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.climoPanel').forEach(p => p.classList.remove('active'));
+    startTab.classList.add('active');
+    document.getElementById('startPanel').classList.add('active');
+  });
+  
+  const finishTab = document.createElement('button');
+  finishTab.className = 'climoTab';
+  finishTab.textContent = 'Finish Climate (Sacramento)';
+  finishTab.addEventListener('click', () => {
+    document.querySelectorAll('.climoTab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.climoPanel').forEach(p => p.classList.remove('active'));
+    finishTab.classList.add('active');
+    document.getElementById('finishPanel').classList.add('active');
+  });
+  
+  tabs.appendChild(startTab);
+  tabs.appendChild(finishTab);
+  
+  // Create panels
+  const startPanel = document.createElement('div');
+  startPanel.id = 'startPanel';
+  startPanel.className = 'climoPanel active';
+  startPanel.innerHTML = `
+    <table>
+      <thead><tr><th>Year</th><th>Temperature (°F)</th><th>Conditions</th><th>Precipitation (")</th></tr></thead>
+      <tbody id="startClimateBody"></tbody>
+      <tfoot><tr id="startAvgRow"><td>Average</td><td>—</td><td>—</td><td>—</td></tr></tfoot>
+    </table>
+    <div class="note">10-year start climate (2015-2024) from MHR (Mather Airport near Folsom) at 7:00 AM on December 7. Data source: <a href="https://mesonet.agron.iastate.edu/request/download.phtml" target="_blank" rel="noopener">Iowa State IEM ASOS Archive</a>.</div>
+  `;
+  
+  const finishPanel = document.createElement('div');
+  finishPanel.id = 'finishPanel';
+  finishPanel.className = 'climoPanel';
+  finishPanel.innerHTML = `
+    <div id="finishClimateContent">
+      <p style="text-align:center; color:#888; font-style:italic; padding:20px;">Generate a forecast to see finish climate data for your estimated finish time.</p>
+    </div>
+  `;
+  
+  panels.appendChild(startPanel);
+  panels.appendChild(finishPanel);
+}
+
+function displayStartClimate() {
+  if (!startClimateData) return;
+  
+  const tbody = document.getElementById('startClimateBody');
+  const avgRow = document.getElementById('startAvgRow');
+  tbody.innerHTML = '';
+  
+  let sumTemp = 0;
+  let count = 0;
+  
+  startClimateData.forEach(row => {
+    const temp = parseFloat(row.temp);
+    if (!isNaN(temp)) {
+      sumTemp += temp;
+      count++;
+    }
+    
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${row.year}</td>
+      <td>${row.temp}°F</td>
+      <td>${row.conditions}</td>
+      <td>${row.precip}</td>`;
+    tbody.appendChild(tr);
+  });
+  
+  if (count > 0) {
+    avgRow.innerHTML = `<td>Average</td><td>${(sumTemp/count).toFixed(1)}°F</td><td>—</td><td>—</td>`;
+  }
+}
+
+function updateFinishClimate(pace) {
+  if (!finishClimateData) return;
+  
+  // Calculate finish time
+  const finishMinutes = 26.2 * pace;
+  const finishTime = new Date(raceConfig.date.getTime() + finishMinutes * 60000);
+  
+  // Round to nearest 5-minute increment
+  const hours = finishTime.getHours();
+  const minutes = finishTime.getMinutes();
+  const roundedMinutes = Math.round(minutes / 5) * 5;
+  
+  let displayHours = hours;
+  let displayMinutes = roundedMinutes;
+  
+  if (displayMinutes === 60) {
+    displayHours++;
+    displayMinutes = 0;
+  }
+  
+  // Format as H:MM for the key
+  const timeKey = `${displayHours}:${String(displayMinutes).padStart(2, '0')}`;
+  
+  // Get data for this time
+  const climateForTime = finishClimateData[timeKey];
+  
+  if (!climateForTime) {
+    document.getElementById('finishClimateContent').innerHTML = `
+      <p style="text-align:center; color:#888; font-style:italic; padding:20px;">
+        Climate data not available for finish time ${timeKey}. 
+        Try a different pace or check data availability.
+      </p>`;
+    return;
+  }
+  
+  // Display finish climate
+  const finishStr = finishTime.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+  
+  let html = `
+    <h4 style="text-align:center; margin-bottom:12px;">Estimated Finish Time: ${finishStr}</h4>
+    <table>
+      <thead><tr><th>Year</th><th>Start Temp (°F)</th><th>Start Conditions</th><th>Finish Temp (°F)</th><th>Finish Conditions</th><th>Precipitation (")</th></tr></thead>
+      <tbody>`;
+  
+  let sumStartTemp = 0, sumFinishTemp = 0, count = 0;
+  
+  climateForTime.forEach(row => {
+    const startTemp = parseFloat(row.start_temp);
+    const finishTemp = parseFloat(row.finish_temp);
+    
+    if (!isNaN(startTemp)) {
+      sumStartTemp += startTemp;
+      count++;
+    }
+    if (!isNaN(finishTemp)) {
+      sumFinishTemp += finishTemp;
+    }
+    
+    html += `
+      <tr>
+        <td>${row.year}</td>
+        <td>${row.start_temp}°F</td>
+        <td>${row.start_conditions}</td>
+        <td>${row.finish_temp}°F</td>
+        <td>${row.finish_conditions}</td>
+        <td>${row.precip}</td>
+      </tr>`;
+  });
+  
+  html += `</tbody>
+    <tfoot><tr style="font-weight:700; background:#f5f5f5;">
+      <td>Average</td>
+      <td>${count > 0 ? (sumStartTemp/count).toFixed(1) : '—'}°F</td>
+      <td>—</td>
+      <td>${count > 0 ? (sumFinishTemp/count).toFixed(1) : '—'}°F</td>
+      <td>—</td>
+      <td>—</td>
+    </tr></tfoot>
+    </table>
+    <div class="note">10-year finish climate (2015-2024) for December 7 at your estimated finish time. Shows conditions at race start (Folsom) and finish (Sacramento). Data source: <a href="https://mesonet.agron.iastate.edu/request/download.phtml" target="_blank" rel="noopener">Iowa State IEM ASOS Archive</a>.</div>
+  `;
+  
+  document.getElementById('finishClimateContent').innerHTML = html;
+}
+
+document.addEventListener('DOMContentLoaded', loadClimatology);
+</script>
+
+<!-- ============ TERRAIN + ELEVATION ============ -->
+<script>
+function latLonToTileXY(lat, lon, z){
+  const x = Math.floor((lon + 180) / 360 * Math.pow(2, z));
+  const y = Math.floor((1 - Math.log(Math.tan(lat*Math.PI/180) + 1/Math.cos(lat*Math.PI/180)) / Math.PI) / 2 * Math.pow(2, z));
+  return {x,y};
+}
+function latLonToPixelXYInTile(lat, lon, z, tileSize=256){
+  const n = Math.pow(2, z);
+  const xtile = (lon + 180) / 360 * n;
+  const latRad = lat * Math.PI/180;
+  const ytile = (1 - Math.log(Math.tan(latRad) + 1/Math.cos(latRad)) / Math.PI) / 2 * n;
+  const px = Math.floor((xtile - Math.floor(xtile)) * tileSize);
+  const py = Math.floor((ytile - Math.floor(ytile)) * tileSize);
+  return {px, py};
+}
+function decodeTerrainRGB(r,g,b){ return -10000 + (r*256*256 + g*256 + b) * 0.1; }
+
+const tileCache = new Map();
+async function getTileImageData(z,x,y){
+  const key = `${z}/${x}/${y}`;
+  if (tileCache.has(key)) return tileCache.get(key);
+  const url = `https://api.mapbox.com/v4/mapbox.terrain-rgb/${z}/${x}/${y}.pngraw?access_token=${MAPBOX_TOKEN}`;
+  const img = new Image(); img.crossOrigin = 'anonymous';
+  const loaded = new Promise((res,rej)=>{ img.onload=()=>res(); img.onerror=(e)=>rej(e); });
+  img.src = url; await loaded;
+  const canvas = document.createElement('canvas'); canvas.width=256; canvas.height=256;
+  const ctx = canvas.getContext('2d'); ctx.drawImage(img,0,0);
+  const imageData = ctx.getImageData(0,0,256,256);
+  const record = { imageData }; tileCache.set(key, record); return record;
+}
+async function getElevationMetersAt(lat, lon, z){
+  const {x,y} = latLonToTileXY(lat, lon, z);
+  const {px,py} = latLonToPixelXYInTile(lat, lon, z, 256);
+  try{
+    const { imageData } = await getTileImageData(z,x,y);
+    const idx = (py*256 + px) * 4;
+    const r = imageData.data[idx], g = imageData.data[idx+1], b = imageData.data[idx+2];
+    return decodeTerrainRGB(r,g,b);
+  }catch(e){ return null; }
+}
+function haversineMi(a,b){
+  const R=3958.7613; const toRad=x=>x*Math.PI/180;
+  const dLat=toRad(b[0]-a[0]); const dLon=toRad(b[1]-a[1]); const la1=toRad(a[0]);
+  const h=Math.sin(dLat/2)**2+Math.cos(la1)*Math.cos(toRad(b[0]))*Math.sin(dLon/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h));
+}
+
+let elevChart = null, profileDistances = [], profileElevations = [], currentHighlightIndices = new Set();
+function elevationAtMile(mile) {
+  if (!profileDistances.length) return null;
+  for (let i=1;i<profileDistances.length;i++) {
+    if (profileDistances[i] >= mile) {
+      const d0 = profileDistances[i-1], d1 = profileDistances[i];
+      const e0 = profileElevations[i-1], e1 = profileElevations[i-1] == null ? null : profileElevations[i];
+      if (e0==null || e1==null) return null;
+      const t = (mile-d0)/(d1-d0);
+      return e0 + t*(e1-e0);
+    }
+  }
+  return profileElevations[profileElevations.length-1];
+}
+async function buildElevationProfile(routeCoords, z){
+  const fullDistances = [0];
+  for(let i=1;i<routeCoords.length;i++) fullDistances[i] = fullDistances[i-1] + haversineMi(routeCoords[i-1], routeCoords[i]);
+  const sampled = [], sampledDistances = [];
+  for (let i=0;i<routeCoords.length;i+=10){ sampled.push(routeCoords[i]); sampledDistances.push(fullDistances[i]); }
+  if (sampled[sampled.length-1] !== routeCoords[routeCoords.length-1]) {
+    sampled.push(routeCoords[routeCoords.length-1]);
+    sampledDistances.push(fullDistances[fullDistances.length-1]);
+  }
+  const meters=[];
+  for (const [lat,lon] of sampled){ meters.push(await getElevationMetersAt(lat,lon,z)); }
+  const feet = meters.map(m => (m!=null ? m*3.28084 : null));
+  return { distances: sampledDistances, elevations: feet, sampled };
+}
+function buildElevationChart(distances, elevations, stations){
+  const ctx = document.getElementById('elevationChart').getContext('2d');
+  if(elevChart) elevChart.destroy();
+  profileDistances = distances; profileElevations = elevations;
+  const stationPoints = stations.map(s => ({ x: s.miles, y: elevationAtMile(s.miles) }));
+  elevChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      datasets: [
+        { label:'Elevation', data: profileDistances.map((d,i)=>({x:d,y:elevations[i]})), parsing:false, borderColor:'#000', pointRadius:0, borderWidth:1.5, fill:false, tension:0.1 },
+        {
+          label:'Stations', type:'scatter', data: stationPoints, parsing:false, pointRadius:6, hoverRadius:10, hitRadius:12,
+          pointBackgroundColor: (c) => {
+            const idx = c.dataIndex;
+            return (elevChart && currentHighlightIndices.has(idx))
+              ? getComputedStyle(document.documentElement).getPropertyValue('--highlight').trim() || '#FF6700'
+              : getComputedStyle(document.documentElement).getPropertyValue('--blaze').trim() || '#37BC7D';
+          },
+          pointBorderColor:'#222', pointBorderWidth:1
+        }
+      ]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      layout: { padding: { left: 0, right: 0, top: 0, bottom: 0 } },
+      plugins: {
+        legend: { display:false },
+        tooltip: {
+          enabled:true, filter: ctx => ctx.datasetIndex === 1,
+          callbacks: {
+            title: (ctx) => {
+              const station = stations[ctx[0].dataIndex];
+              return `${station.name} — Mile ${station.miles.toFixed(1)}`;
+            },
+            label: (ctx) => {
+              const station = stations[ctx.dataIndex];
+              const pace = paceMinPerMiFromUI();
+              const elapsed = formatElapsedFromMinutes(station.miles * pace);
+              if (station.forecasts && station.forecasts.length) {
+                return station.forecasts.map(f => [
+                  `Elapsed: ${elapsed}`,
+                  `ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}`,
+                  `Temp: ${f.temp}`, `Wind: ${f.wind}`, `Conditions: ${f.cond}`
+                ]).flat();
+              }
+              return [`Elapsed: ${elapsed}`, "Forecast: —"];
+            }
+          },
+          backgroundColor:'#fff',
+          borderColor: getComputedStyle(document.documentElement).getPropertyValue('--highlight').trim() || '#FF6700',
+          borderWidth:2, titleColor:'#111', bodyColor:'#111', padding:8, displayColors:false
+        }
+      },
+      interaction: { mode:'point', intersect:true },
+      onHover: (event, elements) => {
+        const canvas = event.chart.canvas;
+        if (elements.length > 0 && elements[0].datasetIndex === 1) {
+          canvas.style.cursor = 'pointer';
+          const idx = elements[0].index;
+          highlightByStationIndex(idx);
+        } else {
+          canvas.style.cursor = 'default';
+          clearHighlights();
+          event.chart.tooltip.setActiveElements([], {x:0,y:0});
+          event.chart.update();
+        }
+      },
+      scales: {
+        x: { type:'linear', title:{ display:true, text:'Distance (mi)' }, min:0, max:26.2 },
+        y: { title:{ display:true, text:'Elevation (ft)' }, ticks:{ autoSkip:true, maxTicksLimit:6 } }
+      }
+    }
+  });
+  ctx.canvas.addEventListener("mouseleave", () => {
+    if (elevChart) {
+      elevChart.tooltip.setActiveElements([], {x:0,y:0});
+      elevChart.update();
+      clearHighlights();
+    }
+  });
+}
+</script>
+
+<!-- ============ MAP + MARKERS + FORECASTS ============ -->
+<script>
+async function getNOAAForecast(lat, lon, targetDate) {
+  try {
+    const pointRes = await fetch(`https://api.weather.gov/points/${lat},${lon}`);
+    const pointData = await pointRes.json();
+    const fRes = await fetch(pointData.properties.forecastHourly);
+    const fData = await fRes.json();
+    const periods=fData?.properties?.periods||[];
+    if (!periods.length) return null;
+    return periods.reduce((p,c)=>
+      Math.abs(new Date(c.startTime)-targetDate) < Math.abs(new Date(p.startTime)-targetDate) ? c : p
+    );
+  } catch { return null; }
+}
+
+async function getOpenMeteoForecast(lat, lon, targetDate) {
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,wind_speed_10m,wind_direction_10m,weather_code&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto`;
+    const res = await fetch(url);
+    const data = await res.json();
+    
+    if (!data.hourly || !data.hourly.time) return null;
+    
+    const times = data.hourly.time.map(t => new Date(t));
+    let closestIdx = 0;
+    let minDiff = Math.abs(times[0] - targetDate);
+    
+    for (let i = 1; i < times.length; i++) {
+      const diff = Math.abs(times[i] - targetDate);
+      if (diff < minDiff) {
+        minDiff = diff;
+        closestIdx = i;
+      }
+    }
+    
+    const weatherCode = data.hourly.weather_code[closestIdx];
+    const weatherDescriptions = {
+      0: "Clear", 1: "Mainly Clear", 2: "Partly Cloudy", 3: "Overcast",
+      45: "Foggy", 48: "Depositing Rime Fog",
+      51: "Light Drizzle", 53: "Moderate Drizzle", 55: "Dense Drizzle",
+      56: "Light Freezing Drizzle", 57: "Dense Freezing Drizzle",
+      61: "Slight Rain", 63: "Moderate Rain", 65: "Heavy Rain",
+      66: "Light Freezing Rain", 67: "Heavy Freezing Rain",
+      71: "Slight Snow", 73: "Moderate Snow", 75: "Heavy Snow",
+      77: "Snow Grains",
+      80: "Slight Rain Showers", 81: "Moderate Rain Showers", 82: "Violent Rain Showers",
+      85: "Slight Snow Showers", 86: "Heavy Snow Showers",
+      95: "Thunderstorm", 96: "Thunderstorm with Slight Hail", 99: "Thunderstorm with Heavy Hail"
+    };
+    
+    const temp = data.hourly.temperature_2m[closestIdx];
+    const windSpeed = data.hourly.wind_speed_10m[closestIdx];
+    const windDir = data.hourly.wind_direction_10m[closestIdx];
+    const windDirCardinal = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'][Math.round(windDir / 22.5) % 16];
+    
+    return {
+      temperature: Math.round(temp),
+      windSpeed: `${Math.round(windSpeed)} mph`,
+      windDirection: windDirCardinal,
+      shortForecast: weatherDescriptions[weatherCode] || "Unknown"
+    };
+  } catch (err) {
+    console.error('OpenMeteo error:', err);
+    return null;
+  }
+}
+
+function bindMarkerTooltip(marker) {
+  marker.bindTooltip("", { direction: "auto", offset: [0, -10], opacity: 0.95, className: "pp-tooltip", sticky: false, autoPan: true });
+}
+
+const map = L.map('map', {
+  keyboard: false,
+  scrollWheelZoom: false,
+  touchZoom: 'center',
+  zoomControl: true,
+  dragging: true
+}).setView([38.60, -121.30], 11);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
+
+let markers = [];
+let groupList = [];
+let stationIndexToGroup = [];
+window.mapReady = false;
+
+function applyMarkerHighlights(activeGroupIdx){
+  markers.forEach((m,i)=>{ const dot = m.getElement()?.querySelector('.blaze-dot'); if (dot) dot.classList.toggle("highlighted", i === activeGroupIdx); });
+}
+function applyChartHighlights(indices){
+  currentHighlightIndices = new Set(indices);
+  if (elevChart){ elevChart.setActiveElements(indices.map(i=>({datasetIndex:1,index:i}))); elevChart.update(); }
+}
+function highlightByStationIndex(stationIdx){
+  const gIdx = stationIndexToGroup[stationIdx];
+  applyMarkerHighlights(gIdx);
+  applyChartHighlights([stationIdx]);
+}
+function highlightByGroupIndex(groupIdx){
+  const indices = groupList[groupIdx].indices;
+  applyMarkerHighlights(groupIdx);
+  applyChartHighlights(indices);
+}
+function clearHighlights(){
+  currentHighlightIndices.clear();
+  markers.forEach(m=>m.getElement()?.querySelector('.blaze-dot')?.classList.remove("highlighted"));
+  if(elevChart){ elevChart.setActiveElements([]); elevChart.update(); }
+}
+const blazeIcon = L.divIcon({ className:"", html:'<div class="blaze-dot"></div>', iconSize:[20,20], iconAnchor:[10,10] });
+
+function tooltipLinesMapGroup(g, stations) {
+  let html = "";
+  g.indices.forEach((i, idx) => {
+    const s = stations[i];
+    if (idx > 0) html += `<hr style="margin:6px 0;">`
+    const pace = paceMinPerMiFromUI();
+    const elapsed = formatElapsedFromMinutes(s.miles * pace);
+    html += `<div style="margin-bottom:6px;">
+      <strong>${s.name} — Mile ${s.miles.toFixed(1)}</strong><br>`;
+    if (s.forecasts && s.forecasts.length) {
+      s.forecasts.forEach(f => {
+        html += `Elapsed: ${elapsed}<br>
+                 ETA: ${f.eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"})}<br>
+                 Temp: ${f.temp}<br>
+                 Wind: ${f.wind}<br>
+                 Conditions: ${f.cond}<br>`;
+      });
+    } else {
+      html += `Elapsed: ${elapsed}<br>Forecast: —<br>`;
+    }
+    html += `</div>`;
+  });
+  return html;
+}
+
+function redrawMarkers(option) {
+  // Clear existing markers
+  markers.forEach(m => m.remove());
+  markers = [];
+  groupList = [];
+  stationIndexToGroup = [];
+  
+  const stations = raceConfig.allStations[option];
+  if (!stations) return;
+  
+  // Group stations by lat/lon
+  const groupsByKey = {};
+  stations.forEach((s, idx) => {
+    const key = `${s.lat},${s.lon}`;
+    if (!groupsByKey[key]) groupsByKey[key] = { lat:s.lat, lon:s.lon, indices:[] };
+    groupsByKey[key].indices.push(idx);
+  });
+  groupList = Object.values(groupsByKey);
+  
+  // Place markers
+  groupList.forEach((g, gIdx) => {
+    g.indices.forEach(stIdx => { stationIndexToGroup[stIdx] = gIdx; });
+    const marker = L.marker([g.lat, g.lon], { icon: blazeIcon }).addTo(map);
+    g.marker = marker;
+    markers.push(marker);
+    bindMarkerTooltip(marker);
+    marker.setTooltipContent(tooltipLinesMapGroup(g, stations));
+    marker.on("mouseover", () => highlightByGroupIndex(gIdx));
+    marker.on("mouseout", clearHighlights);
+  });
+}
+
+// Load route and initial setup
+fetch(raceConfig.routeUrl).then(r=>r.json()).then(async(route)=>{
+  raceConfig.route = route;
+  
+  const line = L.polyline(route, {color:"#000", weight:3}).addTo(map);
+  map.fitBounds(line.getBounds());
+  
+  // Build elevation
+  try {
+    const {distances, elevations} = await buildElevationProfile(route, raceConfig.elevationZoom);
+    profileDistances = distances;
+    profileElevations = elevations;
+  } catch(e) {
+    console.error('Elevation error', e);
+    const distances = [0];
+    for(let i=1; i<route.length; i++) distances[i] = distances[i-1] + haversineMi(route[i-1], route[i]);
+    profileDistances = distances;
+    profileElevations = distances.map(() => 100);
+  }
+  
+  window.mapReady = true;
+});
+
+async function updateForecastsForOption(opt, sourceToFetch = 'both'){
+  const pace = paceMinPerMiFromUI();
+  const now = new Date();
+  const noaaHorizonHours = 6.5 * 24;
+  const openMeteoHorizonHours = 16 * 24;
+  
+  // Only set labels on first option load
+  if (opt === 'option1' && sourceToFetch !== 'openmeteo') {
+    const validLabel = document.getElementById("forecastValidLabel");
+    const sourceLabel = document.getElementById("sourceLabel");
+
+    // Determine if we can fetch both sources
+    let minHrs = Infinity;
+    const stations = raceConfig.allStations[opt];
+    for (const s of stations) {
+      const eta = new Date(raceConfig.date.getTime() + s.miles * pace * 60000);
+      const hrs = (eta - now) / 3_600_000;
+      if (hrs < minHrs) minHrs = hrs;
+    }
+
+    // Check if we should fetch both sources
+    bothSourcesAvailable = (minHrs <= noaaHorizonHours);
+    
+    console.log(`Race is ${minHrs.toFixed(1)} hours away. NOAA available: ${minHrs <= noaaHorizonHours}, Both sources: ${bothSourcesAvailable}`);
+
+    if (minHrs <= noaaHorizonHours) {
+      validLabel.textContent = `Forecast valid as of ${new Date().toLocaleString()}`;
+      sourceLabel.textContent = `Loading forecast sources...`;
+    } else if (minHrs <= openMeteoHorizonHours) {
+      validLabel.textContent = `Forecast valid as of ${new Date().toLocaleString()}`;
+      sourceLabel.textContent = `Source: Open-Meteo`;
+    } else {
+      validLabel.textContent = ``;
+      sourceLabel.textContent = ``;
+    }
+  }
+
+  // Generate forecasts for this option only
+  const stations = raceConfig.allStations[opt];
+  
+  for (const s of stations) {
+    const elapsedStr = formatElapsedFromMinutes(s.miles * pace);
+    const eta = new Date(raceConfig.date.getTime() + s.miles * pace * 60000);
+    const timeStr = eta.toLocaleTimeString([], {hour:"numeric", minute:"2-digit"});
+    const hoursUntilEta = (eta - now) / 3_600_000;
+
+    // Initialize if first time
+    if (!s.noaaForecast) s.noaaForecast = null;
+    if (!s.openMeteoForecast) s.openMeteoForecast = null;
+
+    // Fetch NOAA if requested and within range
+    if ((sourceToFetch === 'noaa' || sourceToFetch === 'both') && hoursUntilEta <= noaaHorizonHours) {
+      const f = await getNOAAForecast(s.lat, s.lon, eta);
+      if (f) {
+        const temp = f.temperature != null ? `${f.temperature}°F` : "—";
+        const speed = f.windSpeed || "", dir = f.windDirection || "";
+        const wind = (speed || dir) ? `${speed} ${dir}`.trim() : "—";
+        const cond = f.shortForecast || "—";
+        s.noaaForecast = { temp, wind, cond, raw: f };
+      } else {
+        s.noaaForecast = { temp: "—", wind: "—", cond: "Forecast unavailable", raw: null };
+      }
+    }
+
+    // Fetch Open-Meteo if requested and within range
+    if ((sourceToFetch === 'openmeteo' || sourceToFetch === 'both') && hoursUntilEta <= openMeteoHorizonHours) {
+      const f = await getOpenMeteoForecast(s.lat, s.lon, eta);
+      if (f) {
+        const temp = f.temperature != null ? `${f.temperature}°F` : "—";
+        const speed = f.windSpeed || "", dir = f.windDirection || "";
+        const wind = (speed || dir) ? `${speed} ${dir}`.trim() : "—";
+        const cond = f.shortForecast || "—";
+        s.openMeteoForecast = { temp, wind, cond, raw: f };
+      } else {
+        s.openMeteoForecast = { temp: "—", wind: "—", cond: "Forecast unavailable", raw: null };
+      }
+    }
+
+    // Set default display values based on current source
+    let displayForecast;
+    if (bothSourcesAvailable && s.noaaForecast) {
+      displayForecast = currentForecastSource === 'noaa' ? s.noaaForecast : (s.openMeteoForecast || s.noaaForecast);
+    } else if (s.noaaForecast) {
+      displayForecast = s.noaaForecast;
+    } else if (s.openMeteoForecast) {
+      displayForecast = s.openMeteoForecast;
+    } else {
+      displayForecast = { temp: "—", wind: "—", cond: "Forecast beyond range" };
+    }
+
+    s.elapsed = elapsedStr;
+    s.etaStr = timeStr;
+    s.temp = displayForecast.temp;
+    s.wind = displayForecast.wind;
+    s.cond = displayForecast.cond;
+    s.forecasts = [{ eta, temp: displayForecast.temp, wind: displayForecast.wind, cond: displayForecast.cond, elapsed: elapsedStr }];
+  }
+}
+</script>
+
+<!-- ============ Row highlighting ============ -->
+<script>
+function installRowHighlighting() {
+  const attach = (tbody) => {
+    if (!tbody) return;
+    tbody.addEventListener("pointerup", (e) => {
+      const tr = e.target.closest("tr");
+      if (!tr) return;
+      const table = tr.closest("table");
+      const was = tr.classList.contains("highlight-row");
+      table.querySelectorAll("tbody tr").forEach(r => r.classList.remove("highlight-row"));
+      if (!was) tr.classList.add("highlight-row");
+    }, { passive: true });
+  };
+  attach(document.getElementById("forecastBody"));
+  const observer = new MutationObserver(() => {
+    document.querySelectorAll(".climoBody").forEach(attach);
+  });
+  observer.observe(document.getElementById("climatology"), { childList: true, subtree: true });
+}
+document.addEventListener("DOMContentLoaded", installRowHighlighting);
+</script>
+</html>
