@@ -68,15 +68,15 @@ section h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700
 .control-row label { font-weight:700; color:#000; font-size:15px; white-space:nowrap; }
 .control-row select, .control-row input { font-size:14px; border:1px solid #ccc; border-radius:6px; background:#fff; color:#111; padding:8px 12px; cursor:pointer; height:38px; }
 
-/* Professional select styling - right angle bracket indicator */
+/* Professional select styling - right angle bracket with SVG path */
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3ctext x='6' y='18' font-size='20' font-weight='bold' fill='%23111'%3e%26rsaquo;%3c/text%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3e%3cpath d='M 8 6 L 14 12 L 8 18' stroke='%23111' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 10px center;
-  background-size: 20px;
+  background-size: 18px;
   background-color: #fff;
   padding-right: 36px;
   padding-left: 8px;
