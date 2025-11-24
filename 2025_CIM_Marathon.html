@@ -69,7 +69,7 @@ section h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700
 .pace-input-group { display:flex; align-items:center; gap:6px; white-space:nowrap; }
 .pace-input-group span { color:#000; font-size:15px; font-weight:700; }
 
-#paceGo { font-size:14px; font-weight:600; border:1px solid #003546; border-radius:6px; color:#fff; background:#003546; cursor:pointer; padding:9px 20px; height:38px; transition:background 0.2s ease; margin-left:4px; }
+#paceGo { font-size:14px; font-weight:600; border:1px solid #003546; border-radius:6px; color:#fff; background:#003546; cursor:pointer; padding:9px 20px; height:38px; min-width:200px; transition:background 0.2s ease; margin-left:4px; white-space: nowrap; position: relative; }
 #paceGo:hover { background:#FF6700; }
 #paceGo:disabled { background:#ccc; cursor:not-allowed; border-color:#ccc; }
 
@@ -152,7 +152,7 @@ th { background:#f0f0f0; font-weight:700; }
 .leaflet-container:focus { outline:none; scroll-margin-top:0; }
 
 /* Loading spinner */
-.spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #f3f3f3; border-top: 2px solid var(--pp-dark); border-radius: 50%; animation: spin 1s linear infinite; margin-left: 8px; vertical-align: middle; }
+.spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #f3f3f3; border-top: 2px solid var(--pp-dark); border-radius: 50%; animation: spin 1s linear infinite; margin-left: 4px; vertical-align: middle; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
 /* ===== MOBILE RESPONSIVENESS ===== */
@@ -312,8 +312,8 @@ th { background:#f0f0f0; font-weight:700; }
     </div>
 
     <!-- Station Detail Modal -->
-    <div id="stationModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); z-index:10000; align-items:center; justify-content:center; padding:16px;">
-      <div style="background:#fff; border-radius:12px; padding:24px; max-width:500px; width:100%; box-shadow:0 4px 30px rgba(0,0,0,0.3); max-height:90vh; overflow-y:auto;">
+    <div id="stationModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:10000; align-items:center; justify-content:center; padding:16px; overflow-y: auto;">
+      <div style="background:#fff; border-radius:12px; padding:24px; max-width:500px; width:100%; box-shadow:0 4px 30px rgba(0,0,0,0.3); max-height:90vh; overflow-y:auto; margin: auto;">
         <!-- Close button -->
         <button id="stationModalClose" style="position:absolute; top:12px; right:12px; background:none; border:none; font-size:28px; cursor:pointer; color:#999; padding:0; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">&times;</button>
         
@@ -386,9 +386,19 @@ th { background:#f0f0f0; font-weight:700; }
           <div style="display: flex; align-items: center; gap: 8px;">
             <label>Start Time:</label>
             <div class="pace-input-group">
-              <input type="number" id="startHour" min="5" max="12" value="7" required style="width: 50px;">
+              <select id="startHour">
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7" selected>7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
               <span>:</span>
-              <input type="number" id="startMinute" min="0" max="59" value="0" placeholder="00" required style="width: 50px;">
+              <select id="startMinute">
+              </select>
               <span>AM</span>
             </div>
           </div>
@@ -673,6 +683,16 @@ document.addEventListener('DOMContentLoaded', function() {
   for(let s=0;s<60;s++){ let o=document.createElement('option'); o.value=s; o.textContent=String(s).padStart(2,'0'); secs.appendChild(o); }
   mins.value=9; secs.value=0;
   
+  // Initialize start time minute dropdown (every minute 00-59)
+  const startMin = document.getElementById('startMinute');
+  for(let m=0;m<60;m++){
+    let o = document.createElement('option');
+    o.value = String(m).padStart(2,'0');
+    o.textContent = String(m).padStart(2,'0');
+    if(m === 0) o.selected = true;  // Default to :00
+    startMin.appendChild(o);
+  }
+  
   checkAllStepsComplete();
   
   // Initialize forecast controls (disabled until forecast is generated)
@@ -775,6 +795,10 @@ document.getElementById('paceGo').addEventListener('click', async function() {
   paceBox.classList.add('loading');
   goBtn.disabled = true;
   
+  // Store button width before changing text to prevent shifting
+  const buttonWidth = goBtn.offsetWidth;
+  goBtn.style.width = buttonWidth + 'px';
+  
   // Show loading
   const originalText = goBtn.textContent;
   goBtn.innerHTML = 'Generating Forecast<span class="spinner"></span>';
@@ -874,6 +898,7 @@ document.getElementById('paceGo').addEventListener('click', async function() {
     confirmEl.style.color = '#d00';
   } finally {
     goBtn.innerHTML = originalText;
+    goBtn.style.width = 'auto';  // Reset width constraint
     goBtn.disabled = false;
     paceBox.classList.remove('loading');
   }
@@ -1744,12 +1769,17 @@ function showStationModal(station, elevation) {
   document.getElementById('stationModalWind').textContent = station.wind || '–';
   document.getElementById('stationModalCond').textContent = station.cond || '–';
   
+  // Prevent body scroll when modal is open
+  document.body.style.overflow = 'hidden';
+  
   // Show modal
   modal.style.display = 'flex';
 }
 
 function closeStationModal() {
   document.getElementById('stationModal').style.display = 'none';
+  // Re-enable body scroll
+  document.body.style.overflow = 'auto';
 }
 
 // Close modal button handlers
