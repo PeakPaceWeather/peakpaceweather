@@ -1,27 +1,124 @@
 [
-  { "name": "Start", "lat": 38.703558, "lon": -121.170346, "miles": 0.00 },
+  {
+    "name": "Start",
+    "lat": 38.703558,
+    "lon": -121.170346,
+    "miles": 0.0
+  },
+  {
+    "name": "Aid #1 – American River Canyon & Oak",
+    "lat": 38.699740,
+    "lon": -121.194575,
+    "miles": 2.2
+  },
+  {
+    "name": "Aid #2 – Beech & Oak",
+    "lat": 38.700333,
+    "lon": -121.231653,
+    "miles": 4.2
+  },
+  {
+    "name": "Aid #3 – Woodmore Oaks & Fair Oaks Blvd",
+    "lat": 38.692642,
+    "lon": -121.262347,
+    "miles": 6.4
+  },
+  {
+    "name": "Aid #4 – Madison & Fair Oaks Blvd",
+    "lat": 38.662262,
+    "lon": -121.262158,
+    "miles": 8.5
+  },
+  {
+    "name": "Aid #5 – Old Fair Oaks",
+    "lat": 38.643955,
+    "lon": -121.268180,
+    "miles": 10.0
+  },
+  {
+    "name": "Aid #6 – Hollister & Fair Oaks Blvd",
+    "lat": 38.636390,
+    "lon": -121.299442,
+    "miles": 12.0
+  },
 
-  { "name": "Aid Station 1",  "lat": 38.699740, "lon": -121.194574, "miles": 2.20 },
-  { "name": "Aid Station 2",  "lat": 38.700333, "lon": -121.231653, "miles": 4.20 },
-  { "name": "Aid Station 3",  "lat": 38.692643, "lon": -121.262347, "miles": 6.40 },
-  { "name": "Aid Station 4",  "lat": 38.662262, "lon": -121.262158, "miles": 8.50 },
+  {
+    "name": "Halfway",
+    "lat": 38.636950,
+    "lon": -121.319910,
+    "miles": 13.1
+  },
 
-  { "name": "Aid Station 5",  "lat": 38.643955, "lon": -121.268180, "miles": 10.00 },
-  { "name": "Aid Station 6",  "lat": 38.636390, "lon": -121.299441, "miles": 12.00 },
-
-  { "name": "Halfway",   "lat": 38.636770, "lon": -121.319817, "miles": 13.10 },
-
-  { "name": "Aid Station 7",  "lat": 38.636096, "lon": -121.328132, "miles": 13.60 },
-  { "name": "Aid Station 8",  "lat": 38.614392, "lon": -121.328724, "miles": 15.10 },
-  { "name": "Aid Station 9",  "lat": 38.587161, "lon": -121.333221, "miles": 16.50 },
-  { "name": "Aid Station 10", "lat": 38.577968, "lon": -121.356682, "miles": 17.90 },
-  { "name": "Aid Station 11", "lat": 38.566348, "lon": -121.392146, "miles": 19.40 },
-  { "name": "Aid Station 12", "lat": 38.563308, "lon": -121.409094, "miles": 20.40 },
-  { "name": "Aid Station 13", "lat": 38.564304, "lon": -121.421806, "miles": 21.40 },
-  { "name": "Aid Station 14", "lat": 38.564636, "lon": -121.430757, "miles": 22.30 },
-  { "name": "Aid Station 15", "lat": 38.569205, "lon": -121.451842, "miles": 23.50 },
-  { "name": "Aid Station 16", "lat": 38.570964, "lon": -121.467628, "miles": 24.50 },
-  { "name": "Aid Station 17", "lat": 38.574703, "lon": -121.481595, "miles": 25.30 },
-
-  { "name": "Finish", "lat": 38.578534, "lon": -121.497182, "miles": 26.20 }
+  {
+    "name": "Aid #7 – Sutter & Fair Oaks Blvd",
+    "lat": 38.636096,
+    "lon": -121.328132,
+    "miles": 13.6
+  },
+  {
+    "name": "Aid #8 – El Camino & Fair Oaks Blvd",
+    "lat": 38.614392,
+    "lon": -121.328724,
+    "miles": 15.1
+  },
+  {
+    "name": "Aid #9 – Walnut & Fair Oaks Blvd",
+    "lat": 38.600113,
+    "lon": -121.341575,
+    "miles": 16.5
+  },
+  {
+    "name": "Aid #10 – Savirien & Fair Oaks Blvd",
+    "lat": 38.584559,
+    "lon": -121.357961,
+    "miles": 17.9
+  },
+  {
+    "name": "Aid #11 – Watt & Fair Oaks Blvd",
+    "lat": 38.574353,
+    "lon": -121.382303,
+    "miles": 19.4
+  },
+  {
+    "name": "Aid #12 – Monroe & Fair Oaks Blvd",
+    "lat": 38.574316,
+    "lon": -121.400761,
+    "miles": 20.4
+  },
+  {
+    "name": "Aid #13 – Howe & Fair Oaks Blvd",
+    "lat": 38.572040,
+    "lon": -121.417953,
+    "miles": 21.4
+  },
+  {
+    "name": "Aid #14 – Elvas Bridge",
+    "lat": 38.564636,
+    "lon": -121.430758,
+    "miles": 22.3
+  },
+  {
+    "name": "Aid #15 – 40th & J St",
+    "lat": 38.569205,
+    "lon": -121.451843,
+    "miles": 23.5
+  },
+  {
+    "name": "Aid #16 – Sutter’s Fort",
+    "lat": 38.570965,
+    "lon": -121.467629,
+    "miles": 24.5
+  },
+  {
+    "name": "Aid #17 – 19th & L St",
+    "lat": 38.574703,
+    "lon": -121.481597,
+    "miles": 25.3
+  },
+  {
+    "name": "Finish",
+    "lat": 38.578276,
+    "lon": -121.497294,
+    "miles": 26.219
+  }
 ]
