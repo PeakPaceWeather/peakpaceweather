@@ -1,21 +1,27 @@
 [
-  { "name": "Start",         "lat": 38.703950, "lon": -121.170205, "miles": 0.00 },
-  { "name": "Aid Station 1", "lat": 38.699608, "lon": -121.194247, "miles": 2.20 },
-  { "name": "Aid Station 2", "lat": 38.700295, "lon": -121.231253, "miles": 4.20 },
-  { "name": "Aid Station 3", "lat": 38.700902, "lon": -121.268969, "miles": 6.40 },
-  { "name": "Aid Station 4", "lat": 38.698755, "lon": -121.303714, "miles": 8.50 },
-  { "name": "Aid Station 5", "lat": 38.691615, "lon": -121.332473, "miles": 10.00 },
-  { "name": "Aid Station 6", "lat": 38.681703, "lon": -121.363668, "miles": 12.00 },
-  { "name": "Aid Station 7", "lat": 38.676775, "lon": -121.389169, "miles": 13.60 },
-  { "name": "Aid Station 8", "lat": 38.667830, "lon": -121.421226, "miles": 15.10 },
-  { "name": "Aid Station 9", "lat": 38.661998, "lon": -121.443473, "miles": 16.50 },
-  { "name": "Aid Station 10","lat": 38.653816, "lon": -121.462807, "miles": 17.90 },
-  { "name": "Aid Station 11","lat": 38.644947, "lon": -121.476921, "miles": 19.40 },
-  { "name": "Aid Station 12","lat": 38.640131, "lon": -121.483932, "miles": 20.40 },
-  { "name": "Aid Station 13","lat": 38.633059, "lon": -121.489723, "miles": 21.40 },
-  { "name": "Aid Station 14","lat": 38.624403, "lon": -121.493002, "miles": 22.30 },
-  { "name": "Aid Station 15","lat": 38.611262, "lon": -121.492967, "miles": 23.50 },
-  { "name": "Aid Station 16","lat": 38.571014, "lon": -121.467827, "miles": 24.50 },
-  { "name": "Aid Station 17","lat": 38.574728, "lon": -121.481776, "miles": 25.30 },
-  { "name": "Finish",       "lat": 38.577497, "lon": -121.496324, "miles": 26.20 }
+  { "name": "Start", "lat": 38.703558, "lon": -121.170346, "miles": 0.00 },
+
+  { "name": "Aid Station 1",  "lat": 38.699740, "lon": -121.194574, "miles": 2.20 },
+  { "name": "Aid Station 2",  "lat": 38.700333, "lon": -121.231653, "miles": 4.20 },
+  { "name": "Aid Station 3",  "lat": 38.692643, "lon": -121.262347, "miles": 6.40 },
+  { "name": "Aid Station 4",  "lat": 38.662262, "lon": -121.262158, "miles": 8.50 },
+
+  { "name": "Aid Station 5",  "lat": 38.643955, "lon": -121.268180, "miles": 10.00 },
+  { "name": "Aid Station 6",  "lat": 38.636390, "lon": -121.299441, "miles": 12.00 },
+
+  { "name": "Halfway 13.1",   "lat": 38.636770, "lon": -121.319817, "miles": 13.10 },
+
+  { "name": "Aid Station 7",  "lat": 38.636096, "lon": -121.328132, "miles": 13.60 },
+  { "name": "Aid Station 8",  "lat": 38.614392, "lon": -121.328724, "miles": 15.10 },
+  { "name": "Aid Station 9",  "lat": 38.587161, "lon": -121.333221, "miles": 16.50 },
+  { "name": "Aid Station 10", "lat": 38.577968, "lon": -121.356682, "miles": 17.90 },
+  { "name": "Aid Station 11", "lat": 38.566348, "lon": -121.392146, "miles": 19.40 },
+  { "name": "Aid Station 12", "lat": 38.563308, "lon": -121.409094, "miles": 20.40 },
+  { "name": "Aid Station 13", "lat": 38.564304, "lon": -121.421806, "miles": 21.40 },
+  { "name": "Aid Station 14", "lat": 38.564636, "lon": -121.430757, "miles": 22.30 },
+  { "name": "Aid Station 15", "lat": 38.569205, "lon": -121.451842, "miles": 23.50 },
+  { "name": "Aid Station 16", "lat": 38.570964, "lon": -121.467628, "miles": 24.50 },
+  { "name": "Aid Station 17", "lat": 38.574703, "lon": -121.481595, "miles": 25.30 },
+
+  { "name": "Finish", "lat": 38.578534, "lon": -121.497182, "miles": 26.20 }
 ]
