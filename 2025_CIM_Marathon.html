@@ -3,7 +3,7 @@
 <head>
   <!-- Peak Pace Weather California International Marathon -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes, maximum-scale=10, viewport-fit=cover" />
   <title id="pageTitle">California International Marathon | Peak Pace</title>
 
   <!-- Fonts & Libraries -->
@@ -308,6 +308,72 @@ th { background:#f0f0f0; font-weight:700; }
         <p style="margin:0; color:#555; font-size:12px;">
           <a href="https://runsra.org/california-international-marathon/general-information/" target="_blank" rel="noopener" style="color:#FF6700; text-decoration:none;">View Race FAQ</a>
         </p>
+      </div>
+    </div>
+
+    <!-- Station Detail Modal -->
+    <div id="stationModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.6); z-index:10000; align-items:center; justify-content:center; padding:16px;">
+      <div style="background:#fff; border-radius:12px; padding:24px; max-width:500px; width:100%; box-shadow:0 4px 30px rgba(0,0,0,0.3); max-height:90vh; overflow-y:auto;">
+        <!-- Close button -->
+        <button id="stationModalClose" style="position:absolute; top:12px; right:12px; background:none; border:none; font-size:28px; cursor:pointer; color:#999; padding:0; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">&times;</button>
+        
+        <!-- Station name -->
+        <h2 id="stationModalName" style="margin:0 0 20px; color:#003546; font-size:24px; font-weight:700; padding-right:32px;"></h2>
+        
+        <!-- Station details grid -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; font-size:14px;">
+          <!-- Distance -->
+          <div>
+            <div style="color:#999; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:4px;">Distance</div>
+            <div id="stationModalDistance" style="color:#111; font-size:16px; font-weight:600;"></div>
+          </div>
+          
+          <!-- Elevation -->
+          <div>
+            <div style="color:#999; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:4px;">Elevation</div>
+            <div id="stationModalElevation" style="color:#111; font-size:16px; font-weight:600;"></div>
+          </div>
+          
+          <!-- Elapsed time -->
+          <div>
+            <div style="color:#999; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:4px;">Elapsed</div>
+            <div id="stationModalElapsed" style="color:#111; font-size:16px; font-weight:600;"></div>
+          </div>
+          
+          <!-- ETA -->
+          <div>
+            <div style="color:#999; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:4px;">ETA</div>
+            <div id="stationModalETA" style="color:#111; font-size:16px; font-weight:600;"></div>
+          </div>
+        </div>
+        
+        <!-- Weather details -->
+        <div style="border-top:1px solid #eee; padding-top:16px; margin-bottom:16px;">
+          <div style="color:#999; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:12px;">Weather</div>
+          
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
+            <!-- Temperature -->
+            <div>
+              <div style="color:#666; font-size:12px; margin-bottom:4px;">Temperature</div>
+              <div id="stationModalTemp" style="color:#111; font-size:18px; font-weight:700;"></div>
+            </div>
+            
+            <!-- Wind -->
+            <div>
+              <div style="color:#666; font-size:12px; margin-bottom:4px;">Wind</div>
+              <div id="stationModalWind" style="color:#111; font-size:14px; font-weight:600;"></div>
+            </div>
+            
+            <!-- Conditions -->
+            <div>
+              <div style="color:#666; font-size:12px; margin-bottom:4px;">Conditions</div>
+              <div id="stationModalCond" style="color:#111; font-size:14px; font-weight:600;"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Close button -->
+        <button id="stationModalCloseBtn" style="width:100%; padding:12px; background:#003546; color:#fff; border:none; border-radius:6px; font-weight:600; cursor:pointer; font-size:14px;">Close</button>
       </div>
     </div>
 
@@ -1443,6 +1509,18 @@ function buildElevationChart(distances, elevations, stations){
           event.chart.update();
         }
       },
+      onClick: (event, elements) => {
+        // When user clicks on a station point on the chart, show modal
+        if (elements.length > 0 && elements[0].datasetIndex === 1) {
+          const stationIdx = elements[0].index;
+          const stations = raceConfig.allStations[currentStationOption];
+          if (stations && stations[stationIdx]) {
+            const station = stations[stationIdx];
+            const elevation = elevationAtMile(station.miles);
+            showStationModal(station, elevation);
+          }
+        }
+      },
       scales: {
         x: { type:'linear', title:{ display:true, text:'Distance (mi)' }, min:0, max:26.2 },
         y: { title:{ display:true, text:'Elevation (ft)' }, ticks:{ autoSkip:true, maxTicksLimit:6 } }
@@ -1652,6 +1730,39 @@ function tooltipLinesMapGroup(g, stations) {
   return html;
 }
 
+// ===== STATION MODAL =====
+function showStationModal(station, elevation) {
+  const modal = document.getElementById('stationModal');
+  
+  // Populate modal with station data
+  document.getElementById('stationModalName').textContent = station.name;
+  document.getElementById('stationModalDistance').textContent = `${station.miles.toFixed(1)} mi`;
+  document.getElementById('stationModalElevation').textContent = elevation !== null ? `${Math.round(elevation)} ft` : 'N/A';
+  document.getElementById('stationModalElapsed').textContent = station.elapsed || 'N/A';
+  document.getElementById('stationModalETA').textContent = station.etaStr || 'N/A';
+  document.getElementById('stationModalTemp').textContent = station.temp || '–';
+  document.getElementById('stationModalWind').textContent = station.wind || '–';
+  document.getElementById('stationModalCond').textContent = station.cond || '–';
+  
+  // Show modal
+  modal.style.display = 'flex';
+}
+
+function closeStationModal() {
+  document.getElementById('stationModal').style.display = 'none';
+}
+
+// Close modal button handlers
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('stationModalClose').addEventListener('click', closeStationModal);
+  document.getElementById('stationModalCloseBtn').addEventListener('click', closeStationModal);
+  
+  // Close modal when clicking outside (on the background)
+  document.getElementById('stationModal').addEventListener('click', function(e) {
+    if(e.target === this) closeStationModal();
+  });
+});
+
 function redrawMarkers(option) {
   // Clear existing markers
   markers.forEach(m => m.remove());
@@ -1681,6 +1792,13 @@ function redrawMarkers(option) {
     marker.setTooltipContent(tooltipLinesMapGroup(g, stations));
     marker.on("mouseover", () => highlightByGroupIndex(gIdx));
     marker.on("mouseout", clearHighlights);
+    // Click handler to show station details modal
+    marker.on("click", () => {
+      const primaryStationIdx = g.indices[0];
+      const station = stations[primaryStationIdx];
+      const elevation = elevationAtMile(station.miles);
+      showStationModal(station, elevation);
+    });
   });
 }
 
