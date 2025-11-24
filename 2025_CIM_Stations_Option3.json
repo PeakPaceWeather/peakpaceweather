@@ -9,7 +9,7 @@
   { "name": "Aid Station 5",  "lat": 38.643955, "lon": -121.268180, "miles": 10.00 },
   { "name": "Aid Station 6",  "lat": 38.636390, "lon": -121.299441, "miles": 12.00 },
 
-  { "name": "Halfway 13.1",   "lat": 38.636770, "lon": -121.319817, "miles": 13.10 },
+  { "name": "Halfway",   "lat": 38.636770, "lon": -121.319817, "miles": 13.10 },
 
   { "name": "Aid Station 7",  "lat": 38.636096, "lon": -121.328132, "miles": 13.60 },
   { "name": "Aid Station 8",  "lat": 38.614392, "lon": -121.328724, "miles": 15.10 },
