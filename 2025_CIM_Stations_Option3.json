@@ -7,118 +7,116 @@
   },
   {
     "name": "Aid #1 – American River Canyon & Oak",
-    "lat": 38.699740,
-    "lon": -121.194575,
+    "lat": 38.699736,
+    "lon": -121.194305,
     "miles": 2.2
   },
   {
     "name": "Aid #2 – Beech & Oak",
-    "lat": 38.700333,
-    "lon": -121.231653,
+    "lat": 38.700336,
+    "lon": -121.232648,
     "miles": 4.2
   },
   {
     "name": "Aid #3 – Woodmore Oaks & Fair Oaks Blvd",
-    "lat": 38.692642,
-    "lon": -121.262347,
+    "lat": 38.683527,
+    "lon": -121.262475,
     "miles": 6.4
   },
   {
     "name": "Aid #4 – Madison & Fair Oaks Blvd",
-    "lat": 38.662262,
-    "lon": -121.262158,
+    "lat": 38.663312,
+    "lon": -121.26217,
     "miles": 8.5
   },
   {
     "name": "Aid #5 – Old Fair Oaks",
-    "lat": 38.643955,
-    "lon": -121.268180,
+    "lat": 38.643775,
+    "lon": -121.268185,
     "miles": 10.0
   },
   {
     "name": "Aid #6 – Hollister & Fair Oaks Blvd",
-    "lat": 38.636390,
-    "lon": -121.299442,
+    "lat": 38.636441,
+    "lon": -121.291182,
     "miles": 12.0
   },
-
   {
     "name": "Halfway",
-    "lat": 38.636950,
-    "lon": -121.319910,
+    "lat": 38.63659,
+    "lon": -121.285133,
     "miles": 13.1
   },
-
   {
     "name": "Aid #7 – Sutter & Fair Oaks Blvd",
-    "lat": 38.636096,
-    "lon": -121.328132,
+    "lat": 38.636706,
+    "lon": -121.328101,
     "miles": 13.6
   },
   {
     "name": "Aid #8 – El Camino & Fair Oaks Blvd",
-    "lat": 38.614392,
-    "lon": -121.328724,
+    "lat": 38.614499,
+    "lon": -121.328721,
     "miles": 15.1
   },
   {
     "name": "Aid #9 – Walnut & Fair Oaks Blvd",
-    "lat": 38.600113,
-    "lon": -121.341575,
+    "lat": 38.600758,
+    "lon": -121.340992,
     "miles": 16.5
   },
   {
     "name": "Aid #10 – Savirien & Fair Oaks Blvd",
-    "lat": 38.584559,
-    "lon": -121.357961,
+    "lat": 38.583996,
+    "lon": -121.358777,
     "miles": 17.9
   },
   {
     "name": "Aid #11 – Watt & Fair Oaks Blvd",
-    "lat": 38.574353,
-    "lon": -121.382303,
+    "lat": 38.574213,
+    "lon": -121.382801,
     "miles": 19.4
   },
   {
     "name": "Aid #12 – Monroe & Fair Oaks Blvd",
-    "lat": 38.574316,
-    "lon": -121.400761,
+    "lat": 38.574212,
+    "lon": -121.399139,
     "miles": 20.4
   },
   {
     "name": "Aid #13 – Howe & Fair Oaks Blvd",
-    "lat": 38.572040,
-    "lon": -121.417953,
+    "lat": 38.571696,
+    "lon": -121.418241,
     "miles": 21.4
   },
   {
     "name": "Aid #14 – Elvas Bridge",
-    "lat": 38.564636,
-    "lon": -121.430758,
+    "lat": 38.564944,
+    "lon": -121.430222,
     "miles": 22.3
   },
   {
     "name": "Aid #15 – 40th & J St",
-    "lat": 38.569205,
-    "lon": -121.451843,
+    "lat": 38.569432,
+    "lon": -121.452693,
     "miles": 23.5
   },
   {
-    "name": "Aid #16 – Sutter’s Fort",
-    "lat": 38.570965,
-    "lon": -121.467629,
+    "name": "Aid #16 – Sutter's Fort",
+    "lat": 38.57061,
+    "lon": -121.466295,
     "miles": 24.5
   },
   {
     "name": "Aid #17 – 19th & L St",
-    "lat": 38.574703,
-    "lon": -121.481597,
+    "lat": 38.574813,
+    "lon": -121.482006,
     "miles": 25.3
   },
   {
     "name": "Finish",
-    "lat": 38.578276,
-    "lon": -121.497294,
-    "miles": 26.219
+    "lat": 38.578706,
+    "lon": -121.497107,
+    "miles": 26.2
   }
 ]
