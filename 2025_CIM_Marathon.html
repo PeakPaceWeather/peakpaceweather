@@ -19,14 +19,14 @@ body { margin: 0; padding: 0; font-family: "Source Sans Pro", Arial, sans-serif;
 :root { --ink:#111; --muted:#555; --line:#ddd; --pp-dark:#003546; --blaze:#37BC7D; --highlight:#FF6700; --hoverRow:#fff3e6; }
 
 /* ===== Layout + Header ===== */
-.page-wrapper { width: 1000px; margin: 0 auto; padding: 0; box-sizing: border-box; }
+.page-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 16px; box-sizing: border-box; }
 .main-header { text-align: center; font-family: "Montserrat", sans-serif; font-weight: 800; font-size: clamp(36px, 6vw, 52px); letter-spacing: .05em; text-transform: uppercase; color: #000; margin: 28px 0 18px; line-height: 1; }
 header { text-align:center; margin:8px auto 14px; }
 header h2 { margin:0; font-size:32px; font-weight:700; }
 #countdown { font-size:20px; font-weight:600; margin-top:6px; color:#333; }
 
 /* ===== Uniform panel widths ===== */
-section, #elevSection, #map, #paceBox { width: 960px; max-width: 960px; margin: 18px auto 0; box-sizing: border-box; }
+section, #elevSection, #map, #paceBox { width: 100%; max-width: 100%; margin: 18px auto 0; box-sizing: border-box; }
 section, #elevSection { border:1px solid #ccc; border-radius:8px; background:#fff; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
 section:last-of-type { margin-bottom:24px; }
 section h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700; }
@@ -38,7 +38,7 @@ section h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700
 #sourcesContent h4 { margin:12px 0 6px; }
 
 /* Map */
-#mapSection { width: 960px; max-width: 960px; margin: 18px auto 0; box-sizing: border-box; border:1px solid #ccc; border-radius:8px; background:#fff; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,0.08); overflow:hidden; }
+#mapSection { width: 100%; max-width: 100%; margin: 18px auto 0; box-sizing: border-box; border:1px solid #ccc; border-radius:8px; background:#fff; padding:16px; box-shadow:0 2px 6px rgba(0,0,0,0.08); overflow:hidden; }
 #mapSection h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700; }
 #mapTitle { transition:color 0.2s; }
 #mapTitle:hover, #elevTitle:hover { color:#FF6700; }
@@ -47,7 +47,7 @@ section h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700
 #map { height: 600px; width: 100%; margin:0; border:1px solid #ccc; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,0.08); box-sizing:border-box; }
 
 /* Elevation */
-#elevSection { width: 960px; max-width: 960px; margin: 18px auto; border: 1px solid #ccc; border-radius: 8px; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.08); padding: 16px; box-sizing: border-box; }
+#elevSection { width: 100%; max-width: 100%; margin: 18px auto; border: 1px solid #ccc; border-radius: 8px; background: #fff; box-shadow: 0 2px 6px rgba(0,0,0,0.08); padding: 16px; box-sizing: border-box; }
 #elevSection h3 { text-align:center; margin:0 0 12px; font-size:20px; font-weight:700; }
 #elevWrap { position:relative; width:100%; height:225px; margin:0 auto; padding:0; box-sizing:border-box; }
 #elevationChart { position:absolute; inset:0; width:100% !important; height:100% !important; display:block; box-sizing:border-box; cursor:pointer; }
@@ -155,6 +155,125 @@ th { background:#f0f0f0; font-weight:700; }
 .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid #f3f3f3; border-top: 2px solid var(--pp-dark); border-radius: 50%; animation: spin 1s linear infinite; margin-left: 8px; vertical-align: middle; }
 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
+/* ===== MOBILE RESPONSIVENESS ===== */
+@media (max-width: 768px) {
+  /* Base font sizes - more readable on mobile */
+  body { font-size: 16px; }
+  
+  /* Headers scale down */
+  .main-header { font-size: clamp(28px, 5vw, 40px); margin: 20px 0 14px; }
+  header h2 { font-size: 24px; }
+  #countdown { font-size: 16px; }
+  
+  /* Section headers */
+  section h3 { font-size: 18px; margin-bottom: 14px; }
+  
+  /* Labels and inputs */
+  label { font-size: 15px; }
+  
+  /* Touch targets: minimum 44px height (Apple standard) */
+  input[type="number"],
+  input[type="text"],
+  select,
+  button,
+  .sourceToggleBtn,
+  .forecastTab {
+    min-height: 44px;
+    font-size: 16px;
+    padding: 8px 12px;
+  }
+  
+  /* Control rows: stack on mobile */
+  .control-row {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  
+  .control-row > div {
+    width: 100%;
+    flex-direction: column;
+  }
+  
+  /* Input groups: stack vertically */
+  .pace-input-group {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  /* Make inputs full width on mobile */
+  input[type="number"],
+  input[type="text"],
+  select {
+    flex: 1;
+    min-width: auto;
+  }
+  
+  #startHour,
+  #startMinute {
+    width: auto;
+    flex: 0 0 auto;
+    min-width: 60px;
+  }
+  
+  #paceMin,
+  #paceSec {
+    width: auto;
+    flex: 0 0 auto;
+    min-width: 60px;
+  }
+  
+  /* Pace box adjustments */
+  #paceBox h3 { margin-bottom: 16px; }
+  
+  /* Map height: responsive but still usable */
+  #map { height: 400px; }
+  
+  /* Elevation chart: responsive height */
+  #elevWrap { height: 280px; }
+  
+  /* Table: better mobile spacing */
+  table { font-size: 13px; }
+  th, td { padding: 8px 6px; }
+  
+  /* Forecast notes: stack on very small screens */
+  #forecastValidLabel,
+  #forecastDateLabel,
+  #forecastSourceMethodLabel {
+    display: block;
+    margin: 4px 0;
+  }
+}
+
+/* Larger phones / small tablets */
+@media (max-width: 600px) {
+  .page-wrapper { padding: 0 12px; }
+  
+  /* Reduce margins on small screens */
+  section, #elevSection { margin: 14px auto 0; padding: 12px; }
+  
+  /* Button row wrapping */
+  #buttonRow { flex-wrap: wrap; }
+  
+  /* Forecast tabs: wrap if needed */
+  #forecastTabs { flex-wrap: wrap; }
+  
+  /* Tone down shadow on small screens */
+  section, #elevSection { box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+}
+
+/* Landscape orientation */
+@media (orientation: landscape) {
+  /* Tighter spacing in landscape */
+  .control-row { margin-bottom: 8px; padding-bottom: 8px; }
+  
+  #map { height: 350px; }
+  #elevWrap { height: 200px; }
+}
+
+
 /* Pace Cutoff Modal */
 #paceCutoffModal[style*="display:flex"] {
   display: flex !important;
@@ -201,19 +320,9 @@ th { background:#f0f0f0; font-weight:700; }
           <div style="display: flex; align-items: center; gap: 8px;">
             <label>Start Time:</label>
             <div class="pace-input-group">
-              <select id="startHour">
-                <option value="05">5</option>
-                <option value="06">6</option>
-                <option value="07" selected>7</option>
-                <option value="08">8</option>
-                <option value="09">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-              </select>
+              <input type="number" id="startHour" min="5" max="12" value="7" required style="width: 50px;">
               <span>:</span>
-              <select id="startMinute">
-              </select>
+              <input type="number" id="startMinute" min="0" max="59" value="0" placeholder="00" required style="width: 50px;">
               <span>AM</span>
             </div>
           </div>
@@ -497,16 +606,6 @@ document.addEventListener('DOMContentLoaded', function() {
   for(let m=4;m<=13;m++){ let o=document.createElement('option'); o.value=m; o.textContent=m; mins.appendChild(o); }
   for(let s=0;s<60;s++){ let o=document.createElement('option'); o.value=s; o.textContent=String(s).padStart(2,'0'); secs.appendChild(o); }
   mins.value=9; secs.value=0;
-  
-  // Initialize start time minute dropdown (every minute 00-59)
-  const startMin = document.getElementById('startMinute');
-  for(let m=0;m<60;m++){
-    let o = document.createElement('option');
-    o.value = String(m).padStart(2,'0');
-    o.textContent = String(m).padStart(2,'0');
-    if(m === 0) o.selected = true;  // Default to :00
-    startMin.appendChild(o);
-  }
   
   checkAllStepsComplete();
   
