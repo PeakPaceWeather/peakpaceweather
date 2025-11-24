@@ -2,81 +2,81 @@
   "2:00": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "40",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.03"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.02"
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 48,
+      "finish_conditions": "Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "38",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
-      "finish_conditions": "Partly Cloudy",
+      "finish_temp": 50,
+      "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "42.00",
+      "finish_temp": 43,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -84,81 +84,81 @@
   "2:05": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "40",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.03"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.02"
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 48,
+      "finish_conditions": "Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "38",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
-      "finish_conditions": "Partly Cloudy",
+      "finish_temp": 50,
+      "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "42.00",
+      "finish_temp": 43,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -166,81 +166,81 @@
   "2:10": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "40",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.03"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.02"
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 48,
+      "finish_conditions": "Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "38",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
-      "finish_conditions": "Partly Cloudy",
+      "finish_temp": 50,
+      "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "42.00",
+      "finish_temp": 43,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -248,81 +248,81 @@
   "2:15": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "40",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.03"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.02"
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 48,
+      "finish_conditions": "Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "38",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
-      "finish_conditions": "Partly Cloudy",
+      "finish_temp": 50,
+      "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "42.00",
+      "finish_temp": 43,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -330,81 +330,81 @@
   "2:20": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "40",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.03"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.02"
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 48,
+      "finish_conditions": "Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "38",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
-      "finish_conditions": "Partly Cloudy",
+      "finish_temp": 50,
+      "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "42.00",
+      "finish_temp": 43,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -412,81 +412,81 @@
   "2:25": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.1"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 48,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
+      "finish_temp": 50,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "41.00",
+      "finish_temp": 43,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -494,81 +494,81 @@
   "2:30": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.1"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 48,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
+      "finish_temp": 50,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "41.00",
+      "finish_temp": 43,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -576,81 +576,81 @@
   "2:35": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.1"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 48,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
+      "finish_temp": 50,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "41.00",
+      "finish_temp": 43,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -658,81 +658,81 @@
   "2:40": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.1"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 48,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
+      "finish_temp": 50,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "41.00",
+      "finish_temp": 43,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -740,81 +740,81 @@
   "2:45": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.1"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 48,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
+      "finish_temp": 50,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "41.00",
+      "finish_temp": 43,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -822,81 +822,81 @@
   "2:50": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.1"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 48,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
+      "finish_temp": 50,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "41.00",
+      "finish_temp": 43,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -904,81 +904,81 @@
   "2:55": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.1"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 48,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
+      "finish_temp": 50,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "41.00",
+      "finish_temp": 43,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -986,901 +986,901 @@
   "3:00": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.1"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Broken",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 37,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
   ],
   "3:05": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.1"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Broken",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 37,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
   ],
   "3:10": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.1"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Broken",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 37,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "41.00",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
   ],
   "3:15": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.1"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Broken",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 37,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "41.00",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
   ],
   "3:20": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.06"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "48",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Broken",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 37,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "50",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "41.00",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
   ],
   "3:25": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.06"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Broken",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "37",
+      "finish_temp": 37,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
   ],
   "3:30": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.06"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Broken",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "37",
+      "finish_temp": 37,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
   ],
   "3:35": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.06"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Broken",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "37",
+      "finish_temp": 37,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
   ],
   "3:40": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.06"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Broken",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "37",
+      "finish_temp": 37,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
   ],
   "3:45": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "55",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.06"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Broken",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "37",
+      "finish_temp": 37,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
   ],
   "3:50": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.08"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Broken",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "37",
+      "finish_temp": 37,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -1888,81 +1888,81 @@
   "3:55": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 36,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.08"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 54,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Broken",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "37",
+      "finish_temp": 37,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -1970,81 +1970,81 @@
   "4:00": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.08"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Few Clouds",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -2052,81 +2052,81 @@
   "4:05": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.08"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Few Clouds",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -2134,81 +2134,81 @@
   "4:10": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.08"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Few Clouds",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -2216,81 +2216,81 @@
   "4:15": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.08"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Few Clouds",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -2298,81 +2298,81 @@
   "4:20": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53.6",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "35",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "36",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.08"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "53",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Few Clouds",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -2380,81 +2380,81 @@
   "4:25": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53.6",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "52",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Few Clouds",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -2462,81 +2462,81 @@
   "4:30": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53.6",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "52",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
-      "finish_conditions": "Clear",
+      "finish_temp": 36,
+      "finish_conditions": "Few Clouds",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -2544,81 +2544,81 @@
   "4:35": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53.6",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "52",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
-      "finish_conditions": "Clear",
+      "finish_temp": 36,
+      "finish_conditions": "Few Clouds",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -2626,81 +2626,81 @@
   "4:40": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53.6",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "52",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
-      "finish_conditions": "Clear",
+      "finish_temp": 36,
+      "finish_conditions": "Few Clouds",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -2708,81 +2708,81 @@
   "4:45": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53.6",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "52",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
-      "finish_conditions": "Clear",
+      "finish_temp": 36,
+      "finish_conditions": "Few Clouds",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -2790,81 +2790,81 @@
   "4:50": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "52",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
-      "finish_conditions": "Clear",
+      "finish_temp": 36,
+      "finish_conditions": "Few Clouds",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -2872,81 +2872,81 @@
   "4:55": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "52",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
-      "finish_conditions": "Clear",
+      "finish_temp": 36,
+      "finish_conditions": "Few Clouds",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -2954,245 +2954,245 @@
   "5:00": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "39",
+      "finish_temp": 37,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "52",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
   ],
   "5:05": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "38",
+      "finish_temp": 37,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "52",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
-      "finish_conditions": "Clear",
+      "finish_temp": 39,
+      "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
   ],
   "5:10": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "38",
+      "finish_temp": 37,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "52",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -3200,81 +3200,81 @@
   "5:15": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "38",
+      "finish_temp": 37,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "T"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "52",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
@@ -3282,737 +3282,81 @@
   "5:20": [
     {
       "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 54,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 54,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2016",
-      "start_temp": "35.6",
+      "start_temp": 37,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
+      "start_temp": 37,
+      "start_conditions": "Mist/Fog",
+      "finish_temp": 34,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2018",
-      "start_temp": "41",
+      "start_temp": 41,
       "start_conditions": "Clear",
-      "finish_temp": "38",
+      "finish_temp": 37,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     },
     {
       "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "T"
+      "start_temp": 55,
+      "start_conditions": "Rain / Mist/Fog / Overcast",
+      "finish_temp": 55,
+      "finish_conditions": "Rain / Mist/Fog / Overcast",
+      "precip": "0.00"
     },
     {
       "year": "2020",
-      "start_temp": "39.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "52",
+      "finish_temp": 52,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
+      "start_temp": 48,
+      "start_conditions": "Mist/Fog / Overcast",
+      "finish_temp": 46,
+      "finish_conditions": "Mist/Fog / Overcast",
       "precip": "0.00"
     },
     {
       "year": "2022",
-      "start_temp": "35.6",
+      "start_temp": 39,
       "start_conditions": "Clear",
-      "finish_temp": "36",
+      "finish_temp": 36,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2023",
-      "start_temp": "48.2",
+      "start_temp": 52,
       "start_conditions": "Clear",
-      "finish_temp": "47",
+      "finish_temp": 46,
       "finish_conditions": "Clear",
       "precip": "0.00"
     },
     {
       "year": "2024",
-      "start_temp": "42.80",
+      "start_temp": 43,
       "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    }
-  ],
-  "5:25": [
-    {
-      "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2016",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2018",
-      "start_temp": "41",
-      "start_conditions": "Clear",
-      "finish_temp": "38",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "T"
-    },
-    {
-      "year": "2020",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "51",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2022",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2023",
-      "start_temp": "48.2",
-      "start_conditions": "Clear",
-      "finish_temp": "47",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2024",
-      "start_temp": "42.80",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    }
-  ],
-  "5:30": [
-    {
-      "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2016",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2018",
-      "start_temp": "41",
-      "start_conditions": "Clear",
-      "finish_temp": "38",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Mist/Fog",
-      "precip": "T"
-    },
-    {
-      "year": "2020",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "51",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2022",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2023",
-      "start_temp": "48.2",
-      "start_conditions": "Clear",
-      "finish_temp": "47",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2024",
-      "start_temp": "42.80",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    }
-  ],
-  "5:35": [
-    {
-      "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2016",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2018",
-      "start_temp": "41",
-      "start_conditions": "Clear",
-      "finish_temp": "38",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
-    },
-    {
-      "year": "2020",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "51",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2022",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2023",
-      "start_temp": "48.2",
-      "start_conditions": "Clear",
-      "finish_temp": "47",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2024",
-      "start_temp": "42.80",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    }
-  ],
-  "5:40": [
-    {
-      "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2016",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2018",
-      "start_temp": "41",
-      "start_conditions": "Clear",
-      "finish_temp": "38",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
-    },
-    {
-      "year": "2020",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "51",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2022",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2023",
-      "start_temp": "48.2",
-      "start_conditions": "Clear",
-      "finish_temp": "47",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2024",
-      "start_temp": "42.80",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    }
-  ],
-  "5:45": [
-    {
-      "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2016",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2018",
-      "start_temp": "41",
-      "start_conditions": "Clear",
-      "finish_temp": "38",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
-    },
-    {
-      "year": "2020",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "51",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2022",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2023",
-      "start_temp": "48.2",
-      "start_conditions": "Clear",
-      "finish_temp": "47",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2024",
-      "start_temp": "42.80",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    }
-  ],
-  "5:50": [
-    {
-      "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2016",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2018",
-      "start_temp": "41",
-      "start_conditions": "Clear",
-      "finish_temp": "38",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
-    },
-    {
-      "year": "2020",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "51",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2022",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2023",
-      "start_temp": "48.2",
-      "start_conditions": "Clear",
-      "finish_temp": "47",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2024",
-      "start_temp": "42.80",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    }
-  ],
-  "5:55": [
-    {
-      "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2016",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2018",
-      "start_temp": "41",
-      "start_conditions": "Clear",
-      "finish_temp": "38",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
-    },
-    {
-      "year": "2020",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "51",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2022",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2023",
-      "start_temp": "48.2",
-      "start_conditions": "Clear",
-      "finish_temp": "47",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2024",
-      "start_temp": "42.80",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "40.00",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    }
-  ],
-  "6:00": [
-    {
-      "year": "2015",
-      "start_temp": "59",
-      "start_conditions": "Mostly Cloudy",
-      "finish_temp": "53",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2016",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2017",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "34",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2018",
-      "start_temp": "41",
-      "start_conditions": "Clear",
-      "finish_temp": "37",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2019",
-      "start_temp": "55.4",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "56",
-      "finish_conditions": "Overcast",
-      "precip": "T"
-    },
-    {
-      "year": "2020",
-      "start_temp": "39.2",
-      "start_conditions": "Clear",
-      "finish_temp": "51",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2021",
-      "start_temp": "48.2",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "47",
-      "finish_conditions": "Mist/Fog",
-      "precip": "0.00"
-    },
-    {
-      "year": "2022",
-      "start_temp": "35.6",
-      "start_conditions": "Clear",
-      "finish_temp": "35",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2023",
-      "start_temp": "48.2",
-      "start_conditions": "Clear",
-      "finish_temp": "47",
-      "finish_conditions": "Clear",
-      "precip": "0.00"
-    },
-    {
-      "year": "2024",
-      "start_temp": "42.80",
-      "start_conditions": "Mist/Fog",
-      "finish_temp": "39.00",
+      "finish_temp": 39,
       "finish_conditions": "Mist/Fog",
       "precip": "0.00"
     }
