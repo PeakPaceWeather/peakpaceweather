@@ -1824,12 +1824,12 @@ if (window.innerWidth <= 768) {
       mutation.addedNodes.forEach((node) => {
         if (node.nodeType === 1) {  // Element node
           // Remove if it's a popup or tooltip
-          if (node.classList && (node.classList.contains('leaflet-popup') || node.classList.contains('leaflet-tooltip') || node.classList.contains('leaflet-popup-pane'))) {
+          if (node.classList && (node.classList.contains('leaflet-popup') || node.classList.contains('leaflet-tooltip') || node.classList.contains('leaflet-popup-pane') || node.classList.contains('pp-tooltip'))) {
             node.remove();
           }
           // Also check for popups/tooltips added as children
           if (node.querySelectorAll) {
-            node.querySelectorAll('.leaflet-popup, .leaflet-tooltip, .leaflet-popup-pane').forEach(el => el.remove());
+            node.querySelectorAll('.leaflet-popup, .leaflet-tooltip, .leaflet-popup-pane, .pp-tooltip').forEach(el => el.remove());
           }
         }
       });
@@ -1874,6 +1874,24 @@ if (window.innerWidth <= 768) {
     }
     return originalBindTooltip.call(this, content, options);
   };
+  
+  // Override setTooltipContent to not set content on mobile
+  const originalSetTooltipContent = L.Marker.prototype.setTooltipContent;
+  L.Marker.prototype.setTooltipContent = function(content) {
+    if (window.innerWidth <= 768) {
+      return this;  // Do nothing on mobile
+    }
+    return originalSetTooltipContent.call(this, content);
+  };
+  
+  // Override openTooltip to prevent opening on mobile
+  const originalOpenTooltip = L.Marker.prototype.openTooltip;
+  L.Marker.prototype.openTooltip = function() {
+    if (window.innerWidth <= 768) {
+      return this;  // Do nothing on mobile
+    }
+    return originalOpenTooltip.call(this);
+  };
 }
 
 const map = L.map('map', {
@@ -1915,6 +1933,28 @@ map.on('popupopen', (e) => {
     
     // Remove all popup elements from DOM
     document.querySelectorAll('.leaflet-popup, .leaflet-popup-pane').forEach(el => {
+      el.remove();
+    });
+  }
+});
+
+// Close any tooltip that tries to open on mobile
+map.on('tooltipopen', (e) => {
+  if (window.innerWidth <= 768) {
+    // Immediately close the tooltip
+    if (e.tooltip) {
+      e.tooltip.close();
+      e.tooltip.remove();
+      e.tooltip = null;
+    }
+    
+    // Close any tooltips on the map
+    if (map._tooltip) {
+      map._tooltip.close();
+    }
+    
+    // Remove all tooltip elements from DOM
+    document.querySelectorAll('.leaflet-tooltip, .pp-tooltip').forEach(el => {
       el.remove();
     });
   }
@@ -2057,7 +2097,7 @@ function redrawMarkers(option) {
         e.preventDefault();
         L.DomEvent.stopPropagation(e);
         
-        // Immediately remove the marker's popup and tooltip
+        // Immediately remove the marker's popup and tooltip objects
         if (marker._popup) {
           marker._popup.remove();
           marker._popup = null;
@@ -2071,28 +2111,19 @@ function redrawMarkers(option) {
         marker.closeTooltip();
         marker.closePopup();
         if (map && map._popup) map.closePopup();
+        if (map && map._tooltip) map._tooltip.close();
         
         // Remove all popup/tooltip elements from DOM immediately
         setTimeout(() => {
-          document.querySelectorAll('.leaflet-popup, .leaflet-tooltip').forEach(el => el.remove());
+          document.querySelectorAll('.leaflet-popup, .leaflet-tooltip, .pp-tooltip').forEach(el => {
+            el.remove();
+          });
         }, 0);
       }
       
       const primaryStationIdx = g.indices[0];
       const station = stations[primaryStationIdx];
       const elevation = elevationAtMile(station.miles);
-      
-      // Close any tooltip/popup on mobile
-      if (window.innerWidth <= 768) {
-        marker.closeTooltip();
-        if (marker._popup) marker.closePopup();
-        // Hide any tooltip/popup elements that might exist
-        document.querySelectorAll('.leaflet-tooltip, .leaflet-popup').forEach(el => {
-          el.style.display = 'none';
-          el.style.visibility = 'hidden';
-          el.style.opacity = '0';
-        });
-      }
       
       showStationModal(station, elevation);
     });
