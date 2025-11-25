@@ -226,6 +226,11 @@ th { background:#f0f0f0; font-weight:700; }
     gap: 8px;
   }
   
+  /* Disable tooltips on mobile - rely on modal instead */
+  .leaflet-tooltip {
+    display: none !important;
+  }
+  
   /* Make inputs full width on mobile */
   input[type="number"],
   input[type="text"],
@@ -1530,7 +1535,7 @@ function buildElevationChart(distances, elevations, stations){
       plugins: {
         legend: { display:false },
         tooltip: {
-          enabled:true, filter: ctx => ctx.datasetIndex === 1,
+          enabled: window.innerWidth > 768, filter: ctx => ctx.datasetIndex === 1,
           callbacks: {
             title: (ctx) => {
               const station = stations[ctx[0].dataIndex];
