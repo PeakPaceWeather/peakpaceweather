@@ -1739,6 +1739,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution:
 let markers = [];
 let groupList = [];
 let stationIndexToGroup = [];
+let mapBounds = null;
 window.mapReady = false;
 
 function applyMarkerHighlights(activeGroupIdx){
@@ -1872,7 +1873,8 @@ fetch(raceConfig.routeUrl).then(r=>r.json()).then(async(route)=>{
   raceConfig.route = route;
   
   const line = L.polyline(route, {color:"#000", weight:3}).addTo(map);
-  map.fitBounds(line.getBounds(), {padding: [30, 30]});
+  mapBounds = line.getBounds();
+  map.fitBounds(mapBounds, {padding: [30, 30]});
   
   // Build elevation
   try {
@@ -2165,7 +2167,12 @@ function toggleMap() {
     toggle.textContent = '−';
     // Trigger map resize if Leaflet is ready
     if (window.map) {
-      setTimeout(() => map.invalidateSize(), 100);
+      setTimeout(() => {
+        map.invalidateSize();
+        if (mapBounds) {
+          map.fitBounds(mapBounds, {padding: [30, 30]});
+        }
+      }, 100);
     }
   } else {
     content.style.display = 'none';
