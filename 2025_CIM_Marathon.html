@@ -231,6 +231,20 @@ th { background:#f0f0f0; font-weight:700; }
     display: none !important;
   }
   
+  .pp-tooltip {
+    display: none !important;
+  }
+  
+  /* Hide any tooltip elements that might appear */
+  .leaflet-tooltip,
+  .pp-tooltip,
+  [role="tooltip"],
+  .chartjs-tooltip {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+  
   /* Make inputs full width on mobile */
   input[type="number"],
   input[type="text"],
@@ -1536,6 +1550,12 @@ function buildElevationChart(distances, elevations, stations){
         legend: { display:false },
         tooltip: {
           enabled: window.innerWidth > 768, filter: ctx => ctx.datasetIndex === 1,
+          external: (context) => {
+            // Prevent tooltip from rendering on mobile
+            if (window.innerWidth <= 768) {
+              return;
+            }
+          },
           callbacks: {
             title: (ctx) => {
               const station = stations[ctx[0].dataIndex];
