@@ -240,7 +240,8 @@ th { background:#f0f0f0; font-weight:700; }
   .pp-tooltip,
   [role="tooltip"],
   .chartjs-tooltip,
-  .leaflet-popup {
+  .leaflet-popup,
+  .leaflet-popup-pane {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
@@ -1822,11 +1823,14 @@ if (window.innerWidth <= 768) {
     mutations.forEach((mutation) => {
       mutation.addedNodes.forEach((node) => {
         if (node.nodeType === 1) {  // Element node
-          if (node.classList && (node.classList.contains('leaflet-popup') || node.classList.contains('leaflet-tooltip'))) {
+          // Remove if it's a popup or tooltip
+          if (node.classList && (node.classList.contains('leaflet-popup') || node.classList.contains('leaflet-tooltip') || node.classList.contains('leaflet-popup-pane'))) {
             node.remove();
           }
-          // Also check for popups added as children
-          node.querySelectorAll && node.querySelectorAll('.leaflet-popup, .leaflet-tooltip').forEach(el => el.remove());
+          // Also check for popups/tooltips added as children
+          if (node.querySelectorAll) {
+            node.querySelectorAll('.leaflet-popup, .leaflet-tooltip, .leaflet-popup-pane').forEach(el => el.remove());
+          }
         }
       });
     });
@@ -1843,13 +1847,32 @@ if (window.innerWidth <= 768) {
 if (window.innerWidth <= 768) {
   L.Marker.prototype.options.closePopupOnClick = true;
   
-  // Disable popup opening entirely on mobile
+  // Completely disable popup opening on mobile
   const originalOpenPopup = L.Marker.prototype.openPopup;
   L.Marker.prototype.openPopup = function() {
     if (window.innerWidth <= 768) {
-      return this;  // Do nothing on mobile
+      // Don't open popup on mobile - just return marker
+      return this;
     }
     return originalOpenPopup.call(this);
+  };
+  
+  // Also override bindPopup to not actually bind on mobile
+  const originalBindPopup = L.Marker.prototype.bindPopup;
+  L.Marker.prototype.bindPopup = function(content, options) {
+    if (window.innerWidth <= 768) {
+      return this;  // Do nothing on mobile
+    }
+    return originalBindPopup.call(this, content, options);
+  };
+  
+  // Override bindTooltip to not bind on mobile
+  const originalBindTooltip = L.Marker.prototype.bindTooltip;
+  L.Marker.prototype.bindTooltip = function(content, options) {
+    if (window.innerWidth <= 768) {
+      return this;  // Do nothing on mobile
+    }
+    return originalBindTooltip.call(this, content, options);
   };
 }
 
@@ -1874,6 +1897,26 @@ map.on('click', () => {
     if (map && map._popup) {
       map.closePopup();
     }
+  }
+});
+
+// Close any popup that tries to open on mobile
+map.on('popupopen', (e) => {
+  if (window.innerWidth <= 768) {
+    // Immediately close the popup
+    if (e.popup) {
+      e.popup.close();
+      e.popup.remove();
+      e.popup = null;
+    }
+    
+    // Close any popups on the map
+    if (map._popup) map.closePopup();
+    
+    // Remove all popup elements from DOM
+    document.querySelectorAll('.leaflet-popup, .leaflet-popup-pane').forEach(el => {
+      el.remove();
+    });
   }
 });
 
@@ -2014,16 +2057,25 @@ function redrawMarkers(option) {
         e.preventDefault();
         L.DomEvent.stopPropagation(e);
         
-        // Close any popups/tooltips
-        if (marker._popup) marker._popup.close();
-        if (marker._tooltip) marker._tooltip.close();
+        // Immediately remove the marker's popup and tooltip
+        if (marker._popup) {
+          marker._popup.remove();
+          marker._popup = null;
+        }
+        if (marker._tooltip) {
+          marker._tooltip.remove();
+          marker._tooltip = null;
+        }
         
-        // Remove popup and tooltip entirely
-        marker.unbindPopup();
-        marker.unbindTooltip();
+        // Close any popups/tooltips on the map
+        marker.closeTooltip();
+        marker.closePopup();
+        if (map && map._popup) map.closePopup();
         
-        // Remove any popups from DOM immediately
-        document.querySelectorAll('.leaflet-popup').forEach(el => el.remove());
+        // Remove all popup/tooltip elements from DOM immediately
+        setTimeout(() => {
+          document.querySelectorAll('.leaflet-popup, .leaflet-tooltip').forEach(el => el.remove());
+        }, 0);
       }
       
       const primaryStationIdx = g.indices[0];
