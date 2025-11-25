@@ -239,7 +239,8 @@ th { background:#f0f0f0; font-weight:700; }
   .leaflet-tooltip,
   .pp-tooltip,
   [role="tooltip"],
-  .chartjs-tooltip {
+  .chartjs-tooltip,
+  .leaflet-popup {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
@@ -1804,13 +1805,31 @@ function bindMarkerTooltip(marker) {
 // Aggressive tooltip suppression on mobile
 if (window.innerWidth <= 768) {
   document.addEventListener('click', () => {
-    // Remove all tooltips immediately after any click
+    // Remove all tooltips and popups immediately after any click
     setTimeout(() => {
-      document.querySelectorAll('.leaflet-tooltip, .chartjs-tooltip, .pp-tooltip').forEach(el => {
+      document.querySelectorAll('.leaflet-tooltip, .leaflet-popup, .chartjs-tooltip, .pp-tooltip').forEach(el => {
         el.remove();
       });
+      // Also close any active Leaflet popups
+      if (map && map._popup) {
+        map.closePopup();
+      }
     }, 0);
   }, true);  // Use capture phase to catch clicks early
+}
+
+// Disable all popups on mobile
+if (window.innerWidth <= 768) {
+  L.Marker.prototype.options.closePopupOnClick = true;
+  
+  // Disable popup opening entirely on mobile
+  const originalOpenPopup = L.Marker.prototype.openPopup;
+  L.Marker.prototype.openPopup = function() {
+    if (window.innerWidth <= 768) {
+      return this;  // Do nothing on mobile
+    }
+    return originalOpenPopup.call(this);
+  };
 }
 
 const map = L.map('map', {
@@ -1965,16 +1984,30 @@ function redrawMarkers(option) {
     marker.on("mouseover", () => highlightByGroupIndex(gIdx));
     marker.on("mouseout", clearHighlights);
     // Click handler to show station details modal
-    marker.on("click", () => {
+    marker.on("click", (e) => {
+      // Prevent Leaflet popup/tooltip from showing on mobile
+      if (window.innerWidth <= 768) {
+        L.DomEvent.stopPropagation(e);
+        
+        // Close any popups/tooltips
+        if (marker._popup) marker._popup.close();
+        if (marker._tooltip) marker._tooltip.close();
+        
+        // Remove popup and tooltip entirely
+        marker.unbindPopup();
+        marker.unbindTooltip();
+      }
+      
       const primaryStationIdx = g.indices[0];
       const station = stations[primaryStationIdx];
       const elevation = elevationAtMile(station.miles);
       
-      // Close any tooltip on mobile
+      // Close any tooltip/popup on mobile
       if (window.innerWidth <= 768) {
         marker.closeTooltip();
-        // Hide any tooltip elements that might exist
-        document.querySelectorAll('.leaflet-tooltip').forEach(el => {
+        if (marker._popup) marker.closePopup();
+        // Hide any tooltip/popup elements that might exist
+        document.querySelectorAll('.leaflet-tooltip, .leaflet-popup').forEach(el => {
           el.style.display = 'none';
           el.style.visibility = 'hidden';
           el.style.opacity = '0';
