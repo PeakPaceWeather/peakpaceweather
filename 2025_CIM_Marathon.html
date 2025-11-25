@@ -14,14 +14,14 @@
 
   <style>
 /* ===== Base + Responsive (pinch-zoom enabled) ===== */
-html, body { overflow-x: hidden; touch-action: pan-y pinch-zoom; zoom: 1; }
+html, body { overflow-x: hidden; touch-action: pan-x pan-y pinch-zoom; zoom: 1; }
 body { margin: 0; padding: 0; font-family: "Source Sans Pro", Arial, sans-serif; color: #111; background: #fff; line-height: 1.5; }
 :root { --ink:#111; --muted:#555; --line:#ddd; --pp-dark:#003546; --blaze:#37BC7D; --highlight:#FF6700; --hoverRow:#fff3e6; }
 
 /* Allow pinch zoom and vertical scrolling on interactive elements */
-#map { touch-action: pan-y pinch-zoom; }
-canvas { touch-action: pan-y pinch-zoom; }
-table { touch-action: pan-y pinch-zoom; }
+#map { touch-action: pan-x pan-y pinch-zoom; }
+canvas { touch-action: pan-x pan-y pinch-zoom; }
+table { touch-action: pan-x pan-y pinch-zoom; }
 
 /* ===== Layout + Header ===== */
 .page-wrapper { width: 100%; max-width: 1000px; margin: 0 auto; padding: 0 16px; box-sizing: border-box; }
@@ -240,9 +240,12 @@ th { background:#f0f0f0; font-weight:700; }
   .pp-tooltip,
   [role="tooltip"],
   .chartjs-tooltip {
+    display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
     pointer-events: none !important;
+    width: 0 !important;
+    height: 0 !important;
   }
   
   /* Make inputs full width on mobile */
@@ -1549,10 +1552,17 @@ function buildElevationChart(distances, elevations, stations){
       plugins: {
         legend: { display:false },
         tooltip: {
-          enabled: window.innerWidth > 768, filter: ctx => ctx.datasetIndex === 1,
+          enabled: window.innerWidth > 768, 
+          filter: ctx => ctx.datasetIndex === 1,
           external: (context) => {
-            // Prevent tooltip from rendering on mobile
+            // Completely suppress tooltip rendering on mobile
             if (window.innerWidth <= 768) {
+              const tooltipElement = document.querySelector('.chartjs-tooltip');
+              if (tooltipElement) {
+                tooltipElement.style.display = 'none';
+                tooltipElement.style.opacity = '0';
+                tooltipElement.style.pointerEvents = 'none';
+              }
               return;
             }
           },
@@ -1580,7 +1590,7 @@ function buildElevationChart(distances, elevations, stations){
           borderWidth:2, titleColor:'#111', bodyColor:'#111', padding:8, displayColors:false
         }
       },
-      interaction: { mode:'point', intersect:true },
+      interaction: { mode: window.innerWidth > 768 ? 'point' : 'none', intersect:true },
       onHover: (event, elements) => {
         const canvas = event.chart.canvas;
         const isMobile = window.innerWidth <= 768;
