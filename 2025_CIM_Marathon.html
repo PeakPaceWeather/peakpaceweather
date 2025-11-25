@@ -1617,6 +1617,20 @@ function buildElevationChart(distances, elevations, stations){
           if (stations && stations[stationIdx]) {
             const station = stations[stationIdx];
             const elevation = elevationAtMile(station.miles);
+            
+            // Hide tooltip on mobile
+            if (window.innerWidth <= 768) {
+              if (elevChart && elevChart.tooltip) {
+                elevChart.tooltip.setActiveElements([]);
+                elevChart.tooltip.setOpacity(0);
+              }
+              document.querySelectorAll('.chartjs-tooltip').forEach(el => {
+                el.style.display = 'none';
+                el.style.visibility = 'hidden';
+                el.style.opacity = '0';
+              });
+            }
+            
             showStationModal(station, elevation);
           }
         }
@@ -1635,6 +1649,17 @@ function buildElevationChart(distances, elevations, stations){
         elevChart.update();
       }
       clearHighlights();
+    }
+  });
+  
+  // Hide tooltips on click on mobile
+  ctx.canvas.addEventListener("click", () => {
+    if (window.innerWidth <= 768) {
+      document.querySelectorAll('.chartjs-tooltip').forEach(el => {
+        el.style.display = 'none';
+        el.style.visibility = 'hidden';
+        el.style.opacity = '0';
+      });
     }
   });
 }
@@ -1782,6 +1807,17 @@ const map = L.map('map', {
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '&copy; OpenStreetMap contributors' }).addTo(map);
 
+// Hide tooltips on click on mobile
+map.on('click', () => {
+  if (window.innerWidth <= 768) {
+    document.querySelectorAll('.leaflet-tooltip').forEach(el => {
+      el.style.display = 'none';
+      el.style.visibility = 'hidden';
+      el.style.opacity = '0';
+    });
+  }
+});
+
 let markers = [];
 let groupList = [];
 let stationIndexToGroup = [];
@@ -1911,6 +1947,18 @@ function redrawMarkers(option) {
       const primaryStationIdx = g.indices[0];
       const station = stations[primaryStationIdx];
       const elevation = elevationAtMile(station.miles);
+      
+      // Close any tooltip on mobile
+      if (window.innerWidth <= 768) {
+        marker.closeTooltip();
+        // Hide any tooltip elements that might exist
+        document.querySelectorAll('.leaflet-tooltip').forEach(el => {
+          el.style.display = 'none';
+          el.style.visibility = 'hidden';
+          el.style.opacity = '0';
+        });
+      }
+      
       showStationModal(station, elevation);
     });
   });
