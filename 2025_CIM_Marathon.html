@@ -246,6 +246,10 @@ th { background:#f0f0f0; font-weight:700; }
     pointer-events: none !important;
     width: 0 !important;
     height: 0 !important;
+    position: fixed !important;
+    top: -9999px !important;
+    left: -9999px !important;
+    z-index: -9999 !important;
   }
   
   /* Make inputs full width on mobile */
@@ -1797,6 +1801,18 @@ function bindMarkerTooltip(marker) {
   }
 }
 
+// Aggressive tooltip suppression on mobile
+if (window.innerWidth <= 768) {
+  document.addEventListener('click', () => {
+    // Remove all tooltips immediately after any click
+    setTimeout(() => {
+      document.querySelectorAll('.leaflet-tooltip, .chartjs-tooltip, .pp-tooltip').forEach(el => {
+        el.remove();
+      });
+    }, 0);
+  }, true);  // Use capture phase to catch clicks early
+}
+
 const map = L.map('map', {
   keyboard: false,
   scrollWheelZoom: false,
@@ -1936,10 +1952,16 @@ function redrawMarkers(option) {
     const marker = L.marker([g.lat, g.lon], { icon: blazeIcon }).addTo(map);
     g.marker = marker;
     markers.push(marker);
-    bindMarkerTooltip(marker);
-    if (window.innerWidth > 768) {
+    
+    // On mobile, explicitly remove any tooltips
+    if (window.innerWidth <= 768) {
+      marker.unbindTooltip();
+    } else {
+      // On desktop, bind and set tooltip content
+      bindMarkerTooltip(marker);
       marker.setTooltipContent(tooltipLinesMapGroup(g, stations));
     }
+    
     marker.on("mouseover", () => highlightByGroupIndex(gIdx));
     marker.on("mouseout", clearHighlights);
     // Click handler to show station details modal
