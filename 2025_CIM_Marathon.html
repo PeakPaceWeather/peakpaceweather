@@ -1816,6 +1816,27 @@ if (window.innerWidth <= 768) {
       }
     }, 0);
   }, true);  // Use capture phase to catch clicks early
+  
+  // Add MutationObserver to catch and remove popups as soon as they're added to DOM
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === 1) {  // Element node
+          if (node.classList && (node.classList.contains('leaflet-popup') || node.classList.contains('leaflet-tooltip'))) {
+            node.remove();
+          }
+          // Also check for popups added as children
+          node.querySelectorAll && node.querySelectorAll('.leaflet-popup, .leaflet-tooltip').forEach(el => el.remove());
+        }
+      });
+    });
+  });
+  
+  // Start observing the map container for changes
+  const mapContainer = document.getElementById('map');
+  if (mapContainer) {
+    observer.observe(mapContainer, { childList: true, subtree: true });
+  }
 }
 
 // Disable all popups on mobile
@@ -1845,11 +1866,14 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution:
 // Hide tooltips on click on mobile
 map.on('click', () => {
   if (window.innerWidth <= 768) {
-    document.querySelectorAll('.leaflet-tooltip').forEach(el => {
-      el.style.display = 'none';
-      el.style.visibility = 'hidden';
-      el.style.opacity = '0';
+    // Remove all popups and tooltips
+    document.querySelectorAll('.leaflet-tooltip, .leaflet-popup').forEach(el => {
+      el.remove();
     });
+    // Close active popup
+    if (map && map._popup) {
+      map.closePopup();
+    }
   }
 });
 
@@ -1987,6 +2011,7 @@ function redrawMarkers(option) {
     marker.on("click", (e) => {
       // Prevent Leaflet popup/tooltip from showing on mobile
       if (window.innerWidth <= 768) {
+        e.preventDefault();
         L.DomEvent.stopPropagation(e);
         
         // Close any popups/tooltips
@@ -1996,6 +2021,9 @@ function redrawMarkers(option) {
         // Remove popup and tooltip entirely
         marker.unbindPopup();
         marker.unbindTooltip();
+        
+        // Remove any popups from DOM immediately
+        document.querySelectorAll('.leaflet-popup').forEach(el => el.remove());
       }
       
       const primaryStationIdx = g.indices[0];
