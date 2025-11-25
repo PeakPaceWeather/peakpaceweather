@@ -335,68 +335,71 @@ th { background:#f0f0f0; font-weight:700; }
     </div>
 
     <!-- Station Detail Modal -->
-    <div id="stationModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:10000; align-items:center; justify-content:center; padding:16px; overflow-y: auto;">
-      <div style="background:#fff; border-radius:12px; padding:24px; max-width:500px; width:100%; box-shadow:0 4px 30px rgba(0,0,0,0.3); max-height:90vh; overflow-y:auto; margin: auto;">
-        <!-- Close button -->
-        <button id="stationModalClose" style="position:absolute; top:12px; right:12px; background:none; border:none; font-size:28px; cursor:pointer; color:#999; padding:0; width:32px; height:32px; display:flex; align-items:center; justify-content:center;">&times;</button>
+    <div id="stationModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:10000; align-items:center; justify-content:center; padding:12px; overflow-y:auto;">
+      <div style="background:#fff; border-radius:10px; max-width:450px; width:100%; box-shadow:0 4px 30px rgba(0,0,0,0.3); max-height:85vh; overflow-y:auto; margin:auto;">
         
-        <!-- Station name -->
-        <h2 id="stationModalName" style="margin:0 0 20px; color:#003546; font-size:24px; font-weight:700; padding-right:32px;"></h2>
-        
-        <!-- Station details grid -->
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; font-size:14px;">
-          <!-- Distance -->
-          <div>
-            <div style="color:#999; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:4px;">Distance</div>
-            <div id="stationModalDistance" style="color:#111; font-size:16px; font-weight:600;"></div>
-          </div>
-          
-          <!-- Elevation -->
-          <div>
-            <div style="color:#999; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:4px;">Elevation</div>
-            <div id="stationModalElevation" style="color:#111; font-size:16px; font-weight:600;"></div>
-          </div>
-          
-          <!-- Elapsed time -->
-          <div>
-            <div style="color:#999; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:4px;">Elapsed</div>
-            <div id="stationModalElapsed" style="color:#111; font-size:16px; font-weight:600;"></div>
-          </div>
-          
-          <!-- ETA -->
-          <div>
-            <div style="color:#999; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:4px;">ETA</div>
-            <div id="stationModalETA" style="color:#111; font-size:16px; font-weight:600;"></div>
-          </div>
+        <!-- Header with brand dark blue background -->
+        <div style="background:#003546; padding:16px; border-radius:10px 10px 0 0; position:relative;">
+          <button id="stationModalClose" style="position:absolute; top:8px; right:8px; background:none; border:none; font-size:24px; cursor:pointer; color:#fff; padding:0; width:28px; height:28px; display:flex; align-items:center; justify-content:center;">&times;</button>
+          <h2 id="stationModalName" style="margin:0; color:#fff; font-size:22px; font-weight:700; padding-right:32px;"></h2>
         </div>
         
-        <!-- Weather details -->
-        <div style="border-top:1px solid #eee; padding-top:16px; margin-bottom:16px;">
-          <div style="color:#999; font-size:12px; font-weight:600; text-transform:uppercase; margin-bottom:12px;">Weather</div>
+        <!-- Content area -->
+        <div style="padding:16px;">
           
-          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;">
-            <!-- Temperature -->
+          <!-- Distance & Elevation (compact 2-column) -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px;">
             <div>
-              <div style="color:#666; font-size:12px; margin-bottom:4px;">Temperature</div>
-              <div id="stationModalTemp" style="color:#111; font-size:18px; font-weight:700;"></div>
+              <div style="color:#666; font-size:11px; font-weight:600; text-transform:uppercase; margin-bottom:3px; letter-spacing:0.5px;">Distance</div>
+              <div id="stationModalDistance" style="color:#111; font-size:16px; font-weight:700;"></div>
             </div>
-            
-            <!-- Wind -->
             <div>
-              <div style="color:#666; font-size:12px; margin-bottom:4px;">Wind</div>
-              <div id="stationModalWind" style="color:#111; font-size:14px; font-weight:600;"></div>
-            </div>
-            
-            <!-- Conditions -->
-            <div>
-              <div style="color:#666; font-size:12px; margin-bottom:4px;">Conditions</div>
-              <div id="stationModalCond" style="color:#111; font-size:14px; font-weight:600;"></div>
+              <div style="color:#666; font-size:11px; font-weight:600; text-transform:uppercase; margin-bottom:3px; letter-spacing:0.5px;">Elevation</div>
+              <div id="stationModalElevation" style="color:#111; font-size:16px; font-weight:700;"></div>
             </div>
           </div>
+          
+          <!-- Elapsed & ETA (compact 2-column) -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:14px; padding-bottom:14px; border-bottom:2px solid #37BC7D;">
+            <div>
+              <div style="color:#666; font-size:11px; font-weight:600; text-transform:uppercase; margin-bottom:3px; letter-spacing:0.5px;">Elapsed Time</div>
+              <div id="stationModalElapsed" style="color:#FF6700; font-size:16px; font-weight:700;"></div>
+            </div>
+            <div>
+              <div style="color:#666; font-size:11px; font-weight:600; text-transform:uppercase; margin-bottom:3px; letter-spacing:0.5px;">Arrival Time</div>
+              <div id="stationModalETA" style="color:#FF6700; font-size:16px; font-weight:700;"></div>
+            </div>
+          </div>
+          
+          <!-- Weather section with colored header -->
+          <div style="margin-bottom:14px;">
+            <div style="color:#003546; font-size:12px; font-weight:700; text-transform:uppercase; margin-bottom:10px; letter-spacing:0.5px;">⚡ Weather</div>
+            
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; background:#f8f8f8; padding:12px; border-radius:6px;">
+              <!-- Temperature -->
+              <div style="text-align:center;">
+                <div style="color:#666; font-size:10px; font-weight:600; text-transform:uppercase; margin-bottom:4px; letter-spacing:0.5px;">Temp</div>
+                <div id="stationModalTemp" style="color:#FF6700; font-size:20px; font-weight:700;"></div>
+              </div>
+              
+              <!-- Wind -->
+              <div style="text-align:center;">
+                <div style="color:#666; font-size:10px; font-weight:600; text-transform:uppercase; margin-bottom:4px; letter-spacing:0.5px;">Wind</div>
+                <div id="stationModalWind" style="color:#111; font-size:13px; font-weight:600;"></div>
+              </div>
+              
+              <!-- Conditions -->
+              <div style="text-align:center;">
+                <div style="color:#666; font-size:10px; font-weight:600; text-transform:uppercase; margin-bottom:4px; letter-spacing:0.5px;">Conditions</div>
+                <div id="stationModalCond" style="color:#111; font-size:13px; font-weight:600;"></div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Close button with brand orange -->
+          <button id="stationModalCloseBtn" style="width:100%; padding:14px; background:#FF6700; color:#fff; border:none; border-radius:6px; font-weight:700; cursor:pointer; font-size:15px; transition:background 0.2s ease;">Close</button>
         </div>
         
-        <!-- Close button -->
-        <button id="stationModalCloseBtn" style="width:100%; padding:12px; background:#003546; color:#fff; border:none; border-radius:6px; font-weight:600; cursor:pointer; font-size:14px;">Close</button>
       </div>
     </div>
 
