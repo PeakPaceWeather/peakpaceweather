@@ -1204,7 +1204,7 @@ function switchForecastSource(source) {
   displayForecastTable(currentStationOption);
   
   // Update map tooltips
-  if(groupList && groupList.length){
+  if(groupList && groupList.length && window.innerWidth > 768){
     groupList.forEach(g=>{
       if(g.marker) g.marker.setTooltipContent(tooltipLinesMapGroup(g, raceConfig.allStations[currentStationOption]));
     });
@@ -1563,6 +1563,8 @@ function buildElevationChart(distances, elevations, stations){
       interaction: { mode:'point', intersect:true },
       onHover: (event, elements) => {
         const canvas = event.chart.canvas;
+        const isMobile = window.innerWidth <= 768;
+        
         if (elements.length > 0 && elements[0].datasetIndex === 1) {
           canvas.style.cursor = 'pointer';
           const idx = elements[0].index;
@@ -1570,8 +1572,11 @@ function buildElevationChart(distances, elevations, stations){
         } else {
           canvas.style.cursor = 'default';
           clearHighlights();
-          event.chart.tooltip.setActiveElements([], {x:0,y:0});
-          event.chart.update();
+          // Only update tooltip on desktop
+          if (!isMobile) {
+            event.chart.tooltip.setActiveElements([], {x:0,y:0});
+            event.chart.update();
+          }
         }
       },
       onClick: (event, elements) => {
@@ -1594,8 +1599,11 @@ function buildElevationChart(distances, elevations, stations){
   });
   ctx.canvas.addEventListener("mouseleave", () => {
     if (elevChart) {
-      elevChart.tooltip.setActiveElements([], {x:0,y:0});
-      elevChart.update();
+      // Only update tooltip on desktop
+      if (window.innerWidth > 768) {
+        elevChart.tooltip.setActiveElements([], {x:0,y:0});
+        elevChart.update();
+      }
       clearHighlights();
     }
   });
@@ -1728,7 +1736,10 @@ async function getOpenMeteoForecast(lat, lon, targetDate) {
 }
 
 function bindMarkerTooltip(marker) {
-  marker.bindTooltip("", { direction: "auto", offset: [0, -10], opacity: 0.95, className: "pp-tooltip", sticky: false, autoPan: true });
+  // Only bind tooltips on desktop (> 768px)
+  if (window.innerWidth > 768) {
+    marker.bindTooltip("", { direction: "auto", offset: [0, -10], opacity: 0.95, className: "pp-tooltip", sticky: false, autoPan: true });
+  }
 }
 
 const map = L.map('map', {
@@ -1860,7 +1871,9 @@ function redrawMarkers(option) {
     g.marker = marker;
     markers.push(marker);
     bindMarkerTooltip(marker);
-    marker.setTooltipContent(tooltipLinesMapGroup(g, stations));
+    if (window.innerWidth > 768) {
+      marker.setTooltipContent(tooltipLinesMapGroup(g, stations));
+    }
     marker.on("mouseover", () => highlightByGroupIndex(gIdx));
     marker.on("mouseout", clearHighlights);
     // Click handler to show station details modal
